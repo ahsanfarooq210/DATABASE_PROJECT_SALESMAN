@@ -3,6 +3,7 @@ package com.example.database_project_salesman;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -72,14 +73,17 @@ public class MainActivity extends AppCompatActivity
 
     public void loginButton(View v)
     {
+        progressBar.setVisibility(View.VISIBLE);
         if(usernameTf.getText().toString().trim().length()==0)
         {
             usernameTf.setError("Enter an email");
+            progressBarh.postDelayed(runnable1,100);
             return;
         }
         if(passeordTf.getText().toString().trim().length()==0)
         {
             passeordTf.setError("Enter passeord");
+            progressBarh.postDelayed(runnable1,100);
             return;
         }
 
@@ -97,6 +101,10 @@ public class MainActivity extends AppCompatActivity
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
+                            Intent intent=new Intent(MainActivity.this,salesname_main_dashboard.class);
+                            progressBarh.postDelayed(runnable1,100);
+                            startActivity(intent);
+
 
 
                         } else {
@@ -104,6 +112,7 @@ public class MainActivity extends AppCompatActivity
 
                             Toast.makeText(MainActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
+                            progressBarh.postDelayed(runnable1,100);
 
                         }
 

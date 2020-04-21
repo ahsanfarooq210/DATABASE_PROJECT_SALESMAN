@@ -23,6 +23,7 @@ public class Home extends Application
         if(firebaseUser!=null)
         {
             Intent intent=new Intent(Home.this,salesname_main_dashboard.class);
+
             startActivity(intent);
         }
         else

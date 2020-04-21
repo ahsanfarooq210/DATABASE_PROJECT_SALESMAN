@@ -75,8 +75,10 @@ public class add_order_activity extends AppCompatActivity
     //array lists for the array adapters
     private List<Sku> skuList;
     private List<ShopDetails> shopDetailsList;
+    //buttons and edit texts
     private Button save;
     private EditText quantity;
+    //to get the email id of the salesman
     private FirebaseAuth auth;
     private FirebaseUser user;
 
@@ -102,6 +104,7 @@ public class add_order_activity extends AppCompatActivity
         //synchronizing the database for the offline use
         skuReference.keepSynced(true);
         shopReference.keepSynced(true);
+        orderReference.keepSynced(true);
 
         //initializing the quantity text view
         quantity=findViewById(R.id.add_order_quantity_et);
@@ -134,9 +137,11 @@ public class add_order_activity extends AppCompatActivity
         save=findViewById(R.id.add_order_save_btn);
         save.setOnClickListener(new View.OnClickListener()
         {
+
             @Override
             public void onClick(View v)
             {
+                progressBar.setVisibility(View.VISIBLE);
                 if(quantity.getText().toString().length()==0)
                 {
                     quantity.setError("Enter quantity");
@@ -145,9 +150,25 @@ public class add_order_activity extends AppCompatActivity
 
                 Sku sk=(Sku)skuSpinner.getSelectedItem();
                 ShopDetails shopDetails=(ShopDetails)shopSpinner.getSelectedItem();
-                final String username=user.getEmail();
+                String username;
+                if(user!=null)
+                {
+                     username=user.getEmail();
+                }
+                else
+                {
+                    username="unknown";
+                }
+
                 String id=orderReference.push().getKey();
                 Orders order =new Orders(id,username,shopDetails,sk,Integer.parseInt(quantity.getText().toString().trim()));
+                if(id!=null)
+                {
+                    orderReference.child(id).setValue(order);
+
+                }
+
+                progressBarh.postDelayed(runnable1,500);
 
             }
         });

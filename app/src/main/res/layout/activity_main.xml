@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_marginLeft="40dp"
+        android:animateLayoutChanges="true"
         android:layout_marginRight="40dp">
 
         <ImageView
@@ -26,6 +27,7 @@
             android:id="@+id/rellay1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
             android:layout_below="@+id/imgView_logo"
             android:visibility="gone">
 

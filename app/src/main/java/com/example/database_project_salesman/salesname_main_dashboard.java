@@ -2,6 +2,7 @@ package com.example.database_project_salesman;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -48,9 +49,15 @@ public class salesname_main_dashboard extends AppCompatActivity
 
     public void addorder(View view)
     {
+        Intent intent=new Intent(salesname_main_dashboard.this,add_order_activity.class);
+        startActivity(intent);
+
     }
 
     public void showorder(View view)
     {
+        Intent intent=new Intent(salesname_main_dashboard.this,show_orders_activity.class);
+        startActivity(intent);
     }
 }
+

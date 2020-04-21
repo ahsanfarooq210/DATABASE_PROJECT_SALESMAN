@@ -69,4 +69,9 @@ public class Orders
     {
         this.quantity = quantity;
     }
+
+    public String getShopName()
+    {
+        return shop.getShopName();
+    }
 }
