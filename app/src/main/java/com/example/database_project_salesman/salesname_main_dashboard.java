@@ -59,5 +59,11 @@ public class salesname_main_dashboard extends AppCompatActivity
         Intent intent=new Intent(salesname_main_dashboard.this,show_orders_activity.class);
         startActivity(intent);
     }
+    public void showshops(View view)
+    {
+        Intent intent=new Intent(salesname_main_dashboard.this,show_shop_activity.class);
+        startActivity(intent);
+
+    }
 }
 

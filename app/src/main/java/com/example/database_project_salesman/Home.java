@@ -9,10 +9,11 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class Home extends Application
 {
+    public static boolean flag;
     @Override
     public void onCreate()
     {
-        super.onCreate();
+
         super.onCreate();
 
         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
@@ -22,12 +23,14 @@ public class Home extends Application
 
         if(firebaseUser!=null)
         {
+            flag=true;
             Intent intent=new Intent(Home.this,salesname_main_dashboard.class);
 
             startActivity(intent);
         }
         else
         {
+            flag=false;
             Intent intent=new Intent(Home.this,MainActivity.class);
             startActivity(intent);
         }

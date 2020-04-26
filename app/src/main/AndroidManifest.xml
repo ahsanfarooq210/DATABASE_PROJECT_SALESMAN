@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".show_orders_activity"></activity>
+        <activity android:name=".show_shop_activity"></activity>
+        <activity android:name=".show_orders_activity" />
         <activity android:name=".add_order_activity" />
         <activity android:name=".salesname_main_dashboard" />
         <activity android:name=".MainActivity">
