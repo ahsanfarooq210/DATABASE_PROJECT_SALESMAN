@@ -103,4 +103,10 @@ public class ShopDetails
     {
         this.ownerMobile = ownerMobile;
     }
+
+    @Override
+    public String toString()
+    {
+        return shopName+"\n"+ownerName+"\n"+ownerCnic;
+    }
 }
