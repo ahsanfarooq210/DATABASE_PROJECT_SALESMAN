@@ -3,7 +3,8 @@
     package="com.example.database_project_salesman">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:name=".Home"
         android:allowBackup="true"
@@ -12,7 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".show_shop_activity"></activity>
+        <activity android:name=".show_shop_on_map_activity"></activity>
+        <activity android:name=".show_order_shop_on_map" />
+        <activity android:name=".show_shop_activity" />
         <activity android:name=".show_orders_activity" />
         <activity android:name=".add_order_activity" />
         <activity android:name=".salesname_main_dashboard" />
@@ -24,6 +27,13 @@
             </intent-filter>
         </activity>
 
+        <receiver android:name=".BrodcastReceivers.LocationBrodcast">
+            <intent-filter>
+                <action android:name="android.location.GPS_ENABLED_CHANGE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

@@ -79,6 +79,24 @@
                         android:textAlignment="center"
                         android:textColor="@android:color/white"
                         android:textSize="15sp" />
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_below="@+id/add_order_shop_spinner"
+                        android:layout_centerHorizontal="true"
+                        android:clickable="true"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/btn_bg"
+                        android:fontFamily="sans-serif-medium"
+                        android:paddingLeft="70dp"
+                        android:paddingRight="70dp"
+                        android:text="Show Shop"
+                        android:id="@+id/shop_shop_btn"
+
+                        android:textAllCaps="false"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

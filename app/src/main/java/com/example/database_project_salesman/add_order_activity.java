@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -14,6 +15,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -95,7 +97,7 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
     private List<Sku> skuList;
     private List<ShopDetails> shopDetailsList;
     //buttons and edit texts
-    private Button save;
+    private Button save,showShop;
     private EditText quantity;
     //to get the email id of the salesman
     private FirebaseAuth auth;
@@ -200,9 +202,10 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
 
                 Sku sk=(Sku)skuSpinner.getSelectedItem();
                 ShopDetails shopDetails=(ShopDetails)shopSpinner.getSelectedItem();
-                if(distance(shopDetails.getLatitude(),shopDetails.getLongitude(),latitude,longitude)>500)
+                double dist=distance(shopDetails.getLatitude(),shopDetails.getLongitude(),latitude,longitude);
+                if(dist>500.00)
                 {
-                    Toast.makeText(add_order_activity.this, "you need to be in 500 meters of the shop \n cirrent distance "+distance(shopDetails.getLatitude(),shopDetails.getLongitude(),latitude,longitude), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(add_order_activity.this, "you need to be in 500 meters of the shop \n current distance "+distance(latitude,longitude,shopDetails.getLatitude(),shopDetails.getLongitude()), Toast.LENGTH_SHORT).show();
                     progressBarh.postDelayed(runnable1,500);
                     return;
                 }
@@ -238,6 +241,22 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
 
 //        Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 //        onLocationChanged(location);
+
+        //initializing the show shop button
+        showShop=findViewById(R.id.shop_shop_btn);
+        showShop.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                ShopDetails shopDetails=(ShopDetails)shopSpinner.getSelectedItem();
+                Intent intent=new Intent(add_order_activity.this,show_order_shop_on_map.class);
+                intent.putExtra("latitude",shopDetails.getLatitude());
+                intent.putExtra("longitude",shopDetails.getLongitude());
+                startActivity(intent);
+
+            }
+        });
 
 
     }
@@ -350,4 +369,25 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
     {
         ActivityCompat.requestPermissions(this,new String[]{ACCESS_FINE_LOCATION},1);
     }
+
+    private boolean isGpsEnabled(Context context) {
+        ContentResolver contentResolver = context.getContentResolver();
+        // Find out what the settings say about which providers are enabled
+        //  String locationMode = "Settings.Secure.LOCATION_MODE_OFF";
+        int mode = Settings.Secure.getInt(
+                contentResolver, Settings.Secure.LOCATION_MODE, Settings.Secure.LOCATION_MODE_OFF);
+        if (mode != Settings.Secure.LOCATION_MODE_OFF) {
+            return true;
+               /* if (mode == Settings.Secure.LOCATION_MODE_HIGH_ACCURACY) {
+                    locationMode = "High accuracy. Uses GPS, Wi-Fi, and mobile networks to determine location";
+                } else if (mode == Settings.Secure.LOCATION_MODE_SENSORS_ONLY) {
+                    locationMode = "Device only. Uses GPS to determine location";
+                } else if (mode == Settings.Secure.LOCATION_MODE_BATTERY_SAVING) {
+                    locationMode = "Battery saving. Uses Wi-Fi and mobile networks to determine location";
+                }*/
+        } else {
+            return false;
+        }
+    }
+
 }
