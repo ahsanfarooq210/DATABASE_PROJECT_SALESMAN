@@ -52,7 +52,20 @@ public class show_order_shop_on_map extends AppCompatActivity implements OnMapRe
     {
         mMap = googleMap;
         mMap.clear();
+        mMap.setMyLocationEnabled(true);
+        mMap.getUiSettings().setMyLocationButtonEnabled(true);
         geo = new Geocoder(show_order_shop_on_map.this, Locale.getDefault());
+
+        try
+        {
+            address= geo.getFromLocation(latLng.latitude, latLng.longitude, 1);
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        mMap.addMarker(new MarkerOptions().position(latLng).title(address.toString()));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(15.0f));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
 
         if (mMap != null) {
 
@@ -74,15 +87,6 @@ public class show_order_shop_on_map extends AppCompatActivity implements OnMapRe
     {
         super.onStart();
 
-        try
-        {
-            address= geo.getFromLocation(latLng.latitude, latLng.longitude, 1);
-        } catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-        mMap.addMarker(new MarkerOptions().position(latLng).title(address.toString()));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(15.0f));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+
     }
 }

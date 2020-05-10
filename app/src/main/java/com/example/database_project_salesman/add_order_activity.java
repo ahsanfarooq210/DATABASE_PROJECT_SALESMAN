@@ -165,6 +165,8 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
        // locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         client= LocationServices.getFusedLocationProviderClient(this);
 
+
+
         //save button initialization and on click listinner
         save=findViewById(R.id.add_order_save_btn);
         save.setOnClickListener(new View.OnClickListener()
@@ -257,6 +259,7 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
 
             }
         });
+
 
 
     }

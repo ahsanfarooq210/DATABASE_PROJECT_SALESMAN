@@ -13,7 +13,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".show_shop_on_map_activity"></activity>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/map_key" />
+        <activity android:name=".edit_order_rv_list"></activity>
+        <activity android:name=".show_shop_on_map_activity" />
         <activity android:name=".show_order_shop_on_map" />
         <activity android:name=".show_shop_activity" />
         <activity android:name=".show_orders_activity" />

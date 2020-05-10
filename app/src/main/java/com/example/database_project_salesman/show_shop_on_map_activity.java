@@ -57,6 +57,8 @@ public class show_shop_on_map_activity extends AppCompatActivity implements OnMa
     {
         mMap = googleMap;
         mMap.clear();
+        mMap.setMyLocationEnabled(true);
+        mMap.getUiSettings().setMyLocationButtonEnabled(true);
         geo = new Geocoder(show_shop_on_map_activity.this, Locale.getDefault());
 
         if (mMap != null) {

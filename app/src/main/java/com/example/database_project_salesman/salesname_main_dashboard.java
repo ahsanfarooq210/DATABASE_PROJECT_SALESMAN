@@ -65,5 +65,12 @@ public class salesname_main_dashboard extends AppCompatActivity
         startActivity(intent);
 
     }
+
+    public void showShopsOnMap(View view)
+    {
+        Intent intent=new Intent(salesname_main_dashboard.this,show_shop_on_map_activity.class);
+        startActivity(intent);
+
+    }
 }
 
