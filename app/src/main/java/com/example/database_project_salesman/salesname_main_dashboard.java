@@ -1,10 +1,14 @@
 package com.example.database_project_salesman;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.location.LocationManagerCompat;
 
+import android.content.Context;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -68,9 +72,19 @@ public class salesname_main_dashboard extends AppCompatActivity
 
     public void showShopsOnMap(View view)
     {
-        Intent intent=new Intent(salesname_main_dashboard.this,show_shop_on_map_activity.class);
-        startActivity(intent);
+        if(isLocationEnabled(this)) {
+            Intent intent = new Intent(salesname_main_dashboard.this, show_shop_on_map_activity.class);
+            startActivity(intent);
+        }
+        else{
+            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivity(intent);
+        }
+    }
 
+    private boolean isLocationEnabled(Context context) {
+        LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        return LocationManagerCompat.isLocationEnabled(locationManager);
     }
 }
 

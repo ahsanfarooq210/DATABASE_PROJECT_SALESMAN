@@ -2,8 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.database_project_salesman">
 
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".Home"
@@ -20,14 +21,23 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/map_key" />
 
-        <activity android:name=".edit_order_rv_list" />
-        <activity android:name=".show_shop_on_map_activity" />
-        <activity android:name=".show_order_shop_on_map" />
-        <activity android:name=".show_shop_activity" />
-        <activity android:name=".show_orders_activity" />
-        <activity android:name=".add_order_activity" />
-        <activity android:name=".salesname_main_dashboard" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".edit_order_rv_list"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".show_shop_on_map_activity"
+            android:theme="@style/AppTheme"
+            android:label="" />
+        <activity android:name=".show_order_shop_on_map"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".show_shop_activity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".show_orders_activity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".add_order_activity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".salesname_main_dashboard"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
