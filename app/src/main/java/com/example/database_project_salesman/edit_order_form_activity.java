@@ -103,10 +103,34 @@ public class edit_order_form_activity extends AppCompatActivity
                     return;
                 }
 
+                Sku sku= (Sku) skuSpinner.getSelectedItem();
+                ShopDetails shopDetails= (ShopDetails) shopSpinner.getSelectedItem();
+                int quant=Integer.parseInt(quantity.getText().toString().trim());
+
+                if (!isSkuSame())
+                {
+                    orderReference.child(orderId).child("sku").setValue(sku);
+                    Toast.makeText(edit_order_form_activity.this, "sku updated", Toast.LENGTH_SHORT).show();
+                }
+                if(!isShopSame())
+                {
+                    orderReference.child(orderId).child("shop").setValue(shopDetails);
+                    Toast.makeText(edit_order_form_activity.this, "shop updated", Toast.LENGTH_SHORT).show();
+                }
+                if(!isQuantitySame())
+                {
+                    orderReference.child(orderId).child("quantity").setValue(quant);
+                    Toast.makeText(edit_order_form_activity.this, "quantity updated", Toast.LENGTH_SHORT).show();
+                }
+
 
             }
         });
     }
+
+
+
+
 
     @Override
     protected void onStart()
@@ -125,6 +149,7 @@ public class edit_order_form_activity extends AppCompatActivity
                 {
                     ordersList.add(orders.getValue(Orders.class));
                 }
+
 
             }
 
@@ -183,5 +208,19 @@ public class edit_order_form_activity extends AppCompatActivity
         });
 
 
+    }
+
+
+    private boolean isSkuSame()
+    {
+        return (Sku) skuSpinner.getSelectedItem() == ordersList.get(0).getSku();
+    }
+    private boolean isShopSame()
+    {
+        return (ShopDetails) shopSpinner.getSelectedItem() == ordersList.get(0).getShop();
+    }
+    private boolean isQuantitySame()
+    {
+        return Integer.parseInt(quantity.getText().toString().trim()) == ordersList.get(0).getQuantity();
     }
 }

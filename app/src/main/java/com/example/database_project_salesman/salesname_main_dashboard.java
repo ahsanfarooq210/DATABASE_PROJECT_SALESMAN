@@ -86,5 +86,10 @@ public class salesname_main_dashboard extends AppCompatActivity
         LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         return LocationManagerCompat.isLocationEnabled(locationManager);
     }
+
+    public void editOrder(View view)
+    {
+        startActivity(new Intent(salesname_main_dashboard.this,edit_order_rv_activity.class));
+    }
 }
 
