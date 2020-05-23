@@ -123,7 +123,7 @@ public class show_shop_on_map_activity extends AppCompatActivity implements Acti
                     builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                           checkLocationPermission();
+                           //checkLocationPermission();
                         }
                     })
                             .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -134,7 +134,7 @@ public class show_shop_on_map_activity extends AppCompatActivity implements Acti
                                     builderInner.setPositiveButton("ok", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
-                                            checkLocationPermission();
+                                            //checkLocationPermission();
                                         }
                                     }).show();
                                 }
@@ -337,13 +337,13 @@ public class show_shop_on_map_activity extends AppCompatActivity implements Acti
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        Location location2 = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
+      //  Location location2 = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
         if (location != null)
         {
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location2.getLatitude(), location2.getLongitude()), 13));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 13));
 
             CameraPosition cameraPosition = new CameraPosition.Builder()
-                    .target(new LatLng(location2.getLatitude(), location2.getLongitude()))      // Sets the center of the map to location user
+                    .target(new LatLng(location.getLatitude(), location.getLongitude()))      // Sets the center of the map to location user
                     .zoom(17)                   // Sets the zoom
                     .bearing(90)                // Sets the orientation of the camera to east
                     .tilt(40)                   // Sets the tilt of the camera to 30 degrees

@@ -27,7 +27,8 @@
             android:theme="@style/AppTheme"
             android:label="" />
         <activity android:name=".show_order_shop_on_map"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme"
+            android:label=""/>
         <activity android:name=".show_shop_activity"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".show_orders_activity"
