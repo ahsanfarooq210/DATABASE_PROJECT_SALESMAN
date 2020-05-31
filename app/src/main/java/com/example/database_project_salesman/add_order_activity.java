@@ -97,7 +97,7 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
     private List<Sku> skuList;
     private List<ShopDetails> shopDetailsList;
     //buttons and edit texts
-    private Button save,showShop;
+    private Button save, showShop;
     private EditText quantity;
     //to get the email id of the salesman
     private FirebaseAuth auth;
@@ -105,7 +105,7 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
     //variables to store current location latlang
     private double latitude, longitude;
     //location managet ot get the current location
-   // private LocationManager locationManager;
+    // private LocationManager locationManager;
     private FusedLocationProviderClient client;
 
 
@@ -162,13 +162,12 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
         shopDetailsArrayAdapter = new ArrayAdapter(this, R.layout.spinner_text, shopDetailsList);
         shopDetailsArrayAdapter.setDropDownViewResource(R.layout.spinner_text_dropdown);
         //initializing the location manager to get the current latitude and longitude
-       // locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        client= LocationServices.getFusedLocationProviderClient(this);
-
+        // locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        client = LocationServices.getFusedLocationProviderClient(this);
 
 
         //save button initialization and on click listinner
-        save=findViewById(R.id.add_order_save_btn);
+        save = findViewById(R.id.add_order_save_btn);
         save.setOnClickListener(new View.OnClickListener()
         {
 
@@ -178,15 +177,26 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
                 requestPermission();
                 //comment
                 //hggh
+                if (ActivityCompat.checkSelfPermission(add_order_activity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(add_order_activity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+                {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    return;
+                }
                 client.getLastLocation().addOnSuccessListener(add_order_activity.this, new OnSuccessListener<Location>()
                 {
                     @Override
                     public void onSuccess(Location location)
                     {
-                        if(location!=null)
+                        if (location != null)
                         {
-                            latitude=location.getLatitude();
-                            longitude=location.getLongitude();
+                            latitude = location.getLatitude();
+                            longitude = location.getLongitude();
                         }
                     }
                 });
