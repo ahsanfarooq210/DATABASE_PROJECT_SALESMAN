@@ -177,6 +177,7 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
                 requestPermission();
                 //comment
                 //hggh
+
                 if (ActivityCompat.checkSelfPermission(add_order_activity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(add_order_activity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
                 {
                     // TODO: Consider calling
