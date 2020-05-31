@@ -176,6 +176,7 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
             public void onClick(View v)
             {
                 requestPermission();
+                //comment
                 client.getLastLocation().addOnSuccessListener(add_order_activity.this, new OnSuccessListener<Location>()
                 {
                     @Override

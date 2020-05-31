@@ -1,22 +1,18 @@
 package com.example.database_project_salesman;
 
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.ActionBar;
-import android.app.AlertDialog;
 import android.app.SearchManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.location.Address;
-import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,12 +20,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.example.database_project_salesman.ActioBarAdapter.TitleNavigationAdapter;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -40,7 +35,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -55,29 +49,34 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class show_shop_on_map_activity extends AppCompatActivity implements ActionBar.OnNavigationListener , OnMapReadyCallback,
-        LocationListener, GoogleApiClient.ConnectionCallbacks,
+public class show_shop_on_map_activity extends AppCompatActivity implements ActionBar.OnNavigationListener ,
+        OnMapReadyCallback, LocationListener, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener{
-    private static final int MY_PERMISSIONS_REQUEST_LOCATION = 911;
     private GoogleMap mMap;
+    String s ;
     Location mLastLocation;
     Marker mCurrLocationMarker;
     GoogleApiClient mGoogleApiClient;
     LocationRequest mLocationRequest;
+    // action bar
     private ActionBar actionBar;
+
+    // Title navigation Spinner data
+    //private ArrayList<SpinnerNavItem> navSpinner;
+
+    // Navigation adapter
+    private TitleNavigationAdapter adapter;
 
     SearchManager searchManager;
     SearchView searchView;
 
     // Refresh menu item
     private MenuItem refreshMenuItem;
-    //ahsan
+
     private Geocoder geo;
     private List<Address> address;
     private DatabaseReference shopReference;
     private ArrayList<ShopDetails> shopArrayList;
-//ahsan
-
 
 
     @Override
@@ -86,65 +85,18 @@ public class show_shop_on_map_activity extends AppCompatActivity implements Acti
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_shop_on_map_activity);
 
+
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.show_shop_map);
-        mapFragment.getMapAsync( this);
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+
         shopReference= FirebaseDatabase.getInstance().getReference("SHOP");
         shopReference.keepSynced(true);
         shopArrayList=new ArrayList<>();
 
-       // checkLocationPermission();
     }
-    public void checkLocationPermission() {
-        if (ContextCompat.checkSelfPermission(show_shop_on_map_activity.this,
-                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
-            if (ActivityCompat.shouldShowRequestPermissionRationale(show_shop_on_map_activity.this,
-                    Manifest.permission.ACCESS_FINE_LOCATION)){
-                ActivityCompat.requestPermissions(show_shop_on_map_activity.this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-            }else{
-                ActivityCompat.requestPermissions(show_shop_on_map_activity.this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-            }
-        }
-    }
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults){
-        switch (requestCode){
-            case 1: {
-                if (grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    if (ContextCompat.checkSelfPermission(show_shop_on_map_activity.this,
-                            Manifest.permission.ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED){
 
-                    }
-                }else{
-                    AlertDialog.Builder builder = new AlertDialog.Builder(show_shop_on_map_activity.this);
-                    builder.setTitle("Location Permission is Required  ");
-                    builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                           //checkLocationPermission();
-                        }
-                    })
-                            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    AlertDialog.Builder builderInner = new AlertDialog.Builder(show_shop_on_map_activity.this);
-                                    builderInner.setTitle("Location Permission is must Required  ");
-                                    builderInner.setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            //checkLocationPermission();
-                                        }
-                                    }).show();
-                                }
-                            }).show();
-                }
-                return;
-            }
-        }
-    }
-    //action bar this ahead
 
 
     @Override
@@ -187,6 +139,9 @@ public class show_shop_on_map_activity extends AppCompatActivity implements Acti
         switch (item.getItemId()) {
             case R.id.action_search:
                 // search action
+
+
+
                 return true;
             case R.id.action_location_found:
                 // location found
@@ -219,6 +174,7 @@ public class show_shop_on_map_activity extends AppCompatActivity implements Acti
         return false;
     }
 
+
     /**
      * Async task to load the data from server
      * **/
@@ -249,20 +205,12 @@ public class show_shop_on_map_activity extends AppCompatActivity implements Acti
             refreshMenuItem.setActionView(null);
         }
     };
-    //location thing ahead
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mMap.clear();
-        mMap.setMyLocationEnabled(true);
-
-        mMap.getUiSettings().setMyLocationButtonEnabled(true);
-
-        mMap.getUiSettings().setZoomControlsEnabled(true);
-        mMap.getUiSettings().setZoomGesturesEnabled(true);
-        mMap.getUiSettings().setCompassEnabled(true);
 
         geo = new Geocoder(show_shop_on_map_activity.this, Locale.getDefault());
+
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this,
@@ -321,35 +269,9 @@ public class show_shop_on_map_activity extends AppCompatActivity implements Acti
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
         mCurrLocationMarker = mMap.addMarker(markerOptions);
 
-        /*Hazeem Zoom */
-        //move map camera
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        // mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        Criteria criteria = new Criteria();
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-      //  Location location2 = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
-        if (location != null)
-        {
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 13));
 
-            CameraPosition cameraPosition = new CameraPosition.Builder()
-                    .target(new LatLng(location.getLatitude(), location.getLongitude()))      // Sets the center of the map to location user
-                    .zoom(17)                   // Sets the zoom
-                    .bearing(90)                // Sets the orientation of the camera to east
-                    .tilt(40)                   // Sets the tilt of the camera to 30 degrees
-                    .build();                   // Creates a CameraPosition from the builder
-            mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-        }
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        //mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
 
         //stop location updates
         if (mGoogleApiClient != null) {
@@ -357,11 +279,43 @@ public class show_shop_on_map_activity extends AppCompatActivity implements Acti
         }
 
     }
-
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (getCurrentFocus() != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            assert imm != null;
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+            searchView.setIconified(true);
+            // searchView.onActionViewCollapsed();
+        }
+        return super.dispatchTouchEvent(ev);
+    }
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
 
     }
+    public void onMapSearch(String location) {
+
+        List<Address> addressList = null;
+        /*if(location.isEmpty())
+        {
+            locationSearch.setError(getResources().getString(R.string.error));
+        }*/
+        if (!location.isEmpty()) {
+            Geocoder geocoder = new Geocoder(this);
+            try {
+                addressList = geocoder.getFromLocationName(location, 1);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Address address = addressList.get(0);
+            LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+            mMap.addMarker(new MarkerOptions().position(latLng).title("Marker"));
+            mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+        }
+    }
+
     //ahsan
     @Override
     public void onStart()
@@ -400,36 +354,4 @@ public class show_shop_on_map_activity extends AppCompatActivity implements Acti
             }
         });
     }
-    public void onMapSearch(String location) {
-
-        List<Address> addressList = null;
-        /*if(location.isEmpty())
-        {
-            locationSearch.setError(getResources().getString(R.string.error));
-        }*/
-        if (!location.isEmpty()) {
-            Geocoder geocoder = new Geocoder(this);
-            try {
-                addressList = geocoder.getFromLocationName(location, 1);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Address address = addressList.get(0);
-            LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
-            mMap.addMarker(new MarkerOptions().position(latLng).title("Marker"));
-            mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-        }
-    }
-
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (getCurrentFocus() != null) {
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            //assert imm != null;
-            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-        }
-        return super.dispatchTouchEvent(ev);
-    }
-
 }

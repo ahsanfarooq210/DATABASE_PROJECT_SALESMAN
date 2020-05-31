@@ -130,7 +130,7 @@
                                 android:layout_height="wrap_content"
                                 android:textStyle="bold"
                                 android:layout_marginTop="10dp"
-                                android:text="Show Order"
+                                android:text="@string/show_order"
                                 android:fontFamily="sans-serif-light"
                                 android:textColor="@android:color/white"/>
                             <View
@@ -147,7 +147,7 @@
                                 android:layout_marginRight="7dp"
                                 android:layout_marginTop="10dp"
                                 android:layout_gravity="center"
-                                android:text="click here to show all of your orders"
+                                android:text="@string/click_here_to_show_all_of_your_orders"
                                 android:fontFamily="sans-serif-light"
                                 android:textColor="@android:color/white"/>
                         </LinearLayout>
@@ -189,7 +189,7 @@
                                 android:layout_height="wrap_content"
                                 android:textStyle="bold"
                                 android:layout_marginTop="10dp"
-                                android:text="Show Shops"
+                                android:text="@string/show_shops"
                                 android:fontFamily="sans-serif-light"
                                 android:textColor="@android:color/white"/>
                             <View
