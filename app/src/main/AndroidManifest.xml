@@ -13,8 +13,37 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".edit_order_form_activity"></activity>
-        <activity android:name=".edit_order_rv_activity" />
+        <activity android:name=".notification_Activity"></activity>
+        <activity
+            android:name=".salesname_main_dashboard"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".setting_activity"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".profileActivites.activity_Edit_Profile"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".profileActivites.activity_View_Profile"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".edit_order_form_activity"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".edit_order_rv_activity"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -22,15 +51,15 @@
 
         <activity android:name=".edit_order_rv_list" />
         <activity android:name=".show_shop_on_map_activity" />
-        <activity android:name=".show_order_shop_on_map"
-            android:theme="@style/AppTheme"
-            android:label=""/>
+        <activity
+            android:name=".show_order_shop_on_map"
+            android:label=""
+            android:theme="@style/AppTheme" />
         <activity android:name=".show_shop_activity" />
         <activity android:name=".show_orders_activity" />
         <activity android:name=".add_order_activity" />
-        <activity android:name=".salesname_main_dashboard"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    tools:context=".edit_order_form_activity">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:gravity="center">
+
+
+        <ImageView
+            android:id="@+id/profile_imgView_logo"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:adjustViewBounds="true"
+
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_twotone_account_circle_24" />
+
+        <RelativeLayout
+            android:id="@+id/adding_sku_rellay1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_below="@id/profile_imgView_logo"
+            >
+
+            <TextView
+                android:id="@+id/tv_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/profile"
+
+                android:textColor="@android:color/black"
+                android:textSize="30sp" />
+
+
+            <LinearLayout
+                android:id="@+id/linlay1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_login"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-light"
+                            android:text="@string/name"
+                            android:textAllCaps="true"
+                            android:textColor="@android:color/black"
+                            android:textSize="27sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="sans-serif-light"
+                            android:text="@string/cnic"
+                            android:textAllCaps="true"
+                            android:textColor="@android:color/black"
+                            android:textSize="27sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="sans-serif-light"
+                            android:text="Email : "
+                            android:textAllCaps="true"
+                            android:textColor="@android:color/black"
+                            android:textSize="27sp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-light"
+                            android:text="@string/dob"
+                            android:textAllCaps="true"
+                            android:textColor="@android:color/black"
+                            android:textSize="27sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="sans-serif-light"
+                            android:text="Cell No : "
+                            android:textAllCaps="true"
+                            android:textColor="@android:color/black"
+                            android:textSize="27sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="sans-serif-light"
+                            android:text="@string/education"
+                            android:textAllCaps="true"
+                            android:textColor="@android:color/black"
+                            android:textSize="27sp" />
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <EditText
+                            android:id="@+id/Name_EDITTEXT"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-light"
+                            android:text="@string/name"
+                            android:textAllCaps="true"
+                            android:textColor="@android:color/black"
+                            android:textSize="15sp" />
+
+                        <EditText
+                            android:id="@+id/Cnic_EDITTEXT"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="sans-serif-light"
+                            android:text="@string/cnic"
+                            android:editable="false"
+                            android:textAllCaps="true"
+                            android:textColor="@android:color/black"
+                            android:textSize="15sp" />
+
+                        <EditText
+                            android:id="@+id/Email_EDITTEXT"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="sans-serif-light"
+                            android:editable="false"
+                            android:text="Email : "
+                            android:textAllCaps="true"
+                            android:textColor="@android:color/black"
+                            android:textSize="15sp" />
+                        <EditText
+                            android:id="@+id/dob_EDITTEXT"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-light"
+                            android:text="@string/dob"
+                            android:editable="false"
+                            android:textAllCaps="true"
+                            android:textColor="@android:color/black"
+                            android:textSize="15sp" />
+
+                        <EditText
+                            android:id="@+id/cell_no_EDITTEXT"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="sans-serif-light"
+                            android:text="Cell No : "
+
+                            android:textAllCaps="true"
+                            android:textColor="@android:color/black"
+                            android:textSize="15sp" />
+
+                        <EditText
+                            android:id="@+id/education_EDITTEXT"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="sans-serif-light"
+                            android:text="@string/education"
+                            android:textAllCaps="true"
+                            android:textColor="@android:color/black"
+                             />
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_below="@+id/linlay1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+
+                >
+
+                <Button
+                    android:id="@+id/cancel_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/btn_bg"
+                    android:clickable="true"
+                    android:fontFamily="sans-serif-medium"
+                    android:paddingLeft="45dp"
+                    android:paddingRight="45dp"
+                    android:text="@string/cancel"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp" />
+
+                <Button
+
+                    android:id="@+id/save_Profile_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/btn_bg"
+                    android:fontFamily="sans-serif-medium"
+                    android:paddingLeft="50dp"
+                    android:paddingRight="55dp"
+                    android:text="@string/save"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/adding_sku_bottom_rally2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:gravity="bottom"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/message_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/adding_sku_rellay2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:visibility="gone">
+
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/my_progress_bar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="20dp"
+            android:indeterminateDrawable="@drawable/progress_bar_ring" />
+
+        <TextView
+            android:id="@+id/catagory_message_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/my_progress_bar"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:gravity="center" />
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

@@ -194,10 +194,8 @@ public class show_shop_on_map_activity extends AppCompatActivity implements Acti
             case R.id.action_search:
                 // search action
 
-
-
                 return true;
-            case R.id.action_location_found:
+           /* case R.id.action_location_found:
                 // location found
 
                 return true;
@@ -213,7 +211,7 @@ public class show_shop_on_map_activity extends AppCompatActivity implements Acti
                 return true;
             case R.id.action_check_updates:
                 // check for updates action
-                return true;
+                return true;*/
             default:
                 return super.onOptionsItemSelected(item);
         }

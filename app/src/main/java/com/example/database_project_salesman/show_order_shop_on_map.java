@@ -26,8 +26,6 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.SearchView;
-import android.widget.Toast;
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -47,9 +45,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-public class show_order_shop_on_map extends AppCompatActivity implements ActionBar.OnNavigationListener , OnMapReadyCallback,
+public class show_order_shop_on_map extends AppCompatActivity implements ActionBar.OnNavigationListener, OnMapReadyCallback,
         LocationListener, GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener{
+        GoogleApiClient.OnConnectionFailedListener {
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 911;
     private GoogleMap mMap;
     Location mLastLocation;
@@ -71,53 +69,55 @@ public class show_order_shop_on_map extends AppCompatActivity implements ActionB
 
     private Geocoder geo;
     private List<Address> address;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_order_shop_on_map);
 
         //getting the coordinates from the previous activity
-        Intent intent=getIntent();
-        double latitiude=intent.getDoubleExtra("latitude",0.00);
-        double longitude=intent.getDoubleExtra("longitude",0.00);
-        latLng=new LatLng(latitiude,longitude);
+        Intent intent = getIntent();
+        double latitiude = intent.getDoubleExtra("latitude", 0.00);
+        double longitude = intent.getDoubleExtra("longitude", 0.00);
+        latLng = new LatLng(latitiude, longitude);
         //initializing the maps fragment
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.show_order_shop_on_map_mapfragment);
-        mapFragment.getMapAsync( this);
+        mapFragment.getMapAsync(this);
 
         //checkLocationPermission();
     }
+
     public void checkLocationPermission() {
         if (ContextCompat.checkSelfPermission(show_order_shop_on_map.this,
-                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(show_order_shop_on_map.this,
-                    Manifest.permission.ACCESS_FINE_LOCATION)){
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
                 ActivityCompat.requestPermissions(show_order_shop_on_map.this,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-            }else{
+            } else {
                 ActivityCompat.requestPermissions(show_order_shop_on_map.this,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             }
         }
     }
+
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults){
-        switch (requestCode){
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
             case 1: {
-                if (grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     if (ContextCompat.checkSelfPermission(show_order_shop_on_map.this,
-                            Manifest.permission.ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED){
+                            Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 
                     }
-                }else{
+                } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(show_order_shop_on_map.this);
                     builder.setTitle("Location Permission is Required  ");
                     builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-          //                  checkLocationPermission();
+                            //                  checkLocationPermission();
                         }
                     })
                             .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -128,7 +128,7 @@ public class show_order_shop_on_map extends AppCompatActivity implements ActionB
                                     builderInner.setPositiveButton("ok", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
-            //                                checkLocationPermission();
+                                            //                                checkLocationPermission();
                                         }
                                     }).show();
                                 }
@@ -184,7 +184,7 @@ public class show_order_shop_on_map extends AppCompatActivity implements ActionB
                 //Here u can get the value "query" which is entered in the search box.
                 searchView.setIconified(true);
                 searchView.onActionViewCollapsed();
-                onMapSearch(query );
+                onMapSearch(query);
 
                 return true;
             }
@@ -193,6 +193,7 @@ public class show_order_shop_on_map extends AppCompatActivity implements ActionB
         return super.onCreateOptionsMenu(menu);
 
     }
+
     /**
      * On selecting action bar icons
      **/
@@ -203,7 +204,7 @@ public class show_order_shop_on_map extends AppCompatActivity implements ActionB
             case R.id.action_search:
                 // search action
                 return true;
-            case R.id.action_location_found:
+            /*case R.id.action_location_found:
                 // location found
 
                 return true;
@@ -219,7 +220,7 @@ public class show_order_shop_on_map extends AppCompatActivity implements ActionB
                 return true;
             case R.id.action_check_updates:
                 // check for updates action
-                return true;
+                return true;*/
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -263,12 +264,25 @@ public class show_order_shop_on_map extends AppCompatActivity implements ActionB
             // remove the progress bar view
             refreshMenuItem.setActionView(null);
         }
-    };
+    }
+
+    ;
+
     //location thing ahead
-   @Override
+    @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.clear();
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         mMap.setMyLocationEnabled(true);
 
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
