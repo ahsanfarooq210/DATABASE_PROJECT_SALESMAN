@@ -50,7 +50,9 @@
             android:value="@string/map_key" />
 
         <activity android:name=".edit_order_rv_list" />
-        <activity android:name=".show_shop_on_map_activity" />
+        <activity android:name=".show_shop_on_map_activity"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".show_order_shop_on_map"
             android:label=""

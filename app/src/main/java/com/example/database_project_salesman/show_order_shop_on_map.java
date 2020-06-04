@@ -139,26 +139,7 @@ public class show_order_shop_on_map extends AppCompatActivity implements ActionB
         }
     }
 
-  /* @Override
-    public void onMapReady(GoogleMap googleMap)
-    {
-        mMap = googleMap;
-        mMap.clear();
-        mMap.setMyLocationEnabled(true);
-        mMap.getUiSettings().setMyLocationButtonEnabled(true);
-        geo = new Geocoder(show_order_shop_on_map.this, Locale.getDefault());
 
-        if (mMap != null) {
-
-            mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                @Override
-                public boolean onMarkerClick(Marker marker) {
-                    Toast.makeText(show_order_shop_on_map.this, marker.getTitle().toString() + " Lat:" + marker.getPosition().latitude + " Long:" + marker.getPosition().longitude, Toast.LENGTH_SHORT).show();
-                    return false;
-                }
-            });
-        }
-    }*/
     //action bar this ahead
 
 
@@ -301,8 +282,23 @@ public class show_order_shop_on_map extends AppCompatActivity implements ActionB
            e.printStackTrace();
        }
        mMap.addMarker(new MarkerOptions().position(latLng).title(address.toString()));
-       mMap.animateCamera(CameraUpdateFactory.zoomTo(15.0f));
-       mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        //zoom to current location
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        Criteria criteria = new Criteria();
+
+         Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
+        if (location != null)
+        {
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 13));
+
+            CameraPosition cameraPosition = new CameraPosition.Builder()
+                    .target(new LatLng(location.getLatitude(), location.getLongitude()))      // Sets the center of the map to location user
+                    .zoom(17)                   // Sets the zoom
+                    .bearing(90)                // Sets the orientation of the camera to east
+                    .tilt(40)                   // Sets the tilt of the camera to 30 degrees
+                    .build();                   // Creates a CameraPosition from the builder
+            mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        }
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)
