@@ -85,12 +85,12 @@ public class show_order_shop_on_map extends AppCompatActivity implements ActionB
         double longitude = intent.getDoubleExtra("longitude", 0.00);
         latLng = new LatLng(latitiude, longitude);
         //initializing the maps fragment
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.show_order_shop_on_map_mapfragment);
+    SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+            .findFragmentById(R.id.show_order_shop_on_map_mapfragment);
         mapFragment.getMapAsync(this);
 
 
-    }
+}
 
     //action bar this ahead
 
