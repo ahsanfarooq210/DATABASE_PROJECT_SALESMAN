@@ -1,14 +1,22 @@
 package com.example.database_project_salesman;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.location.LocationManagerCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
@@ -27,12 +35,15 @@ import com.example.database_project_salesman.profileActivites.activity_Edit_Prof
 import com.example.database_project_salesman.profileActivites.activity_View_Profile;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+
 
 public class salesname_main_dashboard extends AppCompatActivity
-{
+{ private static final int MY_PERMISSIONS_REQUEST_LOCATION = 911;
     private NavigationView navigationView;
     private DrawerLayout drawer;
     private View navHeader;
@@ -334,11 +345,18 @@ public void onBackPressed() {
 
     public void showShopsOnMap(View view)
     {
+
         if(isLocationEnabled(this)) {
+
+         if (checkPermission()) {
             Intent intent = new Intent(salesname_main_dashboard.this, show_shop_on_map_activity.class);
             startActivity(intent);
+
+        } else {
+
+           requestPermission();
         }
-        else{
+        }else{
             Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
             startActivity(intent);
         }
@@ -353,5 +371,64 @@ public void onBackPressed() {
     {
         startActivity(new Intent(salesname_main_dashboard.this,edit_order_rv_activity.class));
     }
+    private boolean checkPermission() {
+        int result = ContextCompat.checkSelfPermission(getApplicationContext(), ACCESS_FINE_LOCATION);
+
+        return result == PackageManager.PERMISSION_GRANTED ;
+    }
+
+    private void requestPermission() {
+
+        ActivityCompat.requestPermissions(this, new String[]{ACCESS_FINE_LOCATION, },MY_PERMISSIONS_REQUEST_LOCATION);
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_LOCATION:
+                if (grantResults.length > 0) {
+                    boolean locationAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                    if (locationAccepted ) {
+                        Intent intent = new Intent(salesname_main_dashboard.this, show_shop_on_map_activity.class);
+                        startActivity(intent);
+                        //Snackbar.make(getCurrentFocus(), "Permission Granted, Now you can access location data and camera.", Snackbar.LENGTH_LONG).show();
+                    }else {
+
+                       // Snackbar.make(getCurrentFocus(), "Permission Denied, You cannot access location data and camera.", Snackbar.LENGTH_LONG).show();
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            if (shouldShowRequestPermissionRationale(ACCESS_FINE_LOCATION)) {
+                                showMessageOKCancel("You need to allow the permissions access to Location",
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                                    requestPermissions(new String[]{ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_LOCATION);
+                                                }
+                                            }
+                                        });
+                                return;
+                            }
+                        }
+
+                    }
+                }
+
+
+                break;
+        }
+    }
+
+
+    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
+        new AlertDialog.Builder(salesname_main_dashboard.this)
+                .setMessage(message)
+                .setPositiveButton("OK", okListener)
+                .setNegativeButton("Cancel", null)
+                .create()
+                .show();
+    }
+
 }
 

@@ -55,9 +55,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+
 public class show_shop_on_map_activity extends AppCompatActivity implements ActionBar.OnNavigationListener ,
         OnMapReadyCallback, LocationListener, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener{
+    private static final int MY_PERMISSIONS_REQUEST_LOCATION = 911;
     private GoogleMap mMap;
     String s ;
     Location mLastLocation;
@@ -100,60 +103,10 @@ public class show_shop_on_map_activity extends AppCompatActivity implements Acti
         shopReference= FirebaseDatabase.getInstance().getReference("SHOP");
         shopReference.keepSynced(true);
         shopArrayList=new ArrayList<>();
-        // checkLocationPermission();
-    }
-    public void checkLocationPermission() {
-        if (ContextCompat.checkSelfPermission(show_shop_on_map_activity.this,
-                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
-            if (ActivityCompat.shouldShowRequestPermissionRationale(show_shop_on_map_activity.this,
-                    Manifest.permission.ACCESS_FINE_LOCATION)){
-                ActivityCompat.requestPermissions(show_shop_on_map_activity.this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-            }else{
-                ActivityCompat.requestPermissions(show_shop_on_map_activity.this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-            }
-        }
-    }
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults){
-        switch (requestCode){
-            case 1: {
-                if (grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    if (ContextCompat.checkSelfPermission(show_shop_on_map_activity.this,
-                            Manifest.permission.ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED){
 
-                    }
-                }else{
-                    AlertDialog.Builder builder = new AlertDialog.Builder(show_shop_on_map_activity.this);
-                    builder.setTitle("Location Permission is Required  ");
-                    builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            //checkLocationPermission();
-                        }
-                    })
-                            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    AlertDialog.Builder builderInner = new AlertDialog.Builder(show_shop_on_map_activity.this);
-                                    builderInner.setTitle("Location Permission is must Required  ");
-                                    builderInner.setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            //checkLocationPermission();
-                                        }
-                                    }).show();
-                                }
-                            }).show();
-                }
-                return;
-            }
-        }
     }
+
     //action bar this ahead
-
-
 
 
     @Override

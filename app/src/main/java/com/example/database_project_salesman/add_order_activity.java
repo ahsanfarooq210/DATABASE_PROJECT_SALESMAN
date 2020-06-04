@@ -3,16 +3,21 @@ package com.example.database_project_salesman;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.location.LocationManagerCompat;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
@@ -107,8 +112,8 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
     //location managet ot get the current location
     // private LocationManager locationManager;
     private FusedLocationProviderClient client;
-
-
+    ShopDetails shopDetails;
+    private static final int MY_PERMISSIONS_REQUEST_LOCATION = 911;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -264,17 +269,92 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
             @Override
             public void onClick(View v)
             {
-                ShopDetails shopDetails=(ShopDetails)shopSpinner.getSelectedItem();
-                Intent intent=new Intent(add_order_activity.this,show_order_shop_on_map.class);
-                intent.putExtra("latitude",shopDetails.getLatitude());
-                intent.putExtra("longitude",shopDetails.getLongitude());
-                startActivity(intent);
+            shopDetails=(ShopDetails)shopSpinner.getSelectedItem();
+                if(isLocationEnabled(add_order_activity.this)) {
+
+                    if (checkPermission()) {
+                        Intent intent = new Intent(add_order_activity.this, show_shop_on_map_activity.class);
+                        startActivity(intent);
+
+                    } else {
+
+                        requestPermission();
+                    }
+                }else{
+                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivity(intent);
+                }
+
 
             }
         });
 
 
 
+    }
+    private boolean isLocationEnabled(Context context) {
+        LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        return LocationManagerCompat.isLocationEnabled(locationManager);
+    }
+    private boolean checkPermission() {
+        int result = ContextCompat.checkSelfPermission(getApplicationContext(), ACCESS_FINE_LOCATION);
+
+        return result == PackageManager.PERMISSION_GRANTED ;
+    }
+
+    private void requestLoctionPermission() {
+
+        ActivityCompat.requestPermissions(this, new String[]{ACCESS_FINE_LOCATION, },MY_PERMISSIONS_REQUEST_LOCATION);
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_LOCATION:
+                if (grantResults.length > 0) {
+                    boolean locationAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                    if (locationAccepted ) {
+                        Intent intent=new Intent(add_order_activity.this,show_order_shop_on_map.class);
+                        intent.putExtra("latitude",shopDetails.getLatitude());
+                        intent.putExtra("longitude",shopDetails.getLongitude());
+                        startActivity(intent);
+                        //Snackbar.make(getCurrentFocus(), "Permission Granted, Now you can access location data and camera.", Snackbar.LENGTH_LONG).show();
+                    }else {
+
+                        // Snackbar.make(getCurrentFocus(), "Permission Denied, You cannot access location data and camera.", Snackbar.LENGTH_LONG).show();
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            if (shouldShowRequestPermissionRationale(ACCESS_FINE_LOCATION)) {
+                                showMessageOKCancel("You need to allow the permissions access to Location",
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                                    requestPermissions(new String[]{ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_LOCATION);
+                                                }
+                                            }
+                                        });
+                                return;
+                            }
+                        }
+
+                    }
+                }
+
+
+                break;
+        }
+    }
+
+
+    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
+        new AlertDialog.Builder(add_order_activity.this)
+                .setMessage(message)
+                .setPositiveButton("OK", okListener)
+                .setNegativeButton("Cancel", null)
+                .create()
+                .show();
     }
 
     @Override
