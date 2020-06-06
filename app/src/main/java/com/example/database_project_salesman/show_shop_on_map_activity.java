@@ -90,7 +90,7 @@ public class show_shop_on_map_activity extends AppCompatActivity implements Acti
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_shop_on_map_activity);
 
-
+        actionBar = getActionBar();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -210,6 +210,8 @@ public class show_shop_on_map_activity extends AppCompatActivity implements Acti
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.getUiSettings().setZoomControlsEnabled(true);
+        mMap.getUiSettings().setZoomGesturesEnabled(true);
 
         geo = new Geocoder(show_shop_on_map_activity.this, Locale.getDefault());
 

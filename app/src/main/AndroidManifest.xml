@@ -56,7 +56,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".show_shop_on_map_activity"
             android:label=""
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".show_order_shop_on_map"
             android:label=""

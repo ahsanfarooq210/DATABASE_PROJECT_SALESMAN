@@ -75,14 +75,14 @@ public class show_order_shop_on_map extends AppCompatActivity implements ActionB
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_order_shop_on_map);
-
+        actionBar = getActionBar();
         //getting the coordinates from the previous activity
         Intent intent = getIntent();
         double latitiude = intent.getDoubleExtra("latitude", 0.00);
         double longitude = intent.getDoubleExtra("longitude", 0.00);
         latLng = new LatLng(latitiude, longitude);
         //initializing the maps fragment
-    SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
             .findFragmentById(R.id.show_order_shop_on_map_mapfragment);
         mapFragment.getMapAsync(this);
 
@@ -90,7 +90,6 @@ public class show_order_shop_on_map extends AppCompatActivity implements ActionB
 }
 
     //action bar this ahead
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -202,6 +201,8 @@ public class show_order_shop_on_map extends AppCompatActivity implements ActionB
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.getUiSettings().setZoomControlsEnabled(true);
+        mMap.getUiSettings().setZoomGesturesEnabled(true);
         mMap.clear();
         if (ActivityCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
