@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.database_project_salesman.R;
+import com.example.database_project_salesman.salesname_main_dashboard;
 
 public class activity_View_Profile extends AppCompatActivity {
  TextView Name_textView,Cnic_textView,Email_textView,dob_textView,cell_no_textView,education_textView;
@@ -57,13 +58,13 @@ public class activity_View_Profile extends AppCompatActivity {
         cell_no_textView=findViewById(R.id.cell_no_textView);
         education_textView=findViewById(R.id.education_textView);
 
-        Name_textView.setText("Hazeem Hassan ");
+        Name_textView.setText("Sale Men");
 
-        Cnic_textView.setText("33100-7915978-9");
+        Cnic_textView.setText("33333-1234567-8");
 
-        Email_textView.setText("hhazimhassan@gmail.com");
+        Email_textView.setText("salesmen2@gmail.com");
 
-        dob_textView.setText("18/10/1997");
+        dob_textView.setText("29/02/1996");
 
         education_textView.setText("BSCS");
         //relative layouts
@@ -82,7 +83,8 @@ public class activity_View_Profile extends AppCompatActivity {
          ok_button.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
-
+                Intent send =new Intent(activity_View_Profile.this, salesname_main_dashboard.class);
+                startActivity(send);
              }
          });
          edit_Profile_button.setOnClickListener(new View.OnClickListener() {

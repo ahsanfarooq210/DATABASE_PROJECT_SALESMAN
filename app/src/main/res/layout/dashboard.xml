@@ -17,7 +17,7 @@
             android:id="@+id/dashboard_imgView_logo"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_marginTop="52dp"
+            android:layout_marginTop="53dp"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
             android:src="@drawable/icons8_sales_performance_100px" />

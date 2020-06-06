@@ -6,15 +6,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.database_project_salesman.R;
+import com.example.database_project_salesman.salesname_main_dashboard;
 
 public class activity_Edit_Profile extends AppCompatActivity {
     EditText Name_EDITTEXT,Cnic_EDITTEXT,Email_EDITTEXT,dob_EDITTEXT,cell_no_EDITTEXT,education_EDITTEXT; //splash screen relative layout
+
+    Button cancel_button,save_Profile_button;
     private RelativeLayout rellay1, rally3, rellay2;
     //handler for the splash screen
     private Handler handler = new Handler();
@@ -57,14 +61,13 @@ public class activity_Edit_Profile extends AppCompatActivity {
 
 
         Name_EDITTEXT.setText("Hazeem Hassan ");
-
-        Cnic_EDITTEXT.setText("33100-7915978-9");
-
-        Email_EDITTEXT.setText("hhazimhassan@gmail.com");
-
-        dob_EDITTEXT.setText("18/10/1997");
-
+        Cnic_EDITTEXT.setText("33333-1234567-8");
+        Email_EDITTEXT.setText("salesmen2@gmail.com");
+        dob_EDITTEXT.setText("29/02/1996");
         education_EDITTEXT.setText("BSCS");
+
+        cancel_button=findViewById(R.id.cancel_button);
+        save_Profile_button=findViewById(R.id.save_Profile_button);
         //relative layouts
         rellay1 = findViewById(R.id.adding_sku_rellay1);
         rellay2 = findViewById(R.id.adding_sku_rellay2);
@@ -76,5 +79,20 @@ public class activity_Edit_Profile extends AppCompatActivity {
         //progress bar
         progressBar = findViewById(R.id.my_progress_bar);
         progressBarh.postDelayed(runnable1, 0);
+
+        cancel_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent send =new Intent(activity_Edit_Profile.this, salesname_main_dashboard.class);
+                startActivity(send);
+            }
+        });
+        save_Profile_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent send =new Intent(activity_Edit_Profile.this, salesname_main_dashboard.class);
+                startActivity(send);
+            }
+        });
     }
 }

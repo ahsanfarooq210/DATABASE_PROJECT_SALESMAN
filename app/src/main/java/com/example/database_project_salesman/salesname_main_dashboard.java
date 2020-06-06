@@ -283,7 +283,7 @@ public void onBackPressed() {
         // Inflate the menu; this adds items to the action bar if it is present.
 
         // show menu only when home fragment is selected
-        if (navItemIndex == 0||navItemIndex == 1||navItemIndex ==3 ) {
+        if (navItemIndex == -1||navItemIndex == 0||navItemIndex == 1||navItemIndex ==3 ) {
             getMenuInflater().inflate(R.menu.main, menu);
         }
         // when fragment is notifications, load the menu created for notifications
