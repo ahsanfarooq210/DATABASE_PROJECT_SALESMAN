@@ -95,7 +95,7 @@ public class show_order_shop_on_map extends AppCompatActivity implements ActionB
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.s, menu);
+        inflater.inflate(R.menu.activity_main_actions, menu);
 
         // Associate searchable configuration with the SearchView
         searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
