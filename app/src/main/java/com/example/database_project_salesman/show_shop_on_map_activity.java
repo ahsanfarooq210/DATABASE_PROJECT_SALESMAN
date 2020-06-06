@@ -106,7 +106,7 @@ public class show_shop_on_map_activity extends AppCompatActivity implements Acti
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.s, menu);
+        inflater.inflate(R.menu.activity_main_actions, menu);
 
         // Associate searchable configuration with the SearchView
         searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
