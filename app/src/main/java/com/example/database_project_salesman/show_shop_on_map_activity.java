@@ -3,15 +3,12 @@ package com.example.database_project_salesman;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.ActionBar;
-import android.app.AlertDialog;
 import android.app.SearchManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Criteria;
@@ -55,7 +52,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 public class show_shop_on_map_activity extends AppCompatActivity implements ActionBar.OnNavigationListener ,
         OnMapReadyCallback, LocationListener, GoogleApiClient.ConnectionCallbacks,
@@ -107,12 +103,10 @@ public class show_shop_on_map_activity extends AppCompatActivity implements Acti
     }
 
     //action bar this ahead
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.activity_main_actions, menu);
+        inflater.inflate(R.menu.s, menu);
 
         // Associate searchable configuration with the SearchView
         searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
@@ -149,7 +143,6 @@ public class show_shop_on_map_activity extends AppCompatActivity implements Acti
         switch (item.getItemId()) {
             case R.id.action_search:
                 // search action
-
                 return true;
            /* case R.id.action_location_found:
                 // location found
