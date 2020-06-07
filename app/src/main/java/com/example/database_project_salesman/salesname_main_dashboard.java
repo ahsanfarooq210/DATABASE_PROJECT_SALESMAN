@@ -1,6 +1,5 @@
 package com.example.database_project_salesman;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -30,12 +29,15 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.example.database_project_salesman.other.CircleTransform;
+import com.example.database_project_salesman.OrderActicities.add_order_activity;
+import com.example.database_project_salesman.OrderActicities.edit_order_rv_activity;
+import com.example.database_project_salesman.OrderActivies.show_orders_activity;
+import com.example.database_project_salesman.ShopActivities.show_shop_activity;
+import com.example.database_project_salesman.ShopActivities.show_shop_on_map_activity;
 import com.example.database_project_salesman.profileActivites.activity_Edit_Profile;
 import com.example.database_project_salesman.profileActivites.activity_View_Profile;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -326,19 +328,19 @@ public void onBackPressed() {
 
     public void addorder(View view)
     {
-        Intent intent=new Intent(salesname_main_dashboard.this,add_order_activity.class);
+        Intent intent=new Intent(salesname_main_dashboard.this, add_order_activity.class);
         startActivity(intent);
 
     }
 
     public void showorder(View view)
     {
-        Intent intent=new Intent(salesname_main_dashboard.this,show_orders_activity.class);
+        Intent intent=new Intent(salesname_main_dashboard.this, show_orders_activity.class);
         startActivity(intent);
     }
     public void showshops(View view)
     {
-        Intent intent=new Intent(salesname_main_dashboard.this,show_shop_activity.class);
+        Intent intent=new Intent(salesname_main_dashboard.this, show_shop_activity.class);
         startActivity(intent);
 
     }
@@ -369,7 +371,7 @@ public void onBackPressed() {
 
     public void editOrder(View view)
     {
-        startActivity(new Intent(salesname_main_dashboard.this,edit_order_rv_activity.class));
+        startActivity(new Intent(salesname_main_dashboard.this, edit_order_rv_activity.class));
     }
     private boolean checkPermission() {
         int result = ContextCompat.checkSelfPermission(getApplicationContext(), ACCESS_FINE_LOCATION);

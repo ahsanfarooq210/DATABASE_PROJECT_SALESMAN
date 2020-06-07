@@ -1,14 +1,14 @@
-package com.example.database_project_salesman;
+package com.example.database_project_salesman.SKUActivities;
 
-public class SkuCatagory
+public class SkuCompany
 {
-    private String id,name;
+    String id, name;
 
-    public SkuCatagory()
+    public SkuCompany()
     {
     }
 
-    public SkuCatagory(String id, String name)
+    public SkuCompany(String id, String name)
     {
         this.id = id;
         this.name = name;

@@ -1,8 +1,10 @@
-package com.example.database_project_salesman;
+package com.example.database_project_salesman.profileActivites;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.database_project_salesman.R;
 
 public class setting_activity extends AppCompatActivity {
 

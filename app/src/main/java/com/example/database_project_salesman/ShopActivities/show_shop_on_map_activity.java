@@ -1,4 +1,4 @@
-package com.example.database_project_salesman;
+package com.example.database_project_salesman.ShopActivities;
 
 
 import androidx.annotation.NonNull;
@@ -27,6 +27,7 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.database_project_salesman.ActioBarAdapter.TitleNavigationAdapter;
+import com.example.database_project_salesman.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;

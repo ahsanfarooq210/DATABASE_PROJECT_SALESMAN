@@ -1,9 +1,8 @@
-package com.example.database_project_salesman;
+package com.example.database_project_salesman.OrderActicities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.DownloadManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,6 +14,9 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.database_project_salesman.R;
+import com.example.database_project_salesman.ShopActivities.ShopDetails;
+import com.example.database_project_salesman.SKUActivities.Sku;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
