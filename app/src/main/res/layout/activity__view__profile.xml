@@ -4,14 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-   >
+    >
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:layout_marginLeft="40dp"
+
         android:layout_marginRight="40dp"
         android:gravity="center">
 
@@ -26,7 +27,7 @@
 
         <RelativeLayout
             android:id="@+id/adding_sku_rellay1"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
             android:layout_below="@id/profile_imgView_logo"
@@ -62,85 +63,99 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-light"
                             android:text="@string/name"
                             android:textAllCaps="true"
-                            android:textColor="@android:color/black"
+                            android:gravity="center_horizontal"
+                            android:background="@drawable/back_btn_bg"
+                            android:textColor="@android:color/white"
                             android:textSize="15sp" />
 
                         <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="sans-serif-light"
-                        android:text="@string/cnic"
-                        android:textAllCaps="true"
-                        android:textColor="@android:color/black"
-                        android:textSize="15sp" />
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="sans-serif-light"
+                            android:text="@string/cnic"
+                            android:textAllCaps="true"
+                            android:gravity="center_horizontal"
+                            android:background="@drawable/back_btn_bg"
+                            android:textColor="@android:color/white"
+                            android:textSize="15sp" />
 
                         <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="sans-serif-light"
-                        android:text="Email : "
-                        android:textAllCaps="true"
-                        android:textColor="@android:color/black"
-                        android:textSize="15sp" />
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="sans-serif-light"
+                            android:text="Email : "
+                            android:textAllCaps="true"
+                            android:gravity="center_horizontal"
+                            android:background="@drawable/back_btn_bg"
+                            android:textColor="@android:color/white"
+                            android:textSize="15sp" />
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-light"
                             android:text="@string/dob"
                             android:layout_marginTop="10dp"
                             android:textAllCaps="true"
-                            android:textColor="@android:color/black"
+                            android:gravity="center_horizontal"
+                            android:background="@drawable/back_btn_bg"
+                            android:textColor="@android:color/white"
                             android:textSize="15sp" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:fontFamily="sans-serif-light"
                             android:text="Cell No : "
                             android:textAllCaps="true"
-                            android:textColor="@android:color/black"
+                            android:gravity="center_horizontal"
+                            android:background="@drawable/back_btn_bg"
+                            android:textColor="@android:color/white"
                             android:textSize="15sp" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:fontFamily="sans-serif-light"
                             android:text="@string/education"
                             android:textAllCaps="true"
-                            android:textColor="@android:color/black"
+                            android:gravity="center_horizontal"
+                            android:background="@drawable/back_btn_bg"
+                            android:textColor="@android:color/white"
                             android:textSize="15sp" />
 
 
-                </LinearLayout>
+                    </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
                         android:orientation="vertical">
                         <TextView
                             android:id="@+id/Name_textView"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-light"
                             android:text="@string/name"
-                            android:textAllCaps="true"
+                            android:gravity="center_horizontal"
                             android:textColor="@android:color/black"
                             android:textSize="15sp" />
 
                         <TextView
                             android:id="@+id/Cnic_textView"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
+                            android:gravity="center_horizontal"
                             android:fontFamily="sans-serif-light"
                             android:text="@string/cnic"
 
@@ -154,38 +169,39 @@
                             android:layout_marginTop="10dp"
                             android:fontFamily="sans-serif-light"
                             android:text="Email : "
-
+                            android:gravity="center_horizontal"
                             android:textColor="@android:color/black"
                             android:textSize="15sp" />
                         <TextView
                             android:id="@+id/dob_textView"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-light"
                             android:text="@string/dob"
+                            android:gravity="center_horizontal"
                             android:layout_marginTop="10dp"
                             android:textColor="@android:color/black"
                             android:textSize="15sp" />
 
                         <TextView
                             android:id="@+id/cell_no_textView"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:fontFamily="sans-serif-light"
                             android:text="Cell No : "
-
+                            android:gravity="center_horizontal"
                             android:textColor="@android:color/black"
                             android:textSize="15sp" />
 
                         <TextView
                             android:id="@+id/education_textView"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:fontFamily="sans-serif-light"
                             android:text="@string/education"
-
+                            android:gravity="center_horizontal"
                             android:textColor="@android:color/black"
                             android:textSize="15sp" />
 
@@ -201,37 +217,39 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 >
-            <Button
-                android:layout_weight="1"
-                android:id="@+id/ok_button"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_below="@+id/linlay1"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/btn_bg"
-                android:clickable="true"
-                android:fontFamily="sans-serif-medium"
-                android:text="Ok"
-                android:layout_marginRight="10dp"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
-                android:textSize="16sp" />
+                <Button
 
-            <Button
-                android:layout_weight="1"
-                android:id="@+id/edit_Profile_button"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_below="@+id/linlay1"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/btn_bg"
-                android:clickable="true"
-                android:fontFamily="sans-serif-medium"
-               android:layout_marginLeft="10dp"
-                android:text="@string/Edit_Profile"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
-                android:textSize="16sp" />
+                    android:id="@+id/ok_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_below="@+id/linlay1"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/btn_bg"
+                    android:clickable="true"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_marginRight="10dp"
+                    android:text="Ok"
+                    android:layout_weight="1"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp" />
+
+                <Button
+
+                    android:id="@+id/edit_Profile_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_below="@+id/linlay1"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/btn_bg"
+                    android:clickable="true"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/Edit_Profile"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp" />
 
             </LinearLayout>
         </RelativeLayout>
