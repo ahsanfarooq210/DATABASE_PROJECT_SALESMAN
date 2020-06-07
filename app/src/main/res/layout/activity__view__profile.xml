@@ -12,7 +12,6 @@
         android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:layout_marginLeft="40dp"
-
         android:layout_marginRight="40dp"
         android:gravity="center">
 
@@ -21,7 +20,6 @@
             android:id="@+id/profile_imgView_logo"
             android:layout_width="80dp"
             android:layout_height="80dp"
-
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_twotone_account_circle_24" />
@@ -60,7 +58,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_weight="1.5"
                         android:orientation="vertical">
 
                         <TextView
@@ -96,6 +94,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-light"
                             android:text="@string/dob"
+                            android:layout_marginTop="10dp"
                             android:textAllCaps="true"
                             android:textColor="@android:color/black"
                             android:textSize="15sp" />
@@ -144,18 +143,18 @@
                             android:layout_marginTop="10dp"
                             android:fontFamily="sans-serif-light"
                             android:text="@string/cnic"
-                            android:textAllCaps="true"
+
                             android:textColor="@android:color/black"
                             android:textSize="15sp" />
 
                         <TextView
                             android:id="@+id/Email_textView"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:fontFamily="sans-serif-light"
                             android:text="Email : "
-                            android:textAllCaps="true"
+
                             android:textColor="@android:color/black"
                             android:textSize="15sp" />
                         <TextView
@@ -164,7 +163,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-light"
                             android:text="@string/dob"
-                            android:textAllCaps="true"
+                            android:layout_marginTop="10dp"
                             android:textColor="@android:color/black"
                             android:textSize="15sp" />
 
@@ -175,7 +174,7 @@
                             android:layout_marginTop="10dp"
                             android:fontFamily="sans-serif-light"
                             android:text="Cell No : "
-                            android:textAllCaps="true"
+
                             android:textColor="@android:color/black"
                             android:textSize="15sp" />
 
@@ -186,7 +185,7 @@
                             android:layout_marginTop="10dp"
                             android:fontFamily="sans-serif-light"
                             android:text="@string/education"
-                            android:textAllCaps="true"
+
                             android:textColor="@android:color/black"
                             android:textSize="15sp" />
 
