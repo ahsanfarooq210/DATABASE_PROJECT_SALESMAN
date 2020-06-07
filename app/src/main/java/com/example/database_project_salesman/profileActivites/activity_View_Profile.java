@@ -58,7 +58,7 @@ public class activity_View_Profile extends AppCompatActivity {
         cell_no_textView=findViewById(R.id.cell_no_textView);
         education_textView=findViewById(R.id.education_textView);
 
-        Name_textView.setText("Sale Men");
+        Name_textView.setText("Sales Men");
 
         Cnic_textView.setText("33333-1234567-8");
 

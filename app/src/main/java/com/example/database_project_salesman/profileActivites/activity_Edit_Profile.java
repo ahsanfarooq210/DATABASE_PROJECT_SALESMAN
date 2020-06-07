@@ -1,7 +1,5 @@
 package com.example.database_project_salesman.profileActivites;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,7 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.database_project_salesman.R;
 import com.example.database_project_salesman.salesname_main_dashboard;
@@ -60,7 +59,7 @@ public class activity_Edit_Profile extends AppCompatActivity {
         education_EDITTEXT=findViewById(R.id.education_EDITTEXT);
 
 
-        Name_EDITTEXT.setText("Hazeem Hassan ");
+        Name_EDITTEXT.setText("Sales Men ");
         Cnic_EDITTEXT.setText("33333-1234567-8");
         Email_EDITTEXT.setText("salesmen2@gmail.com");
         dob_EDITTEXT.setText("29/02/1996");

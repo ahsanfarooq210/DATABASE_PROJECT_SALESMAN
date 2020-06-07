@@ -1,4 +1,4 @@
-package com.example.database_project_salesman.ShopActivities;
+package com.example.database_project_salesman;
 
 public class ShopDetails
 {
@@ -10,7 +10,6 @@ public class ShopDetails
     {
 
     }
-
 
     public ShopDetails(String id, double latitude, double longitude, String adress, String ownerName, String ownerCnic, String shopName, String ownerMobile)
     {

@@ -1,7 +1,4 @@
-package com.example.database_project_salesman.OrderActicities;
-
-import com.example.database_project_salesman.ShopActivities.ShopDetails;
-import com.example.database_project_salesman.SKUActivities.Sku;
+package com.example.database_project_salesman;
 
 public class Orders
 {

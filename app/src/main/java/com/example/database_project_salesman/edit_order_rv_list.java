@@ -1,4 +1,4 @@
-package com.example.database_project_salesman.OrderActicities;
+package com.example.database_project_salesman;
 
 import android.app.Activity;
 

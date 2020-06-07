@@ -1,8 +1,8 @@
 package com.example.database_project_salesman.profileActivites;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.database_project_salesman.R;
 

@@ -1,10 +1,4 @@
-package com.example.database_project_salesman.OrderActicities;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.location.LocationManagerCompat;
+package com.example.database_project_salesman;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -31,12 +25,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.location.LocationManagerCompat;
+
 import com.example.database_project_salesman.BrodcastReceivers.LocationBrodcast;
-import com.example.database_project_salesman.R;
-import com.example.database_project_salesman.ShopActivities.ShopDetails;
-import com.example.database_project_salesman.SKUActivities.Sku;
-import com.example.database_project_salesman.OrderActivies.show_order_shop_on_map;
-import com.example.database_project_salesman.ShopActivities.show_shop_on_map_activity;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -237,7 +232,7 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
                 String username;
                 if(user!=null)
                 {
-                     username=user.getEmail();
+                    username=user.getEmail();
                 }
                 else
                 {
@@ -274,7 +269,7 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
             @Override
             public void onClick(View v)
             {
-            shopDetails=(ShopDetails)shopSpinner.getSelectedItem();
+                shopDetails=(ShopDetails)shopSpinner.getSelectedItem();
                 if(isLocationEnabled(add_order_activity.this)) {
 
                     if (checkPermission()) {
@@ -320,7 +315,7 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
                 if (grantResults.length > 0) {
                     boolean locationAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
                     if (locationAccepted ) {
-                        Intent intent=new Intent(add_order_activity.this, show_order_shop_on_map.class);
+                        Intent intent=new Intent(add_order_activity.this,show_order_shop_on_map.class);
                         intent.putExtra("latitude",shopDetails.getLatitude());
                         intent.putExtra("longitude",shopDetails.getLongitude());
                         startActivity(intent);
@@ -447,7 +442,7 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
 
     //returns distance in meters
     public  double distance(double lat1, double lng1,
-                                  double lat2, double lng2){
+                            double lat2, double lng2){
         double a = (lat1-lat2)*distPerLat(lat1);
         double b = (lng1-lng2)*distPerLng(lat1);
         return Math.sqrt(a*a+b*b);

@@ -1,4 +1,4 @@
-package com.example.database_project_salesman.SKUActivities;
+package com.example.database_project_salesman;
 
 public class Sku
 {

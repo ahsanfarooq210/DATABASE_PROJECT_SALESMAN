@@ -1,14 +1,5 @@
 package com.example.database_project_salesman;
 
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.location.LocationManagerCompat;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -27,15 +18,19 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.location.LocationManagerCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.example.database_project_salesman.OrderActicities.add_order_activity;
-import com.example.database_project_salesman.OrderActicities.edit_order_rv_activity;
-import com.example.database_project_salesman.OrderActivies.show_orders_activity;
-import com.example.database_project_salesman.ShopActivities.show_shop_activity;
-import com.example.database_project_salesman.ShopActivities.show_shop_on_map_activity;
-import com.example.database_project_salesman.profileActivites.activity_Edit_Profile;
-import com.example.database_project_salesman.profileActivites.activity_View_Profile;
+import com.example.database_project_salesman.profileActivites.*;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -162,7 +157,6 @@ public class salesname_main_dashboard extends AppCompatActivity
 
         case 0:
             // activity_View_Profile
-           //
            Intent view_profile=new Intent(salesname_main_dashboard.this, activity_View_Profile.class);
             startActivity(view_profile);
             break;

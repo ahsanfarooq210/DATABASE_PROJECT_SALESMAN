@@ -24,14 +24,14 @@ public class Home extends Application
         if(firebaseUser!=null)
         {
             flag=true;
-            Intent intent=new Intent(Home.this,salesname_main_dashboard.class);
+            Intent intent=new Intent(Home.this, salesname_main_dashboard.class);
 
             startActivity(intent);
         }
         else
         {
             flag=false;
-            Intent intent=new Intent(Home.this,MainActivity.class);
+            Intent intent=new Intent(Home.this, MainActivity.class);
             startActivity(intent);
         }
     }
