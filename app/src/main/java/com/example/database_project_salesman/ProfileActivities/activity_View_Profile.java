@@ -1,4 +1,4 @@
-package com.example.database_project_salesman.profileActivites;
+package com.example.database_project_salesman.ProfileActivities;
 
 import androidx.appcompat.app.AppCompatActivity;
 

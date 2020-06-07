@@ -27,15 +27,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".profileActivites.setting_activity"
+            android:name=".ProfileActivities.setting_activity"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".profileActivites.activity_Edit_Profile"
+            android:name=".ProfileActivities.activity_Edit_Profile"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".profileActivites.activity_View_Profile"
+            android:name=".ProfileActivities.activity_View_Profile"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -43,7 +43,7 @@
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Activities.OrderActicities.edit_order_rv_activity"
+            android:name=".edit_order_rv_activity"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
 
@@ -51,20 +51,20 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/map_key" />
 
-        <activity android:name=".Activities.OrderActicities.edit_order_rv_list"
+        <activity android:name=".edit_order_rv_list"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".show_shop_on_map_activity"
             android:label=""
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Activities.ShopActivities.show_order_shop_on_map"
+            android:name=".show_order_shop_on_map"
             android:label=""
             android:theme="@style/AppTheme" />
         <activity android:name=".show_shop_activity"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activities.OrderActicities.show_orders_activity"
+        <activity android:name=".show_orders_activity"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".add_order_activity"

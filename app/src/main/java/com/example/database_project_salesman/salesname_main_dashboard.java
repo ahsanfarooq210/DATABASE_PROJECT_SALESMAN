@@ -29,8 +29,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.example.database_project_salesman.profileActivites.*;
 
+import com.example.database_project_salesman.ProfileActivities.activity_Edit_Profile;
+import com.example.database_project_salesman.ProfileActivities.activity_View_Profile;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
