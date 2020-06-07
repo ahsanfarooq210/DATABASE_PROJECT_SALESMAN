@@ -1,10 +1,6 @@
 package com.example.database_project_salesman;
 
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.app.ActionBar;
 import android.app.SearchManager;
@@ -25,6 +21,10 @@ import android.view.MotionEvent;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.SearchView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.database_project_salesman.ActioBarAdapter.TitleNavigationAdapter;
 import com.google.android.gms.common.ConnectionResult;
@@ -327,7 +327,13 @@ public class show_shop_on_map_activity extends AppCompatActivity implements Acti
             }
             Address address = addressList.get(0);
             LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
-            mMap.addMarker(new MarkerOptions().position(latLng).title("Marker"));
+
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.position(latLng);
+            markerOptions.title(location);
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+            // mMap.addMarker(new MarkerOptions().position(latLng).title(location));
+            mMap.addMarker(markerOptions);
             mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
         }
     }

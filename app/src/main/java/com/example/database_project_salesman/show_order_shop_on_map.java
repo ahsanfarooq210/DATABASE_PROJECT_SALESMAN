@@ -363,7 +363,13 @@ public class show_order_shop_on_map extends AppCompatActivity implements ActionB
             }
             Address address = addressList.get(0);
             LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
-            mMap.addMarker(new MarkerOptions().position(latLng).title("Marker"));
+
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.position(latLng);
+            markerOptions.title(location);
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+            // mMap.addMarker(new MarkerOptions().position(latLng).title(location));
+            mMap.addMarker(markerOptions);
             mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
         }
     }
