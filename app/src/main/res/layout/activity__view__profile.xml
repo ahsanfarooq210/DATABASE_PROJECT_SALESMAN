@@ -21,7 +21,7 @@
             android:id="@+id/profile_imgView_logo"
             android:layout_width="80dp"
             android:layout_height="80dp"
-
+android:visibility="gone"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_twotone_account_circle_24" />
@@ -30,7 +30,7 @@
             android:id="@+id/adding_sku_rellay1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+
             android:layout_below="@id/profile_imgView_logo"
             >
 
@@ -203,6 +203,7 @@
                 android:orientation="horizontal"
                 >
             <Button
+                android:layout_weight="1"
                 android:id="@+id/ok_button"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
@@ -211,15 +212,14 @@
                 android:background="@drawable/btn_bg"
                 android:clickable="true"
                 android:fontFamily="sans-serif-medium"
-                android:paddingLeft="50dp"
-                android:paddingRight="50dp"
                 android:text="Ok"
+                android:layout_marginRight="10dp"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:textSize="16sp" />
 
             <Button
-
+                android:layout_weight="1"
                 android:id="@+id/edit_Profile_button"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
@@ -228,8 +228,7 @@
                 android:background="@drawable/btn_bg"
                 android:clickable="true"
                 android:fontFamily="sans-serif-medium"
-                android:paddingLeft="50dp"
-                android:paddingRight="50dp"
+               android:layout_marginLeft="10dp"
                 android:text="@string/Edit_Profile"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"

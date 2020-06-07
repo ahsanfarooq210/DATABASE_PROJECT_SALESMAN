@@ -21,7 +21,7 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:adjustViewBounds="true"
-
+            android:visibility="gone"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_twotone_account_circle_24" />
 
@@ -29,7 +29,7 @@
             android:id="@+id/adding_sku_rellay1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+
             android:layout_below="@id/profile_imgView_logo"
             >
 
@@ -212,6 +212,7 @@
                     android:id="@+id/cancel_button"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
+                    android:layout_weight="1"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/btn_bg"
                     android:clickable="true"
@@ -219,12 +220,13 @@
                     android:paddingLeft="45dp"
                     android:paddingRight="45dp"
                     android:text="@string/cancel"
+                    android:layout_marginRight="10dp"
                     android:textAllCaps="false"
                     android:textColor="@android:color/white"
                     android:textSize="16sp" />
 
                 <Button
-
+                    android:layout_weight="1"
                     android:id="@+id/save_Profile_button"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
