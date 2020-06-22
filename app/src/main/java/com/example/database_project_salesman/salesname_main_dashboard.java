@@ -339,7 +339,12 @@ public void onBackPressed() {
         startActivity(intent);
 
     }
+public  void targetDetails(View view)
+{
+   // Intent intent=new Intent(salesname_main_dashboard.this, show_shop_activity.class);
+    startActivity(new Intent(salesname_main_dashboard.this,show_target_progess_activity.class));
 
+}
     public void showShopsOnMap(View view)
     {
 

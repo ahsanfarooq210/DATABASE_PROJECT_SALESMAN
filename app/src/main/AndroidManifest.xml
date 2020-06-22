@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.database_project_salesman">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -13,9 +14,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".profileActivites.notification_Activity"
+        <activity
+            android:name=".show_target_progess_activity"
             android:label=""
-            android:theme="@style/AppTheme.NoActionBar" ></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ProfileActivities.notification_Activity"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".salesname_main_dashboard"
             android:label=""
@@ -51,23 +57,28 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/map_key" />
 
-        <activity android:name=".edit_order_rv_list"
+        <activity
+            android:name=".edit_order_rv_list"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".show_shop_on_map_activity"
+        <activity
+            android:name=".show_shop_on_map_activity"
             android:label=""
             android:theme="@style/AppTheme" />
         <activity
             android:name=".show_order_shop_on_map"
             android:label=""
             android:theme="@style/AppTheme" />
-        <activity android:name=".show_shop_activity"
+        <activity
+            android:name=".show_shop_activity"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".show_orders_activity"
+        <activity
+            android:name=".show_orders_activity"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".add_order_activity"
+        <activity
+            android:name=".add_order_activity"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

@@ -4,11 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.OrderActicities.edit_order_rv_activity">
+    tools:context=".edit_order_rv_activity">
+    <TextView
+        android:id="@+id/edit_order_rv_activity_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:fontFamily="sans-serif-medium"
+        android:text="Edit Order"
 
+        android:textColor="@android:color/black"
+        android:textSize="30sp" />
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/edit_order_rv_activity_textView"
         android:id="@+id/edit_order_recycler_view"/>
 
 </RelativeLayout>

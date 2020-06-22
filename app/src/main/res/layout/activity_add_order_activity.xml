@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
 
                 android:fontFamily="sans-serif-medium"
-                android:text="Order"
+                android:text="Add Order"
 
                 android:textColor="@android:color/black"
                 android:textSize="30sp" />
