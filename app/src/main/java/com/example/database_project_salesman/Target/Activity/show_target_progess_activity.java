@@ -1,4 +1,4 @@
-package com.example.database_project_salesman;
+package com.example.database_project_salesman.Target.Activity;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,12 +14,17 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.database_project_salesman.R;
+import com.example.database_project_salesman.Sku;
+import com.example.database_project_salesman.Target.Enity.Target;
+import com.example.database_project_salesman.Target.Enity.Target_SalesMen;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -71,6 +76,9 @@ public class show_target_progess_activity extends AppCompatActivity {
 
     //array lists for the array adapters
     private List<Sku> skuList;
+    private List<Target_SalesMen> overAll_Selected_sku_progress;
+    private List<Target> selected_sku_list;
+    private List<Target_SalesMen> Target_saleMen_list;
     //to get the email id of the salesman
     private FirebaseAuth auth;
     private FirebaseUser user;
@@ -85,6 +93,9 @@ public class show_target_progess_activity extends AppCompatActivity {
 
         //initializing lists
         skuList = new ArrayList<>();
+        overAll_Selected_sku_progress=new ArrayList<>();
+        selected_sku_list=new ArrayList<>();
+        Target_saleMen_list=new ArrayList<>();
         //initializing databasee reference for downloading and uploading the data the data
         skuReference = FirebaseDatabase.getInstance().getReference("SKU");
         //synchronizing the database for the offline use
@@ -118,10 +129,75 @@ public class show_target_progess_activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Sku skU=(Sku)skuSpinner.getSelectedItem();
+                Sku skuSelected =(Sku)skuSpinner.getSelectedItem();
+                Query q =FirebaseDatabase.getInstance().getReference("TARGET").orderByChild("SKU_ID").equalTo(skuSelected.getId());
+                q.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        selected_sku_list.clear();
+                        for(DataSnapshot targets:dataSnapshot.getChildren()  )
+                        {
+                            selected_sku_list.add(targets.getValue(Target.class));
+                        }
+                    }
 
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
+                    }
+                });
+                Query q1 =FirebaseDatabase.getInstance().getReference("TARGET").orderByChild("SKU_ID");
+                q1.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        overAll_Selected_sku_progress.clear();
+                        for(DataSnapshot targets:dataSnapshot.getChildren()  )
+                        {
+                            overAll_Selected_sku_progress.add(targets.getValue(Target_SalesMen.class));
+                        }
+                    }
 
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+                Query q2 =FirebaseDatabase.getInstance().getReference("Target_SalesMen").orderByChild("SKU_ID").equalTo(skuSelected.getId());
+                q2.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        Target_saleMen_list.clear();
+                        for(DataSnapshot targets:dataSnapshot.getChildren()  )
+                        {
+                            Target_saleMen_list.add(targets.getValue(Target_SalesMen.class));
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+                int progres = 0;
+                for (int i=0; i<Target_saleMen_list.size(); i++) {
+                    progres += Target_saleMen_list.get(i).getAchieved();
+                }
+                int total=0;
+                for (int i=0; i<selected_sku_list.size(); i++) {
+                    total += selected_sku_list.get(i).getTARGET();
+                }
+                int  actualPercentage=(progres/total)*100;
+                circularProgressbar_specific.setProgress(actualPercentage);
+                textview_specific.setText(actualPercentage);
+                int overall_progress=0;
+                for (int i=0; i<overAll_Selected_sku_progress.size(); i++) {
+                    overall_progress += overAll_Selected_sku_progress.get(i).getAchieved();
+                }
+                int target=0;
+                target=selected_sku_list.get(0).getTARGET();
+                int actual_overall_progress=(overall_progress/target)*100;
+                circularProgressbar_overAll.setProgress(actual_overall_progress);
+                textView_overAll.setText(actual_overall_progress);
                 progressBars.postDelayed(runnable1,500);
             }
         });

@@ -32,6 +32,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import com.example.database_project_salesman.ProfileActivities.activity_Edit_Profile;
 import com.example.database_project_salesman.ProfileActivities.activity_View_Profile;
+import com.example.database_project_salesman.Target.Activity.show_target_progess_activity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -342,7 +343,7 @@ public void onBackPressed() {
 public  void targetDetails(View view)
 {
    // Intent intent=new Intent(salesname_main_dashboard.this, show_shop_activity.class);
-    startActivity(new Intent(salesname_main_dashboard.this,show_target_progess_activity.class));
+    startActivity(new Intent(salesname_main_dashboard.this, show_target_progess_activity.class));
 
 }
     public void showShopsOnMap(View view)

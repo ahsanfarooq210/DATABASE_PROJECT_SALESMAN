@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".show_target_progess_activity"
+            android:name=".Target.Activity.show_target_progess_activity"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

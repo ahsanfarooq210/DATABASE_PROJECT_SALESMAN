@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".show_target_progess_activity"
+    tools:context=".Target.Activity.show_target_progess_activity"
     android:animateLayoutChanges="true">
 
     <RelativeLayout
@@ -207,7 +207,7 @@
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="20sp" />
 
-                </RelativeLayout>custom_progressbar_drawable.xml
+                </RelativeLayout>ss
             </LinearLayout>
 
         </RelativeLayout>

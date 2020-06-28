@@ -244,17 +244,12 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
                 if(id!=null)
                 {
                     orderReference.child(id).setValue(order);
-
                 }
                 else
                 {
                     Toast.makeText(add_order_activity.this, "Error \n string id=null \n contact developer immediately", Toast.LENGTH_SHORT).show();
                 }
-
                 progressBarh.postDelayed(runnable1,500);
-
-
-
             }
         });
 
