@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -73,10 +74,8 @@ public class edit_order_form_activity extends AppCompatActivity
         orderReference = FirebaseDatabase.getInstance().getReference("ORDERS");
 
         //setting the array adapters
-        skuArrayAdapter = new ArrayAdapter(this, R.layout.spinner_text, skuList);
-        skuArrayAdapter.setDropDownViewResource(R.layout.spinner_text_dropdown);
-        shopDetailsArrayAdapter = new ArrayAdapter(this, R.layout.spinner_text, shopDetailsList);
-        shopDetailsArrayAdapter.setDropDownViewResource(R.layout.spinner_text_dropdown);
+
+
 
         //initializing lists
         skuList = new ArrayList<>();
@@ -106,21 +105,21 @@ public class edit_order_form_activity extends AppCompatActivity
                 ShopDetails shopDetails= (ShopDetails) shopSpinner.getSelectedItem();
                 int quant=Integer.parseInt(quantity.getText().toString().trim());
 
-                if (!isSkuSame())
-                {
+                //if (!isSkuSame())
+                //{
                     orderReference.child(orderId).child("sku").setValue(sku);
                     Toast.makeText(edit_order_form_activity.this, "sku updated", Toast.LENGTH_SHORT).show();
-                }
-                if(!isShopSame())
-                {
+                //}
+                //if(!isShopSame())
+                //{
                     orderReference.child(orderId).child("shop").setValue(shopDetails);
                     Toast.makeText(edit_order_form_activity.this, "shop updated", Toast.LENGTH_SHORT).show();
-                }
-                if(!isQuantitySame())
-                {
+                //}
+                //if(!isQuantitySame())
+                //{
                     orderReference.child(orderId).child("quantity").setValue(quant);
                     Toast.makeText(edit_order_form_activity.this, "quantity updated", Toast.LENGTH_SHORT).show();
-                }
+              //  }
 
 
             }
@@ -137,16 +136,18 @@ public class edit_order_form_activity extends AppCompatActivity
         super.onStart();
 
         //getting teh data of the particular order that the user clicked in the previous rcycler view
-        Query query= FirebaseDatabase.getInstance().getReference("ORDERS").orderByChild("id").equalTo(orderId);
+        Query query=FirebaseDatabase.getInstance().getReference("ORDERS").orderByKey().equalTo(orderId);
+
         query.addListenerForSingleValueEvent(new ValueEventListener()
         {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
                 ordersList.clear();
-                for(DataSnapshot orders:dataSnapshot.getChildren())
+                for(DataSnapshot shop:dataSnapshot.getChildren())
                 {
-                    ordersList.add(orders.getValue(Orders.class));
+                    ordersList.add(shop.getValue(Orders.class));
                 }
 
 
@@ -159,7 +160,7 @@ public class edit_order_form_activity extends AppCompatActivity
             }
         });
 
-        orders=ordersList.get(0);
+       // orders=ordersList.get(0);
 
         ////getting all the sku
         skuReference.addValueEventListener(new ValueEventListener()
@@ -168,11 +169,13 @@ public class edit_order_form_activity extends AppCompatActivity
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
                 skuList.clear();
-                skuList.add(ordersList.get(0).getSku());
+
                 for(DataSnapshot sku:dataSnapshot.getChildren())
                 {
                     skuList.add(sku.getValue(Sku.class));
                 }
+                skuArrayAdapter = new ArrayAdapter(edit_order_form_activity.this, R.layout.spinner_text, skuList);
+                skuArrayAdapter.setDropDownViewResource(R.layout.spinner_text_dropdown);
                 skuSpinner.setAdapter(skuArrayAdapter);
             }
 
@@ -190,11 +193,13 @@ public class edit_order_form_activity extends AppCompatActivity
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
                 shopDetailsList.clear();
-                shopDetailsList.add(ordersList.get(0).getShop());
+
                 for(DataSnapshot shop:dataSnapshot.getChildren())
                 {
                     shopDetailsList.add(shop.getValue(ShopDetails.class));
                 }
+                shopDetailsArrayAdapter = new ArrayAdapter(edit_order_form_activity.this, R.layout.spinner_text, shopDetailsList);
+                shopDetailsArrayAdapter.setDropDownViewResource(R.layout.spinner_text_dropdown);
                 shopSpinner.setAdapter(shopDetailsArrayAdapter);
             }
 
@@ -205,6 +210,9 @@ public class edit_order_form_activity extends AppCompatActivity
             }
 
         });
+
+
+
 
 
     }

@@ -2,7 +2,8 @@ package com.example.database_project_salesman;
 
 public class Orders
 {
-    String id,salesman;
+    String id;
+    String salesman;
     ShopDetails shop;
     Sku sku;
     int quantity;

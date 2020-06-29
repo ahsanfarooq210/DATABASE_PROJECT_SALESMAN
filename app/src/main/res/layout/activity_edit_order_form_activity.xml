@@ -68,7 +68,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
-                        android:animateLayoutChanges="true"
+
                         android:autofillHints="company"
                         android:background="@drawable/et_bg"
                         android:fontFamily="sans-serif-light"
@@ -94,7 +94,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginTop="10dp"
-                        android:animateLayoutChanges="true"
+
                         android:background="@drawable/et_bg"
                         android:fontFamily="sans-serif-light"
                         android:paddingLeft="15dp"
