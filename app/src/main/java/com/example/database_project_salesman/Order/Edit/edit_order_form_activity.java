@@ -1,7 +1,4 @@
-package com.example.database_project_salesman;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.database_project_salesman.Order.Edit;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +11,13 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.database_project_salesman.Order.Orders;
+import com.example.database_project_salesman.R;
+import com.example.database_project_salesman.SHOP.ShopDetails;
+import com.example.database_project_salesman.SKU.Sku;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -88,7 +91,7 @@ public class edit_order_form_activity extends AppCompatActivity
 
         //initializing the quantity edit text
         quantity=findViewById(R.id.edit_order_form_quantity_edit_text);
-
+       // quantity.setText();
 
         saveButton.setOnClickListener(new View.OnClickListener()
         {

@@ -15,7 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.database_project_salesman.R;
-import com.example.database_project_salesman.Sku;
+import com.example.database_project_salesman.SKU.Sku;
 import com.example.database_project_salesman.Target.Enity.Target;
 import com.example.database_project_salesman.Target.Enity.Target_SalesMen;
 import com.google.firebase.auth.FirebaseAuth;
@@ -178,6 +178,7 @@ public class show_target_progess_activity extends AppCompatActivity {
 
                     }
                 });
+
                 int progres = 0;
                 for (int i=0; i<Target_saleMen_list.size(); i++) {
                     progres += Target_saleMen_list.get(i).getAchieved();

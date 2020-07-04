@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".edit_order_rv_activity">
+    tools:context=".Order.Edit.edit_order_rv_activity">
     <TextView
         android:id="@+id/edit_order_rv_activity_textView"
         android:layout_width="match_parent"

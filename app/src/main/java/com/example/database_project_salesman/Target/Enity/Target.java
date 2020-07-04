@@ -1,7 +1,7 @@
 package com.example.database_project_salesman.Target.Enity;
 
 
-import com.example.database_project_salesman.Sku;
+import com.example.database_project_salesman.SKU.Sku;
 
 public class Target {
    String TARGET_ID;

@@ -1,4 +1,4 @@
-package com.example.database_project_salesman;
+package com.example.database_project_salesman.Activities;
 
 import android.app.Application;
 import android.content.Intent;

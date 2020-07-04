@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".salesname_main_dashboard"
+    tools:context=".Activities.salesname_main_dashboard"
     android:orientation="vertical">
 
     <RelativeLayout

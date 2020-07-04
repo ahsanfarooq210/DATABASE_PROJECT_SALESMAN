@@ -1,4 +1,4 @@
-package com.example.database_project_salesman;
+package com.example.database_project_salesman.Order;
 
 import android.Manifest;
 import android.app.ActionBar;
@@ -6,6 +6,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
@@ -14,17 +15,21 @@ import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.database_project_salesman.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -39,6 +44,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
 import java.util.List;
@@ -361,6 +367,22 @@ public class show_order_shop_on_map extends AppCompatActivity implements ActionB
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            if (addressList.isEmpty()) {
+                // View  = findViewById(R.id.context_view);
+                View contextView = findViewById(android.R.id.content);
+                Snackbar snackbar = Snackbar.make(contextView,"Address Not found",Snackbar.LENGTH_LONG);
+
+                View snackbarView = snackbar.getView();
+                TextView snackbarText = (TextView) snackbarView.findViewById(R.id.snackbar_text);
+                snackbarText.setTextColor(Color.RED);
+                snackbarText.setGravity(Gravity.CENTER_HORIZONTAL);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1)
+                    snackbarText.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                else
+                    snackbarText.setGravity(Gravity.CENTER_HORIZONTAL);
+                snackbar.show();
+
+            } else {
             Address address = addressList.get(0);
             LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
 
@@ -371,7 +393,7 @@ public class show_order_shop_on_map extends AppCompatActivity implements ActionB
             // mMap.addMarker(new MarkerOptions().position(latLng).title(location));
             mMap.addMarker(markerOptions);
             mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-        }
+        }}
     }
 
     @Override
@@ -388,6 +410,5 @@ public class show_order_shop_on_map extends AppCompatActivity implements ActionB
     protected void onStart()
     {
         super.onStart();
-
     }
 }

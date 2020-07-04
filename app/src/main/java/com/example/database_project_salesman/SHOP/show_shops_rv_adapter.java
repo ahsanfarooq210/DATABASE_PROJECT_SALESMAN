@@ -1,4 +1,4 @@
-package com.example.database_project_salesman;
+package com.example.database_project_salesman.SHOP;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.database_project_salesman.R;
 
 import java.util.ArrayList;
 

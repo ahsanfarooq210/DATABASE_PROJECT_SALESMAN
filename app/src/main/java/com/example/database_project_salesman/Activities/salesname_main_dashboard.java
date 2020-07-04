@@ -1,4 +1,4 @@
-package com.example.database_project_salesman;
+package com.example.database_project_salesman.Activities;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -30,8 +30,14 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
+import com.example.database_project_salesman.Order.Add_Order.add_order_activity;
+import com.example.database_project_salesman.Order.Edit.edit_order_rv_activity;
+import com.example.database_project_salesman.Order.show_orders_activity;
 import com.example.database_project_salesman.ProfileActivities.activity_Edit_Profile;
 import com.example.database_project_salesman.ProfileActivities.activity_View_Profile;
+import com.example.database_project_salesman.R;
+import com.example.database_project_salesman.SHOP.show_shop_activity;
+import com.example.database_project_salesman.SHOP.show_shop_on_map_activity;
 import com.example.database_project_salesman.Target.Activity.show_target_progess_activity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -267,7 +273,7 @@ public void onBackPressed() {
         // checking if user is on other navigation menu
         // rather than home
         if (navItemIndex != 0) {
-            navItemIndex = 0;
+            navItemIndex = -1;
             load();
             return;
         }
@@ -300,7 +306,10 @@ public void onBackPressed() {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_logout) {
-            Toast.makeText(getApplicationContext(), "Logout user!", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "Logout user!", Toast.LENGTH_LONG).show();
+            FirebaseAuth.getInstance().signOut();
+           Intent intent=new Intent(salesname_main_dashboard.this, MainActivity.class);
+            startActivity(intent);
             return true;
         }
 

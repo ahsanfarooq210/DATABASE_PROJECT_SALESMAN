@@ -1,17 +1,21 @@
-package com.example.database_project_salesman;
+package com.example.database_project_salesman.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.database_project_salesman.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -69,10 +73,22 @@ public class MainActivity extends AppCompatActivity
         progressBarh.postDelayed(runnable1,100);
 
         mAuth = FirebaseAuth.getInstance();
+
+        /*if(mAuth.currentUser == null){
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }else{
+            Toast.makeText(this, "Already logged in", Toast.LENGTH_LONG).show()
+        }*/
     }
 
     public void loginButton(View v)
-    {
+    { if (getCurrentFocus() != null) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        assert imm != null;
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+    }
         progressBar.setVisibility(View.VISIBLE);
         if(usernameTf.getText().toString().trim().length()==0)
         {
@@ -101,7 +117,7 @@ public class MainActivity extends AppCompatActivity
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Intent intent=new Intent(MainActivity.this,salesname_main_dashboard.class);
+                            Intent intent=new Intent(MainActivity.this, salesname_main_dashboard.class);
                             progressBarh.postDelayed(runnable1,100);
                             startActivity(intent);
 

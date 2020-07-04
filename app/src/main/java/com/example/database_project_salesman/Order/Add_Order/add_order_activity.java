@@ -1,4 +1,4 @@
-package com.example.database_project_salesman;
+package com.example.database_project_salesman.Order.Add_Order;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -32,6 +32,12 @@ import androidx.core.content.ContextCompat;
 import androidx.core.location.LocationManagerCompat;
 
 import com.example.database_project_salesman.BrodcastReceivers.LocationBrodcast;
+import com.example.database_project_salesman.Order.Orders;
+import com.example.database_project_salesman.Order.show_order_shop_on_map;
+import com.example.database_project_salesman.R;
+import com.example.database_project_salesman.SHOP.ShopDetails;
+import com.example.database_project_salesman.SKU.Sku;
+import com.example.database_project_salesman.SHOP.show_shop_on_map_activity;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -310,7 +316,7 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
                 if (grantResults.length > 0) {
                     boolean locationAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
                     if (locationAccepted ) {
-                        Intent intent=new Intent(add_order_activity.this,show_order_shop_on_map.class);
+                        Intent intent=new Intent(add_order_activity.this, show_order_shop_on_map.class);
                         intent.putExtra("latitude",shopDetails.getLatitude());
                         intent.putExtra("longitude",shopDetails.getLongitude());
                         startActivity(intent);

@@ -12,7 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.database_project_salesman.R;
-import com.example.database_project_salesman.salesname_main_dashboard;
+import com.example.database_project_salesman.Activities.salesname_main_dashboard;
 
 public class activity_View_Profile extends AppCompatActivity {
  TextView Name_textView,Cnic_textView,Email_textView,dob_textView,cell_no_textView,education_textView;
