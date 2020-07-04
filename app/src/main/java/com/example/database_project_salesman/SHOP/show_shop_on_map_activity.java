@@ -334,7 +334,7 @@ public class show_shop_on_map_activity extends AppCompatActivity implements Acti
             }
 
             if (addressList.isEmpty()) {
-              // View  = findViewById(R.id.context_view);
+
                 View contextView = findViewById(android.R.id.content);
                 Snackbar snackbar = Snackbar.make(contextView,"Address Not found",Snackbar.LENGTH_LONG);
 

@@ -1,7 +1,10 @@
 package com.example.database_project_salesman.Target.Activity;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -18,6 +21,7 @@ import com.example.database_project_salesman.R;
 import com.example.database_project_salesman.SKU.Sku;
 import com.example.database_project_salesman.Target.Enity.Target;
 import com.example.database_project_salesman.Target.Enity.Target_SalesMen;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -178,28 +182,48 @@ public class show_target_progess_activity extends AppCompatActivity {
 
                     }
                 });
+        if(overAll_Selected_sku_progress.isEmpty()&&Target_saleMen_list.isEmpty())
+        {
 
-                int progres = 0;
-                for (int i=0; i<Target_saleMen_list.size(); i++) {
-                    progres += Target_saleMen_list.get(i).getAchieved();
-                }
-                int total=0;
-                for (int i=0; i<selected_sku_list.size(); i++) {
-                    total += selected_sku_list.get(i).getTARGET();
-                }
-                int  actualPercentage=(progres/total)*100;
-                circularProgressbar_specific.setProgress(actualPercentage);
-                textview_specific.setText(actualPercentage);
-                int overall_progress=0;
-                for (int i=0; i<overAll_Selected_sku_progress.size(); i++) {
-                    overall_progress += overAll_Selected_sku_progress.get(i).getAchieved();
-                }
-                int target=0;
-                target=selected_sku_list.get(0).getTARGET();
-                int actual_overall_progress=(overall_progress/target)*100;
-                circularProgressbar_overAll.setProgress(actual_overall_progress);
-                textView_overAll.setText(actual_overall_progress);
-                progressBars.postDelayed(runnable1,500);
+            View contextView = findViewById(android.R.id.content);
+            Snackbar snackbar = Snackbar.make(contextView,"Target for Selected Sku is not set by admin Yet",Snackbar.LENGTH_LONG);
+
+            View snackbarView = snackbar.getView();
+            TextView snackbarText = (TextView) snackbarView.findViewById(R.id.snackbar_text);
+            snackbarText.setTextColor(Color.RED);
+            snackbarText.setGravity(Gravity.CENTER_HORIZONTAL);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1)
+                snackbarText.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            else
+                snackbarText.setGravity(Gravity.CENTER_HORIZONTAL);
+            snackbar.show();
+        }
+        else
+        {
+            int progres = 0;
+            for (int i=0; i<Target_saleMen_list.size(); i++) {
+                progres += Target_saleMen_list.get(i).getAchieved();
+            }
+            int total=0;
+            for (int i=0; i<selected_sku_list.size(); i++) {
+                total += selected_sku_list.get(i).getTARGET();
+            }
+            int  actualPercentage=(progres/total)*100;
+            circularProgressbar_specific.setProgress(actualPercentage);
+            textview_specific.setText(actualPercentage);
+            int overall_progress=0;
+            for (int i=0; i<overAll_Selected_sku_progress.size(); i++) {
+                overall_progress += overAll_Selected_sku_progress.get(i).getAchieved();
+            }
+            int target=0;
+            target=selected_sku_list.get(0).getTARGET();
+            int actual_overall_progress=(overall_progress/target)*100;
+            circularProgressbar_overAll.setProgress(actual_overall_progress);
+            textView_overAll.setText(actual_overall_progress);
+            progressBars.postDelayed(runnable1,500);
+        }
+
+
             }
         });
 
