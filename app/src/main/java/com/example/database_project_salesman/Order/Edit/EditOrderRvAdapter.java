@@ -2,12 +2,14 @@ package com.example.database_project_salesman.Order.Edit;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.database_project_salesman.Order.Orders;
@@ -43,6 +45,7 @@ public class EditOrderRvAdapter extends RecyclerView.Adapter<EditOrderRvAdapter.
         return new viewHolder(view);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position)
     {
@@ -50,6 +53,24 @@ public class EditOrderRvAdapter extends RecyclerView.Adapter<EditOrderRvAdapter.
         holder.shopName.setText(shop.get(position).getShopName());
         holder.skuName.setText(shop.get(position).getSku().toString());
         holder.quantity.setText(Integer.toString(shop.get(position).getQuantity()));
+
+        holder.status.setText(shop.get(position).getOrderStatus());
+        if(shop.get(position).getOrderStatus()==context.getString(R.string.delivered))
+        {
+            holder.status.setTextColor(context.getColor(R.color.green));
+        }
+        else
+        {
+            if(shop.get(position).getOrderStatus()==context.getString(R.string.in_progress))
+            {
+                holder.status.setTextColor(context.getColor(R.color.yellow));
+            }
+            else
+            {
+                holder.status.setTextColor(context.getColor(R.color.red));
+            }
+        }
+
     }
 
     @Override
@@ -61,13 +82,14 @@ public class EditOrderRvAdapter extends RecyclerView.Adapter<EditOrderRvAdapter.
     public class viewHolder extends RecyclerView.ViewHolder
     {
 
-        TextView shopName,skuName,quantity;
+        TextView shopName,skuName,quantity,status;
         public viewHolder(@NonNull View itemView)
         {
             super(itemView);
             shopName=itemView.findViewById(R.id.show_order_rv_layout_shopname);
             skuName=itemView.findViewById(R.id.show_order_rv_layout_skuname);
             quantity=itemView.findViewById(R.id.show_order_rv_layout_quantity);
+            status=itemView.findViewById(R.id.show_order_rv_layout_status);
 
             itemView.setOnClickListener(new View.OnClickListener()
             {

@@ -47,7 +47,7 @@ public class edit_order_form_activity extends AppCompatActivity
     };
 
     private Button saveButton;
-    private Spinner shopSpinner,skuSpinner;
+    private Spinner shopSpinner,skuSpinner,statusSpinner;
     //array adapters for the dropdown lists
     private ArrayAdapter<Sku> skuArrayAdapter;
     private ArrayAdapter<ShopDetails> shopDetailsArrayAdapter;
@@ -57,6 +57,10 @@ public class edit_order_form_activity extends AppCompatActivity
     private List<Sku> skuList;
     private List<ShopDetails> shopDetailsList;
     private EditText quantity;
+
+    private ArrayList<String> orderStatusList;
+    //array aadapter for the order status spinner
+    private ArrayAdapter<String> orderstatusArrayAdapter;
 
 
 
@@ -77,7 +81,15 @@ public class edit_order_form_activity extends AppCompatActivity
         orderReference = FirebaseDatabase.getInstance().getReference("ORDERS");
 
         //setting the array adapters
+        statusSpinner=findViewById(R.id.edit_order_form_status_edit_text);
+        orderStatusList=new ArrayList<>();
+        orderStatusList.add(getString(R.string.delivered));
+        orderStatusList.add(getString(R.string.in_progress));
+        orderStatusList.add(getString(R.string.cancelled));
 
+        orderstatusArrayAdapter=new ArrayAdapter(this,R.layout.spinner_text,orderStatusList);
+        orderstatusArrayAdapter.setDropDownViewResource(R.layout.spinner_text_dropdown);
+        statusSpinner.setAdapter(orderstatusArrayAdapter);
 
 
         //initializing lists
@@ -107,6 +119,8 @@ public class edit_order_form_activity extends AppCompatActivity
                 Sku sku= (Sku) skuSpinner.getSelectedItem();
                 ShopDetails shopDetails= (ShopDetails) shopSpinner.getSelectedItem();
                 int quant=Integer.parseInt(quantity.getText().toString().trim());
+                String status=statusSpinner.getSelectedItem().toString();
+
 
                 //if (!isSkuSame())
                 //{
@@ -124,6 +138,8 @@ public class edit_order_form_activity extends AppCompatActivity
                     Toast.makeText(edit_order_form_activity.this, "quantity updated", Toast.LENGTH_SHORT).show();
               //  }
 
+                orderReference.child("orderStatus").setValue(status);
+
 
             }
         });
@@ -139,7 +155,7 @@ public class edit_order_form_activity extends AppCompatActivity
         super.onStart();
 
         //getting teh data of the particular order that the user clicked in the previous rcycler view
-        Query query=FirebaseDatabase.getInstance().getReference("ORDERS").orderByKey().equalTo(orderId);
+        Query query=FirebaseDatabase.getInstance().getReference().child("ORDERS").orderByKey().equalTo(orderId);
 
         query.addListenerForSingleValueEvent(new ValueEventListener()
         {

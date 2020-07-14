@@ -54,7 +54,8 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 public class show_order_shop_on_map extends AppCompatActivity implements ActionBar.OnNavigationListener, OnMapReadyCallback,
         LocationListener, GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener {
+        GoogleApiClient.OnConnectionFailedListener
+{
 
 
     private GoogleMap mMap;
@@ -79,7 +80,8 @@ public class show_order_shop_on_map extends AppCompatActivity implements ActionB
     private List<Address> address;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_order_shop_on_map);
         actionBar = getActionBar();
@@ -89,17 +91,18 @@ public class show_order_shop_on_map extends AppCompatActivity implements ActionB
         double longitude = intent.getDoubleExtra("longitude", 0.00);
         latLng = new LatLng(latitiude, longitude);
         //initializing the maps fragment
-         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-            .findFragmentById(R.id.show_order_shop_on_map_mapfragment);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.show_order_shop_on_map_mapfragment);
         mapFragment.getMapAsync(this);
 
 
-}
+    }
 
     //action bar this ahead
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.activity_main_actions, menu);
 
@@ -110,13 +113,16 @@ public class show_order_shop_on_map extends AppCompatActivity implements ActionB
         assert searchManager != null;
         searchView.setSearchableInfo(searchManager
                 .getSearchableInfo(getComponentName()));
-        SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
-            public boolean onQueryTextChange(String newText) {
+        SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener()
+        {
+            public boolean onQueryTextChange(String newText)
+            {
                 // this is your adapter that will be filtered
                 return true;
             }
 
-            public boolean onQueryTextSubmit(String query) {
+            public boolean onQueryTextSubmit(String query)
+            {
                 //Here u can get the value "query" which is entered in the search box.
                 searchView.setIconified(true);
                 searchView.onActionViewCollapsed();
@@ -134,9 +140,11 @@ public class show_order_shop_on_map extends AppCompatActivity implements ActionB
      * On selecting action bar icons
      **/
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         // Take appropriate action for each action item click
-        switch (item.getItemId()) {
+        switch (item.getItemId())
+        {
             case R.id.action_search:
                 // search action
                 return true;
@@ -164,38 +172,45 @@ public class show_order_shop_on_map extends AppCompatActivity implements ActionB
 
     /**
      * Actionbar navigation item select listener
-     * */
+     */
     @Override
-    public boolean onNavigationItemSelected(int itemPosition, long itemId) {
+    public boolean onNavigationItemSelected(int itemPosition, long itemId)
+    {
         // Action to be taken after selecting a spinner item
         return false;
     }
 
     /**
      * Async task to load the data from server
-     * **/
-    private class SyncData extends AsyncTask<String, Void, String> {
+     **/
+    private class SyncData extends AsyncTask<String, Void, String>
+    {
         @Override
-        protected void onPreExecute() {
+        protected void onPreExecute()
+        {
             // set the progress bar view
             refreshMenuItem.setActionView(R.layout.action_progressbar);
             refreshMenuItem.expandActionView();
         }
 
         @Override
-        protected String doInBackground(String... params) {
+        protected String doInBackground(String... params)
+        {
             // not making real request in this demo
             // for now we use a timer to wait for sometime
-            try {
+            try
+            {
                 Thread.sleep(3000);
-            } catch (InterruptedException e) {
+            } catch (InterruptedException e)
+            {
                 e.printStackTrace();
             }
             return null;
         }
 
         @Override
-        protected void onPostExecute(String result) {
+        protected void onPostExecute(String result)
+        {
             refreshMenuItem.collapseActionView();
             // remove the progress bar view
             refreshMenuItem.setActionView(null);
@@ -206,12 +221,14 @@ public class show_order_shop_on_map extends AppCompatActivity implements ActionB
 
     //location thing ahead
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(GoogleMap googleMap)
+    {
         mMap = googleMap;
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.getUiSettings().setZoomGesturesEnabled(true);
         mMap.clear();
-        if (ActivityCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -231,19 +248,19 @@ public class show_order_shop_on_map extends AppCompatActivity implements ActionB
 
         geo = new Geocoder(show_order_shop_on_map.this, Locale.getDefault());
 
-       try
-       {
-           address= geo.getFromLocation(latLng.latitude, latLng.longitude, 1);
-       } catch (IOException e)
-       {
-           e.printStackTrace();
-       }
-       mMap.addMarker(new MarkerOptions().position(latLng).title(address.toString()));
+        try
+        {
+            address = geo.getFromLocation(latLng.latitude, latLng.longitude, 1);
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        mMap.addMarker(new MarkerOptions().position(latLng).title(address.toString()));
         //zoom to current location
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
 
-         Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
+        Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
         if (location != null)
         {
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 13));
@@ -256,21 +273,25 @@ public class show_order_shop_on_map extends AppCompatActivity implements ActionB
                     .build();                   // Creates a CameraPosition from the builder
             mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
         }
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+        {
             if (ContextCompat.checkSelfPermission(this,
                     ACCESS_FINE_LOCATION)
-                    == PackageManager.PERMISSION_GRANTED) {
+                    == PackageManager.PERMISSION_GRANTED)
+            {
                 buildGoogleApiClient();
                 mMap.setMyLocationEnabled(true);
             }
-        }
-        else {
+        } else
+        {
             buildGoogleApiClient();
             mMap.setMyLocationEnabled(true);
         }
 
     }
-    protected synchronized void buildGoogleApiClient() {
+
+    protected synchronized void buildGoogleApiClient()
+    {
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -279,7 +300,8 @@ public class show_order_shop_on_map extends AppCompatActivity implements ActionB
     }
 
     @Override
-    public void onConnected(Bundle bundle) {
+    public void onConnected(Bundle bundle)
+    {
 
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(1000);
@@ -287,22 +309,26 @@ public class show_order_shop_on_map extends AppCompatActivity implements ActionB
         mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
         if (ContextCompat.checkSelfPermission(this,
                 ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
+                == PackageManager.PERMISSION_GRANTED)
+        {
             LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
         }
 
     }
 
     @Override
-    public void onConnectionSuspended(int i) {
+    public void onConnectionSuspended(int i)
+    {
 
     }
 
     @Override
-    public void onLocationChanged(Location location) {
+    public void onLocationChanged(Location location)
+    {
 
         mLastLocation = location;
-        if (mCurrLocationMarker != null) {
+        if (mCurrLocationMarker != null)
+        {
             mCurrLocationMarker.remove();
         }//Place current location marker
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
@@ -318,7 +344,8 @@ public class show_order_shop_on_map extends AppCompatActivity implements ActionB
         // mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
-        if (ActivityCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -343,34 +370,43 @@ public class show_order_shop_on_map extends AppCompatActivity implements ActionB
         }
 
         //stop location updates
-        if (mGoogleApiClient != null) {
+        if (mGoogleApiClient != null)
+        {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
         }
 
     }
 
     @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {
+    public void onConnectionFailed(ConnectionResult connectionResult)
+    {
 
-    }public void onMapSearch(String location) {
+    }
+
+    public void onMapSearch(String location)
+    {
 
         List<Address> addressList = null;
         /*if(location.isEmpty())
         {
             locationSearch.setError(getResources().getString(R.string.error));
         }*/
-        if (!location.isEmpty()) {
+        if (!location.isEmpty())
+        {
             Geocoder geocoder = new Geocoder(this);
-            try {
+            try
+            {
                 addressList = geocoder.getFromLocationName(location, 1);
 
-            } catch (IOException e) {
+            } catch (IOException e)
+            {
                 e.printStackTrace();
             }
-            if (addressList.isEmpty()) {
+            if (addressList.isEmpty())
+            {
                 // View  = findViewById(R.id.context_view);
                 View contextView = findViewById(android.R.id.content);
-                Snackbar snackbar = Snackbar.make(contextView,"Address Not found",Snackbar.LENGTH_LONG);
+                Snackbar snackbar = Snackbar.make(contextView, "Address Not found", Snackbar.LENGTH_LONG);
 
                 View snackbarView = snackbar.getView();
                 TextView snackbarText = (TextView) snackbarView.findViewById(R.id.snackbar_text);
@@ -382,33 +418,39 @@ public class show_order_shop_on_map extends AppCompatActivity implements ActionB
                     snackbarText.setGravity(Gravity.CENTER_HORIZONTAL);
                 snackbar.show();
 
-            } else {
-            Address address = addressList.get(0);
-            LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+            } else
+            {
+                Address address = addressList.get(0);
+                LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
 
-            MarkerOptions markerOptions = new MarkerOptions();
-            markerOptions.position(latLng);
-            markerOptions.title(location);
-            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
-            // mMap.addMarker(new MarkerOptions().position(latLng).title(location));
-            mMap.addMarker(markerOptions);
-            mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-        }}
+                MarkerOptions markerOptions = new MarkerOptions();
+                markerOptions.position(latLng);
+                markerOptions.title(location);
+                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                // mMap.addMarker(new MarkerOptions().position(latLng).title(location));
+                mMap.addMarker(markerOptions);
+                mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+            }
+        }
     }
 
     @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (getCurrentFocus() != null) {
+    public boolean dispatchTouchEvent(MotionEvent ev)
+    {
+        if (getCurrentFocus() != null)
+        {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
             imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         }
         return super.dispatchTouchEvent(ev);
     }
+
     //ahsan
     @Override
     protected void onStart()
     {
         super.onStart();
+
     }
 }

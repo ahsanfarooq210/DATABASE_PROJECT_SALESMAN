@@ -144,6 +144,30 @@
                         android:textColor="@android:color/white"
                         android:textSize="15sp" />
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-light"
+                        android:text="select the order status"
+                        android:layout_marginTop="10dp"
+                        android:textAllCaps="true"
+                        android:textColor="@android:color/black"
+                        android:textSize="15sp" />
+
+                    <Spinner
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/et_bg"
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/add_order_status"
+                        android:fontFamily="sans-serif-light"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:animateLayoutChanges="true"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/white"
+                        android:textSize="15sp" />
+
 
 
                 </LinearLayout>

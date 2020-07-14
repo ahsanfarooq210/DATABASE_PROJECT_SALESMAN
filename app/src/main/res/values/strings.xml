@@ -84,4 +84,8 @@
     <string name="cancel">Cancel</string>
     <string name="save">Save </string>
     <string name="over_all_progress_for_selected_sku">Over All Progress for Selected SKU</string>
+    <string name="in_progress">In progress</string>
+    <string name="delivered">Delivered</string>
+    <string name="cancelled">Cancelled</string>
+    <string name="enter_quantity">Enter quantity</string>
 </resources>

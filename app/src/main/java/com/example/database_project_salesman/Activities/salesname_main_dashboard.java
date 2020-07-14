@@ -47,7 +47,7 @@ import com.google.firebase.auth.FirebaseUser;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 
-public class salesname_main_dashboard extends AppCompatActivity
+public class  salesname_main_dashboard extends AppCompatActivity
 { private static final int MY_PERMISSIONS_REQUEST_LOCATION = 911;
     private NavigationView navigationView;
     private DrawerLayout drawer;
@@ -442,5 +442,12 @@ public  void targetDetails(View view)
                 .show();
     }
 
+    public void changeStatus(View view)
+    {
+    }
+
+    public void filterOrder(View view)
+    {
+    }
 }
 

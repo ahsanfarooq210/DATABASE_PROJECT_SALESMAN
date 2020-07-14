@@ -74,7 +74,7 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
     private TextView message;
 
     //dropdowns spinners
-    private Spinner shopSpinner, skuSpinner;
+    private Spinner shopSpinner, skuSpinner,orderStatusSpinner;
 
     //handler for the splash screen
     private Handler handler = new Handler();
@@ -120,6 +120,10 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
     private FusedLocationProviderClient client;
     ShopDetails shopDetails;
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 911;
+    //arraylist for the order status spinner
+    private ArrayList<String> orderStatusList;
+    //array aadapter for the order status spinner
+    private ArrayAdapter<String> orderstatusArrayAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -166,6 +170,7 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
         //initializing the spinners
         shopSpinner = findViewById(R.id.add_order_shop_spinner);
         skuSpinner = findViewById(R.id.add_order_sku_spinner);
+        orderStatusSpinner=findViewById(R.id.add_order_status);
 
         //setting the array adapters
         skuArrayAdapter = new ArrayAdapter(this, R.layout.spinner_text, skuList);
@@ -175,7 +180,15 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
         //initializing the location manager to get the current latitude and longitude
         // locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         client = LocationServices.getFusedLocationProviderClient(this);
-
+        //adding strings in the order status list
+        orderStatusList=new ArrayList<>();
+        orderStatusList.add(getString(R.string.delivered));
+        orderStatusList.add(getString(R.string.in_progress));
+        orderStatusList.add(getString(R.string.cancelled));
+        //initializing the orderstatus array adapter
+        orderstatusArrayAdapter=new ArrayAdapter(this,R.layout.spinner_text,orderStatusList);
+        orderstatusArrayAdapter.setDropDownViewResource(R.layout.spinner_text_dropdown);
+        orderStatusSpinner.setAdapter(orderstatusArrayAdapter);
 
         //save button initialization and on click listinner
         save = findViewById(R.id.add_order_save_btn);
@@ -221,7 +234,7 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
                 progressBar.setVisibility(View.VISIBLE);
                 if(quantity.getText().toString().length()==0)
                 {
-                    quantity.setError("Enter quantity");
+                    quantity.setError(getString(R.string.enter_quantity));
                     progressBarh.postDelayed(runnable1,500);
                     return;
                 }
@@ -245,8 +258,10 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
                     username="unknown";
                 }
 
+                String OrderStatus=orderStatusSpinner.getSelectedItem().toString();
+
                 String id=orderReference.push().getKey();
-                Orders order =new Orders(id,username,shopDetails,sk,Integer.parseInt(quantity.getText().toString().trim()));
+                Orders order =new Orders(id,username,shopDetails,sk,Integer.parseInt(quantity.getText().toString().trim()),OrderStatus);
                 if(id!=null)
                 {
                     orderReference.child(id).setValue(order);
