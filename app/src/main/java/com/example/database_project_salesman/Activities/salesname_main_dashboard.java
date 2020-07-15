@@ -126,14 +126,14 @@ public class  salesname_main_dashboard extends AppCompatActivity
         auth=FirebaseAuth.getInstance();
         user=auth.getCurrentUser();
         //displaying the name of the user
-        assert user != null;
-        dashboard_nameplate.setText(user.getEmail().trim());
+       // assert user != null;
+      //  dashboard_nameplate.setText(user.getEmail().trim());
         loadNavHeader();
     }
     private void loadNavHeader() {
         // name, website
         assert user != null;
-        txtName.setText("name");
+        txtName.setText("Sales Men");
         txtWebsite.setText(user.getEmail().trim());
        // loading header background image
         Glide.with(this).load(urlNavHeaderBg)
@@ -279,7 +279,7 @@ public void onBackPressed() {
         }
     }
 
-    super.onBackPressed();
+  //  super.onBackPressed();
 }
 
     @Override

@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".Activities.salesname_main_dashboard">
+    tools:context=".Activities.salesname_main_dashboard"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -13,394 +13,363 @@
         android:layout_centerInParent="true"
         android:animateLayoutChanges="true"
         android:orientation="vertical">
-
         <ImageView
             android:id="@+id/dashboard_imgView_logo"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_marginLeft="10dp"
             android:layout_marginTop="53dp"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
+            android:layout_marginLeft="10dp"
             android:src="@drawable/icons8_sales_performance_100px" />
-
         <TextView
-            android:id="@+id/dashboard_name_plate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/dashboard_imgView_logo"
-            android:layout_gravity="left"
-            android:fontFamily="sans-serif-black"
-            android:text="Main Dashboard"
             android:textSize="30sp"
-            android:visibility="gone" />
+            android:layout_below="@+id/dashboard_imgView_logo"
+            android:id="@+id/dashboard_name_plate"
+            android:text="Main Dashboard"
+            android:visibility="gone"
+            android:layout_gravity="left"
+            android:fontFamily="sans-serif-black"/>
 
         <ScrollView
-            android:id="@+id/dashboard_scroll_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/dashboard_name_plate"
+            android:id="@+id/dashboard_scroll_view"
             android:animateLayoutChanges="true"
             android:visibility="gone">
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:animateLayoutChanges="true"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:animateLayoutChanges="true">
 
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal"
                     android:layout_gravity="center"
-                    android:gravity="center"
-                    android:orientation="horizontal">
+                    android:gravity="center">
 
                     <androidx.cardview.widget.CardView
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:clickable="true"
                         android:id="@+id/dashboard_add_order"
                         android:layout_width="160dp"
                         android:layout_height="160dp"
-                        android:layout_margin="10dp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:foreground="?android:attr/selectableItemBackground"
                         android:onClick="addorder"
+                        android:focusable="true"
+                        android:layout_margin="10dp"
                         app:cardBackgroundColor="@color/colorPrimary"
                         app:cardCornerRadius="20dp">
-
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:gravity="center"
                             android:orientation="vertical">
-
                             <ImageView
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
                                 android:background="@drawable/oval_black"
-                                android:src="@drawable/icons8_order_history_60px" />
-
+                                android:src="@drawable/icons8_order_history_60px"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textStyle="bold"
                                 android:layout_marginTop="10dp"
-                                android:fontFamily="sans-serif-light"
                                 android:text="Add Order"
-                                android:textColor="@android:color/white"
-                                android:textStyle="bold" />
-
+                                android:fontFamily="sans-serif-light"
+                                android:textColor="@android:color/white"/>
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
-                                android:layout_margin="10dp"
-                                android:background="@android:color/white" />
+                                android:background="@android:color/white"
+                                android:layout_margin="10dp"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center"
+                                android:textStyle="bold"
                                 android:layout_marginLeft="7dp"
-                                android:layout_marginTop="10dp"
                                 android:layout_marginRight="7dp"
-                                android:fontFamily="sans-serif-light"
+                                android:layout_marginTop="10dp"
+                                android:layout_gravity="center"
                                 android:text="Click to make an order"
-                                android:textColor="@android:color/white"
-                                android:textStyle="bold" />
+                                android:fontFamily="sans-serif-light"
+                                android:textColor="@android:color/white"/>
                         </LinearLayout>
 
                     </androidx.cardview.widget.CardView>
-
                     <androidx.cardview.widget.CardView
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:clickable="true"
                         android:id="@+id/dashboard_edit_order"
                         android:layout_width="160dp"
                         android:layout_height="160dp"
-                        android:layout_margin="10dp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:foreground="?android:attr/selectableItemBackground"
                         android:onClick="editOrder"
+                        android:focusable="true"
+                        android:layout_margin="10dp"
                         app:cardBackgroundColor="@color/colorPrimary"
                         app:cardCornerRadius="20dp">
-
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:gravity="center"
                             android:orientation="vertical">
-
                             <ImageView
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
                                 android:background="@drawable/oval_black"
-                                android:src="@drawable/icons8_edit_link_48px" />
-
+                                android:src="@drawable/icons8_edit_link_48px"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textStyle="bold"
                                 android:layout_marginTop="10dp"
-                                android:fontFamily="sans-serif-light"
                                 android:text="Edit order"
-                                android:textColor="@android:color/white"
-                                android:textStyle="bold" />
-
+                                android:fontFamily="sans-serif-light"
+                                android:textColor="@android:color/white"/>
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
-                                android:layout_margin="10dp"
-                                android:background="@android:color/white" />
+                                android:background="@android:color/white"
+                                android:layout_margin="10dp"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center"
+                                android:textStyle="bold"
                                 android:layout_marginLeft="7dp"
-                                android:layout_marginTop="10dp"
                                 android:layout_marginRight="7dp"
-                                android:fontFamily="sans-serif-light"
+                                android:layout_marginTop="10dp"
+                                android:layout_gravity="center"
                                 android:text="Click here to edit previous placed orders"
-                                android:textColor="@android:color/white"
-                                android:textStyle="bold" />
+                                android:fontFamily="sans-serif-light"
+                                android:textColor="@android:color/white"/>
                         </LinearLayout>
 
                     </androidx.cardview.widget.CardView>
 
                 </LinearLayout>
-
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal"
                     android:layout_gravity="center"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
+                    android:gravity="center">
                     <androidx.cardview.widget.CardView
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:id="@+id/dashboard_show_order"
                         android:layout_width="160dp"
                         android:layout_height="160dp"
-                        android:layout_margin="10dp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:foreground="?android:attr/selectableItemBackground"
                         android:onClick="showorder"
+                        android:layout_margin="10dp"
                         app:cardBackgroundColor="@color/colorPrimary"
                         app:cardCornerRadius="20dp">
-
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:gravity="center"
                             android:orientation="vertical">
-
                             <ImageView
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
                                 android:background="@drawable/oval_black"
-                                android:src="@drawable/icons8_show_property_240px" />
-
+                                android:src="@drawable/icons8_show_property_240px"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textStyle="bold"
                                 android:layout_marginTop="10dp"
-                                android:fontFamily="sans-serif-light"
                                 android:text="@string/show_order"
-                                android:textColor="@android:color/white"
-                                android:textStyle="bold" />
-
+                                android:fontFamily="sans-serif-light"
+                                android:textColor="@android:color/white"/>
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
-                                android:layout_margin="10dp"
-                                android:background="@android:color/white" />
+                                android:background="@android:color/white"
+                                android:layout_margin="10dp"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center"
+                                android:textStyle="bold"
                                 android:layout_marginLeft="7dp"
-                                android:layout_marginTop="10dp"
                                 android:layout_marginRight="7dp"
-                                android:fontFamily="sans-serif-light"
+                                android:layout_marginTop="10dp"
+                                android:layout_gravity="center"
                                 android:text="@string/click_here_to_show_all_of_your_orders"
-                                android:textColor="@android:color/white"
-                                android:textStyle="bold" />
+                                android:fontFamily="sans-serif-light"
+                                android:textColor="@android:color/white"/>
                         </LinearLayout>
 
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:clickable="true"
                         android:id="@+id/dashboard_target"
                         android:layout_width="160dp"
                         android:layout_height="160dp"
-                        android:layout_margin="10dp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:foreground="?android:attr/selectableItemBackground"
                         android:onClick="targetDetails"
+                        android:focusable="true"
+                        android:layout_margin="10dp"
                         app:cardBackgroundColor="@color/colorPrimary"
                         app:cardCornerRadius="20dp">
-
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:gravity="center"
                             android:orientation="vertical">
-
                             <ImageView
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
                                 android:background="@drawable/oval_black"
-                                android:src="@drawable/target_white" />
-
+                                android:src="@drawable/target_white"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textStyle="bold"
                                 android:layout_marginTop="10dp"
-                                android:fontFamily="sans-serif-light"
                                 android:text="Target Details"
-                                android:textColor="@android:color/white"
-                                android:textStyle="bold" />
-
+                                android:fontFamily="sans-serif-light"
+                                android:textColor="@android:color/white"/>
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
-                                android:layout_margin="10dp"
-                                android:background="@android:color/white" />
+                                android:background="@android:color/white"
+                                android:layout_margin="10dp"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center"
+                                android:textStyle="bold"
                                 android:layout_marginLeft="7dp"
-                                android:layout_marginTop="10dp"
                                 android:layout_marginRight="7dp"
-                                android:fontFamily="sans-serif-light"
+                                android:layout_marginTop="10dp"
+                                android:layout_gravity="center"
                                 android:text="Click here to view Target Details"
-                                android:textColor="@android:color/white"
-                                android:textStyle="bold" />
+                                android:fontFamily="sans-serif-light"
+                                android:textColor="@android:color/white"/>
                         </LinearLayout>
 
                     </androidx.cardview.widget.CardView>
                 </LinearLayout>
-
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal"
                     android:layout_gravity="center"
-                    android:gravity="center"
-                    android:orientation="horizontal">
+                    android:gravity="center">
 
                     <androidx.cardview.widget.CardView
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:clickable="true"
                         android:id="@+id/dashboard_show_shops"
                         android:layout_width="160dp"
                         android:layout_height="160dp"
-                        android:layout_margin="10dp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:foreground="?android:attr/selectableItemBackground"
                         android:onClick="showshops"
+                        android:focusable="true"
+                        android:layout_margin="10dp"
                         app:cardBackgroundColor="@color/colorPrimary"
                         app:cardCornerRadius="20dp">
-
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:gravity="center"
                             android:orientation="vertical">
-
                             <ImageView
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
                                 android:background="@drawable/oval_black"
-                                android:src="@drawable/icons8_shop_128px_1" />
-
+                                android:src="@drawable/icons8_shop_128px_1"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textStyle="bold"
                                 android:layout_marginTop="10dp"
-                                android:fontFamily="sans-serif-light"
                                 android:text="@string/show_shops"
-                                android:textColor="@android:color/white"
-                                android:textStyle="bold" />
-
+                                android:fontFamily="sans-serif-light"
+                                android:textColor="@android:color/white"/>
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
-                                android:layout_margin="10dp"
-                                android:background="@android:color/white" />
+                                android:background="@android:color/white"
+                                android:layout_margin="10dp"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center"
+                                android:textStyle="bold"
                                 android:layout_marginLeft="7dp"
-                                android:layout_marginTop="10dp"
                                 android:layout_marginRight="7dp"
-                                android:fontFamily="sans-serif-light"
+                                android:layout_marginTop="10dp"
+                                android:layout_gravity="center"
                                 android:text="Click here to show all the shops"
-                                android:textColor="@android:color/white"
-                                android:textStyle="bold" />
+                                android:fontFamily="sans-serif-light"
+                                android:textColor="@android:color/white"/>
                         </LinearLayout>
 
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:clickable="true"
                         android:id="@+id/dashboard_show_shops_on_map"
                         android:layout_width="160dp"
                         android:layout_height="160dp"
-                        android:layout_margin="10dp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:foreground="?android:attr/selectableItemBackground"
                         android:onClick="showShopsOnMap"
+                        android:focusable="true"
+                        android:layout_margin="10dp"
                         app:cardBackgroundColor="@color/colorPrimary"
                         app:cardCornerRadius="20dp">
-
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:gravity="center"
                             android:orientation="vertical">
-
                             <ImageView
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
                                 android:background="@drawable/oval_black"
-                                android:src="@drawable/icons8_map_52px" />
-
+                                android:src="@drawable/icons8_map_52px"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textStyle="bold"
                                 android:layout_marginTop="10dp"
-                                android:fontFamily="sans-serif-light"
                                 android:text="Show Shops on map"
-                                android:textColor="@android:color/white"
-                                android:textStyle="bold" />
-
+                                android:fontFamily="sans-serif-light"
+                                android:textColor="@android:color/white"/>
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
-                                android:layout_margin="10dp"
-                                android:background="@android:color/white" />
+                                android:background="@android:color/white"
+                                android:layout_margin="10dp"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center"
+                                android:textStyle="bold"
                                 android:layout_marginLeft="7dp"
-                                android:layout_marginTop="10dp"
                                 android:layout_marginRight="7dp"
-                                android:fontFamily="sans-serif-light"
+                                android:layout_marginTop="10dp"
+                                android:layout_gravity="center"
                                 android:text="Click here to show all the shops on map"
-                                android:textColor="@android:color/white"
-                                android:textStyle="bold" />
+                                android:fontFamily="sans-serif-light"
+                                android:textColor="@android:color/white"/>
                         </LinearLayout>
 
                     </androidx.cardview.widget.CardView>
@@ -408,131 +377,14 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:orientation="horizontal">
 
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/dashboard_change_order_status"
-                        android:layout_width="160dp"
-                        android:layout_height="160dp"
-                        android:layout_margin="10dp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:foreground="?android:attr/selectableItemBackground"
-                        android:onClick="changeStatus"
-                        app:cardBackgroundColor="@color/colorPrimary"
-                        app:cardCornerRadius="20dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:background="@drawable/oval_black"
-                                android:src="@drawable/icons8_unknown_status_80px" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:fontFamily="sans-serif-light"
-                                android:text="Change order status"
-                                android:textColor="@android:color/white"
-                                android:textStyle="bold" />
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:layout_margin="10dp"
-                                android:background="@android:color/white" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginLeft="7dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginRight="7dp"
-                                android:fontFamily="sans-serif-light"
-                                android:text="Click here to change status of the order"
-                                android:textColor="@android:color/white"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/dashboard_filter_order"
-                        android:layout_width="160dp"
-                        android:layout_height="160dp"
-                        android:layout_margin="10dp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:foreground="?android:attr/selectableItemBackground"
-                        android:onClick="filterOrder"
-                        app:cardBackgroundColor="@color/colorPrimary"
-                        app:cardCornerRadius="20dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:background="@drawable/oval_black"
-                                android:src="@drawable/icons8_filter_and_sort_80px" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:fontFamily="sans-serif-light"
-                                android:text="Filter Orders"
-                                android:textColor="@android:color/white"
-                                android:textStyle="bold" />
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:layout_margin="10dp"
-                                android:background="@android:color/white" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginLeft="7dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginRight="7dp"
-                                android:fontFamily="sans-serif-light"
-                                android:text="Click here to filter orders"
-                                android:textColor="@android:color/white"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-
-                    </androidx.cardview.widget.CardView>
-
-
-                </LinearLayout>
 
 
             </LinearLayout>
 
 
         </ScrollView>
+
 
 
     </RelativeLayout>
