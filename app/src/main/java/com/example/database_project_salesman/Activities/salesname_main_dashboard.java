@@ -307,7 +307,7 @@ public void onBackPressed() {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_logout) {
             //Toast.makeText(getApplicationContext(), "Logout user!", Toast.LENGTH_LONG).show();
-            FirebaseAuth.getInstance().signOut();
+            auth.getInstance().signOut();
            Intent intent=new Intent(salesname_main_dashboard.this, MainActivity.class);
             startActivity(intent);
             return true;
