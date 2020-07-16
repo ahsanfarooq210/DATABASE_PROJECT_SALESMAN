@@ -71,6 +71,8 @@ public class edit_order_form_activity extends AppCompatActivity
         setContentView(R.layout.activity_edit_order_form_activity);
         ordersList=new ArrayList<>();
         Intent intent=getIntent();
+        progressBar=findViewById(R.id.edit_order_my_progress_bar);
+        progressBarh.postDelayed(runnable1, 0);
         orderId=intent.getStringExtra("order_id");
         shopSpinner=findViewById(R.id.edit_order_form_shop_spiner);
         skuSpinner=findViewById(R.id.edit_order_form_sku_spinner);
@@ -110,6 +112,7 @@ public class edit_order_form_activity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
+                progressBar.setVisibility(View.VISIBLE);
                 if(quantity.getText().toString().trim().length()==0)
                 {
                     quantity.setError("Please enter the quantity");
@@ -138,7 +141,9 @@ public class edit_order_form_activity extends AppCompatActivity
                     Toast.makeText(edit_order_form_activity.this, "quantity updated", Toast.LENGTH_SHORT).show();
               //  }
 
-                orderReference.child("orderStatus").setValue(status);
+                orderReference.child(orderId).child("orderStatus").setValue(status);
+
+                progressBarh.postDelayed(runnable1,100);
 
 
             }

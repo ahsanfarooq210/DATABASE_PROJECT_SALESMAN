@@ -14,7 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Order.Order_status_filter.Order_filter_status"></activity>
+        <activity android:name=".Order.Order_status_filter.Order_filter_status_form"></activity>
+        <activity android:name=".Order.Edit.Edit_order_status" />
+        <activity android:name=".Order.Order_status_filter.Order_filter_status" />
         <activity
             android:name=".Target.Activity.show_target_progess_activity"
             android:label=""

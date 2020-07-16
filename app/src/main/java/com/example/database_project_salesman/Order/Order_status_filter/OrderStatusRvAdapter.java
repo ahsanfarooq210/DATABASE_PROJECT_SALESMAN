@@ -1,4 +1,4 @@
-package com.example.database_project_salesman.Order.Edit;
+package com.example.database_project_salesman.Order.Order_status_filter;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,14 +12,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.database_project_salesman.Order.Order_status_filter.OrderStatusRvAdapter;
+import com.example.database_project_salesman.Order.Edit.edit_order_form_activity;
 import com.example.database_project_salesman.Order.Orders;
 import com.example.database_project_salesman.R;
 
 import java.util.ArrayList;
 
-public class EditOrderRvAdapter extends RecyclerView.Adapter<EditOrderRvAdapter.viewHolder>
+public class OrderStatusRvAdapter extends RecyclerView.Adapter<OrderStatusRvAdapter.viewHolder>
 {
-    private ArrayList<Orders> shop;
+    private ArrayList<Orders> orderList;
     private Activity context;
 //    private EditOrderInterface editOrderInterface;
 //
@@ -28,9 +30,9 @@ public class EditOrderRvAdapter extends RecyclerView.Adapter<EditOrderRvAdapter.
 //        public void onItemClick(int position);
 //    }
 
-    public EditOrderRvAdapter(ArrayList<Orders> shop, Activity context)
+    public OrderStatusRvAdapter(ArrayList<Orders> orderList, Activity context)
     {
-        this.shop = shop;
+        this.orderList = orderList;
         this.context = context;
         //editOrderInterface= (EditOrderInterface) context;
     }
@@ -39,29 +41,29 @@ public class EditOrderRvAdapter extends RecyclerView.Adapter<EditOrderRvAdapter.
 
     @NonNull
     @Override
-    public viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+    public OrderStatusRvAdapter.viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
         View view= LayoutInflater.from(context).inflate(R.layout.show_orders_rv_layout,parent,false);
-        return new viewHolder(view);
+        return new OrderStatusRvAdapter.viewHolder(view);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
-    public void onBindViewHolder(@NonNull viewHolder holder, int position)
+    public void onBindViewHolder(@NonNull OrderStatusRvAdapter.viewHolder holder, int position)
     {
 
-        holder.shopName.setText(shop.get(position).getShopName());
-        holder.skuName.setText(shop.get(position).getSku().toString());
-        holder.quantity.setText(Integer.toString(shop.get(position).getQuantity()));
+        holder.shopName.setText(orderList.get(position).getShopName());
+        holder.skuName.setText(orderList.get(position).getSku().toString());
+        holder.quantity.setText(Integer.toString(orderList.get(position).getQuantity()));
 
-        holder.status.setText(shop.get(position).getOrderStatus());
-        if(shop.get(position).getOrderStatus().equals(context.getString(R.string.delivered)))
+        holder.status.setText(orderList.get(position).getOrderStatus());
+        if(orderList.get(position).getOrderStatus().equals(context.getString(R.string.delivered)))
         {
             holder.status.setTextColor(context.getColor(R.color.green));
         }
         else
         {
-            if(shop.get(position).getOrderStatus().equals(context.getString(R.string.in_progress)))
+            if(orderList.get(position).getOrderStatus().equals(context.getString(R.string.in_progress)))
             {
                 holder.status.setTextColor(context.getColor(R.color.yellow));
             }
@@ -76,7 +78,7 @@ public class EditOrderRvAdapter extends RecyclerView.Adapter<EditOrderRvAdapter.
     @Override
     public int getItemCount()
     {
-        return shop.size();
+        return orderList.size();
     }
 
     public class viewHolder extends RecyclerView.ViewHolder
@@ -96,8 +98,8 @@ public class EditOrderRvAdapter extends RecyclerView.Adapter<EditOrderRvAdapter.
                 @Override
                 public void onClick(View v)
                 {
-                    String id=shop.get(getAdapterPosition()).getId();
-                    Intent intent=new Intent(context,edit_order_form_activity.class);
+                    String id=orderList.get(getAdapterPosition()).getId();
+                    Intent intent=new Intent(context, Order_filter_status_form.class);
                     intent.putExtra("order_id",id);
                     context.startActivity(intent);
                 }
