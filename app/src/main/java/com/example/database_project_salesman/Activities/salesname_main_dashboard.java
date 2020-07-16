@@ -29,12 +29,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-
 import com.example.database_project_salesman.Order.Add_Order.add_order_activity;
 import com.example.database_project_salesman.Order.Edit.edit_order_rv_activity;
 import com.example.database_project_salesman.Order.show_orders_activity;
 import com.example.database_project_salesman.ProfileActivities.activity_Edit_Profile;
 import com.example.database_project_salesman.ProfileActivities.activity_View_Profile;
+import com.example.database_project_salesman.ProfileActivities.setting_activity;
 import com.example.database_project_salesman.R;
 import com.example.database_project_salesman.SHOP.show_shop_activity;
 import com.example.database_project_salesman.SHOP.show_shop_on_map_activity;
@@ -180,9 +180,9 @@ public class  salesname_main_dashboard extends AppCompatActivity
             break;
         case 3:
             // settings
-           // Intent setting =new Intent(salesname_main_dashboard.this,setting_activity.class);
-           //startActivity(setting);
-            Toast.makeText(salesname_main_dashboard.this,"setting",Toast.LENGTH_LONG).show();
+            Intent setting =new Intent(salesname_main_dashboard.this, setting_activity.class);
+           startActivity(setting);
+            //Toast.makeText(salesname_main_dashboard.this,"setting",Toast.LENGTH_LONG).show();
 
             break;
         case 4:
