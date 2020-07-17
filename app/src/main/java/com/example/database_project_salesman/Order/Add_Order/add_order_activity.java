@@ -289,7 +289,9 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
                 if(isLocationEnabled(add_order_activity.this)) {
 
                     if (checkPermission()) {
-                        Intent intent = new Intent(add_order_activity.this, show_shop_on_map_activity.class);
+                        Intent intent = new Intent(add_order_activity.this, show_order_shop_on_map.class);
+                        intent.putExtra("latitude",shopDetails.getLatitude());
+                        intent.putExtra("longitude",shopDetails.getLongitude());
                         startActivity(intent);
 
                     } else {
