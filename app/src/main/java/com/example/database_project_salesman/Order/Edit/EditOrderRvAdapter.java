@@ -91,11 +91,11 @@ public class EditOrderRvAdapter extends RecyclerView.Adapter<EditOrderRvAdapter.
             quantity=itemView.findViewById(R.id.show_order_rv_layout_quantity);
             status=itemView.findViewById(R.id.show_order_rv_layout_status);
 
-            itemView.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
+                    itemView.setOnClickListener(new View.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View v)
+                        {
                     String id=shop.get(getAdapterPosition()).getId();
                     Intent intent=new Intent(context,edit_order_form_activity.class);
                     intent.putExtra("order_id",id);

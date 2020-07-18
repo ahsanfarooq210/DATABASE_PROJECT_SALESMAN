@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:animateLayoutChanges="true"
             android:layout_below="@+id/imgView_logo"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <TextView
                 android:id="@+id/tv_login"

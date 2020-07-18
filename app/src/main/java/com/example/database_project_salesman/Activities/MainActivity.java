@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity
         }
         if(passeordTf.getText().toString().trim().length()==0)
         {
-            passeordTf.setError("Enter passeord");
+            passeordTf.setError("Enter password");
             progressBarh.postDelayed(runnable1,100);
             return;
         }
@@ -139,6 +139,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-
+super.onBackPressed();
     }
 }
