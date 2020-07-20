@@ -13,7 +13,8 @@
         android:layout_gravity="center"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
-        android:gravity="center">
+        android:gravity="center"
+        android:animateLayoutChanges="true">
 
 
         <ImageView
@@ -30,7 +31,7 @@
             android:layout_height="wrap_content"
             android:visibility="visible"
             android:layout_below="@id/profile_imgView_logo"
-            >
+            android:animateLayoutChanges="true">
 
             <TextView
                 android:id="@+id/tv_login"

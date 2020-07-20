@@ -156,13 +156,12 @@ public class activity_Edit_Profile extends AppCompatActivity {
                 }
                 if(!isprofileDatacomplete)
                 {
-                    auth.getInstance().signOut();
-                    Intent intent=new Intent(activity_Edit_Profile.this, MainActivity.class);
+                    //rwccf
                     progressBar.setVisibility(View.VISIBLE);
+                    Handler logoutHandler=new Handler();
+                    rellay2.setVisibility(View.VISIBLE);
                     rellay1.setVisibility(View.GONE);
-                    rellay2.setVisibility(View.GONE);
-                    progressBarh.postDelayed(runnable1,500);
-                    startActivity(intent);
+                    logoutHandler.postDelayed(logout,2000);
 
                 }
 
@@ -287,6 +286,19 @@ public class activity_Edit_Profile extends AppCompatActivity {
 
 
 
+
+    Runnable logout=new Runnable()
+    {
+        @Override
+        public void run()
+        {
+            auth.getInstance().signOut();
+
+            progressBarh.postDelayed(runnable1,0);
+            Intent intent=new Intent(activity_Edit_Profile.this, MainActivity.class);
+            startActivity(intent);
+        }
+    };
     private boolean validateFields(String n) {
         String names[]= n.split("\\s+");
         if((names.length <2))
