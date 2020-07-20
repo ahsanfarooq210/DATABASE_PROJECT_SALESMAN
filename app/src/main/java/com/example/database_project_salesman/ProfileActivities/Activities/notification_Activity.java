@@ -1,4 +1,4 @@
-package com.example.database_project_salesman.ProfileActivities;
+package com.example.database_project_salesman.ProfileActivities.Activities;
 
 import android.os.Bundle;
 

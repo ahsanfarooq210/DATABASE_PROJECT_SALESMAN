@@ -14,7 +14,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Order.Order_status_filter.Order_filter_status_form"></activity>
+        <activity
+            android:name=".Order.Order_status_filter.Order_filter_status_form"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Order.Edit.Edit_order_status" />
         <activity android:name=".Order.Order_status_filter.Order_filter_status" />
         <activity
@@ -22,7 +25,7 @@
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ProfileActivities.notification_Activity"
+            android:name=".ProfileActivities.Activities.notification_Activity"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -36,15 +39,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ProfileActivities.setting_activity"
+            android:name=".ProfileActivities.Activities.setting_activity"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ProfileActivities.activity_Edit_Profile"
+            android:name=".ProfileActivities.Activities.activity_Edit_Profile"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ProfileActivities.activity_View_Profile"
+            android:name=".ProfileActivities.Activities.activity_View_Profile"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

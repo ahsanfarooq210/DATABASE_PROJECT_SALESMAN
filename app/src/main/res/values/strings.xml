@@ -79,7 +79,9 @@
     <string name="profile">Profile</string>
     <string name="name">Name :</string>
     <string name="dob">Date of Birth :</string>
-    <string name="cnic">CNIC :</string>
+    <string name="cnic">CNIC : </string>
+    <string name="cell">Contact Number : </string>
+    <string name="email">Email : </string>
     <string name="education">Education :</string>
     <string name="cancel">Cancel</string>
     <string name="save">Save </string>
@@ -88,4 +90,8 @@
     <string name="delivered">Delivered</string>
     <string name="cancelled">Cancelled</string>
     <string name="enter_quantity">Enter quantity</string>
+    <!--SharedPreferences.-->
+    <string name="SharedPreferences_FileName">com.example.salesman.profileData</string>
+    <string name="SharedPreferences_SALESMEN">SALESMEN</string>
+    <string name="SharedPreferences_isProfileDataComplete">isProfileDataComplete</string>
 </resources>

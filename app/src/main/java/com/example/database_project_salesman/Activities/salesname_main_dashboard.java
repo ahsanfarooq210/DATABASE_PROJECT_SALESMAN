@@ -32,11 +32,10 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.database_project_salesman.Order.Add_Order.add_order_activity;
 import com.example.database_project_salesman.Order.Edit.Edit_order_status;
 import com.example.database_project_salesman.Order.Edit.edit_order_rv_activity;
-import com.example.database_project_salesman.Order.Order_status_filter.Order_filter_status;
 import com.example.database_project_salesman.Order.show_orders_activity;
-import com.example.database_project_salesman.ProfileActivities.activity_Edit_Profile;
-import com.example.database_project_salesman.ProfileActivities.activity_View_Profile;
-import com.example.database_project_salesman.ProfileActivities.setting_activity;
+import com.example.database_project_salesman.ProfileActivities.Activities.activity_Edit_Profile;
+import com.example.database_project_salesman.ProfileActivities.Activities.activity_View_Profile;
+import com.example.database_project_salesman.ProfileActivities.Activities.setting_activity;
 import com.example.database_project_salesman.R;
 import com.example.database_project_salesman.SHOP.show_shop_activity;
 import com.example.database_project_salesman.SHOP.show_shop_on_map_activity;
@@ -127,6 +126,7 @@ public class  salesname_main_dashboard extends AppCompatActivity
         handler.postDelayed(runnable,500);
         auth=FirebaseAuth.getInstance();
         user=auth.getCurrentUser();
+
         //displaying the name of the user
        // assert user != null;
       //  dashboard_nameplate.setText(user.getEmail().trim());
@@ -168,11 +168,13 @@ public class  salesname_main_dashboard extends AppCompatActivity
         case 0:
             // activity_View_Profile
            Intent view_profile=new Intent(salesname_main_dashboard.this, activity_View_Profile.class);
+           view_profile.putExtra("VIEW_EMAIL",user.getEmail().trim());
             startActivity(view_profile);
             break;
         case 1:
             // activity_Edit_Profile
             Intent edit_profile=new Intent(salesname_main_dashboard.this, activity_Edit_Profile.class);
+            edit_profile.putExtra("EDIT_EMAIl",user.getEmail().trim());
             startActivity(edit_profile);
             break;
         case 2:
@@ -449,6 +451,10 @@ public  void targetDetails(View view)
         startActivity(new Intent(salesname_main_dashboard.this, Edit_order_status.class));
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
 
+    }
 }
 
