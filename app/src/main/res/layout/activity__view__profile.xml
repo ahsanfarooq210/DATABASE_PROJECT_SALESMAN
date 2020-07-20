@@ -28,7 +28,7 @@
             android:id="@+id/adding_view_rellay1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="visible"
+            android:visibility="gone"
             android:layout_below="@id/profile_imgView_logo"
             >
 
@@ -68,7 +68,7 @@
 
                             android:id="@+id/name_tf_view_profile"
                             android:hint="@string/name"
-
+                            android:enabled="false"
                             android:layout_width="match_parent"
                             android:layout_height="60dp"
                             android:layout_marginTop="5dp"
@@ -96,19 +96,19 @@
                         <com.google.android.material.textfield.TextInputEditText
 
                             android:id="@+id/cnic_tf_view_profile"
-                            android:hint="@string/cnic"
-
                             android:layout_width="match_parent"
+                            android:enabled="false"
                             android:layout_height="60dp"
                             android:layout_marginTop="5dp"
-                            android:inputType="textEmailAddress"
-
+                            android:background="@drawable/bg_edit_text"
                             android:fontFamily="sans-serif-light"
+
+                            android:hint="@string/cnic"
+                            android:inputType="textEmailAddress"
                             android:paddingLeft="15dp"
                             android:paddingRight="15dp"
-                            android:background="@drawable/bg_edit_text"
                             android:textColor="@android:color/black"
-                            android:textSize="15sp"/>
+                            android:textSize="15sp" />
                     </com.google.android.material.textfield.TextInputLayout>
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
@@ -126,7 +126,7 @@
 
                             android:id="@+id/email_tf_view_profile"
                             android:hint="@string/email"
-
+                            android:enabled="false"
                             android:layout_width="match_parent"
                             android:layout_height="60dp"
                             android:layout_marginTop="5dp"
@@ -139,9 +139,10 @@
                             android:textColor="@android:color/black"
                             android:textSize="15sp"/>
                     </com.google.android.material.textfield.TextInputLayout>
+
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="81dp"
 
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
@@ -154,19 +155,19 @@
                         <com.google.android.material.textfield.TextInputEditText
 
                             android:id="@+id/dob_tf_view_profile"
-                            android:hint="@string/dob"
-
                             android:layout_width="match_parent"
+                            android:enabled="false"
                             android:layout_height="60dp"
                             android:layout_marginTop="5dp"
-                            android:inputType="textEmailAddress"
-
+                            android:background="@drawable/bg_edit_text"
                             android:fontFamily="sans-serif-light"
+
+                            android:hint="@string/dob"
+                            android:inputType="textEmailAddress"
                             android:paddingLeft="15dp"
                             android:paddingRight="15dp"
-                            android:background="@drawable/bg_edit_text"
                             android:textColor="@android:color/black"
-                            android:textSize="15sp"/>
+                            android:textSize="15sp" />
                     </com.google.android.material.textfield.TextInputLayout>
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
@@ -184,7 +185,7 @@
 
                             android:id="@+id/contact_number_tf_view_profile"
                             android:hint="@string/cell"
-
+                            android:enabled="false"
                             android:layout_width="match_parent"
                             android:layout_height="60dp"
                             android:layout_marginTop="5dp"
@@ -213,7 +214,7 @@
 
                             android:id="@+id/education_tf_view_profile"
                             android:hint="@string/education"
-
+                            android:enabled="false"
                             android:layout_width="match_parent"
                             android:layout_height="60dp"
                             android:layout_marginTop="5dp"
@@ -248,8 +249,6 @@
                     android:background="@drawable/btn_bg"
                     android:clickable="true"
                     android:fontFamily="sans-serif-medium"
-                    android:paddingLeft="45dp"
-                    android:paddingRight="45dp"
                     android:text="@string/cancel"
                     android:layout_marginRight="10dp"
                     android:textAllCaps="false"
@@ -265,8 +264,7 @@
                     android:layout_marginLeft="10dp"
                     android:background="@drawable/btn_bg"
                     android:fontFamily="sans-serif-medium"
-                    android:paddingLeft="50dp"
-                    android:paddingRight="55dp"
+
                     android:text="@string/Edit_Profile"
                     android:textAllCaps="false"
                     android:textColor="@android:color/white"

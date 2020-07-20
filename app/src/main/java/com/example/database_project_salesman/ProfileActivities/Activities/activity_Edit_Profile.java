@@ -1,22 +1,29 @@
 package com.example.database_project_salesman.ProfileActivities.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.database_project_salesman.Activities.MainActivity;
 import com.example.database_project_salesman.Activities.salesname_main_dashboard;
 import com.example.database_project_salesman.ProfileActivities.Entity.ProfileData;
 import com.example.database_project_salesman.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,7 +35,9 @@ import java.util.List;
 
 public class activity_Edit_Profile extends AppCompatActivity {
     EditText name_tf_edit_profile,cnic_tf_edit_profile,email_tf_edit_profile,dob_tf_edit_profile,contact_number_tf_edit_profile,education_tf_edit_profile; //splash screen relative layout
-
+    //employeee name
+    private FirebaseUser user;
+    private FirebaseAuth auth;
     Button cancel_button,save_Profile_button;
     private RelativeLayout rellay1, rally3, rellay2;
     //handler for the splash screen
@@ -61,12 +70,13 @@ public class activity_Edit_Profile extends AppCompatActivity {
     //profileData
 
     String salesMenEmail;
-    boolean isprofileDatacomplete,profileDatacomplete=false;
+    boolean isprofileDatacomplete;
     //database reference
     private DatabaseReference profileDataReference;
     //array lists for the array adapters
     private List<ProfileData> profileDataList;
     SharedPreferences prefreences ;
+    ScrollView scrollView_edit_Profile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,11 +85,15 @@ public class activity_Edit_Profile extends AppCompatActivity {
         prefreences = getSharedPreferences(getResources().getString(R.string.SharedPreferences_FileName),MODE_PRIVATE);
         salesMenEmail=prefreences.getString(getResources().getString(R.string.SharedPreferences_SALESMEN),"");
         isprofileDatacomplete=prefreences.getBoolean(getResources().getString(R.string.SharedPreferences_isProfileDataComplete),false);
-        profileDatacomplete=false;
+
+        auth=FirebaseAuth.getInstance();
+        user=auth.getCurrentUser();
+
         //initializing databasee reference for downloading and uploading the data the data
         profileDataReference = FirebaseDatabase.getInstance().getReference("ProfileData");
         profileDataReference.keepSynced(true);
         profileDataList=new ArrayList<>();
+        scrollView_edit_Profile=findViewById(R.id.scrollView_edit_Profile);
 
         name_tf_edit_profile=findViewById(R.id.name_tf_edit_profile);
         cnic_tf_edit_profile=findViewById(R.id.cnic_tf_edit_profile);
@@ -88,22 +102,8 @@ public class activity_Edit_Profile extends AppCompatActivity {
         contact_number_tf_edit_profile=findViewById(R.id.contact_number_tf_edit_profile);
         education_tf_edit_profile=findViewById(R.id.education_tf_edit_profile);
 
-
-       if(isprofileDatacomplete)
-        {
-            name_tf_edit_profile.setText(profileDataList.get(0).getName());
-            cnic_tf_edit_profile.setText(profileDataList.get(0).getCNIC());
-            dob_tf_edit_profile.setText(profileDataList.get(0).getDate_of_birth());
-            contact_number_tf_edit_profile.setText(profileDataList.get(0).getCell_number());
-            education_tf_edit_profile.setText(profileDataList.get(0).getEducation());
-        }
-
-
         email_tf_edit_profile.setText(salesMenEmail);
         email_tf_edit_profile.setEnabled(false);
-
-
-
 
         cancel_button=findViewById(R.id.cancel_button);
         save_Profile_button=findViewById(R.id.save_Profile_button);
@@ -119,6 +119,33 @@ public class activity_Edit_Profile extends AppCompatActivity {
         progressBar = findViewById(R.id.my_progress_bar);
         progressBarh.postDelayed(runnable1, 0);
 
+        if (getCurrentFocus() != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            assert imm != null;
+            if(imm.isActive())
+            {
+                scrollView_edit_Profile.setOnTouchListener( new View.OnTouchListener() {
+
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event)
+                    {
+                        return false;
+                    }
+                });
+
+            }
+            if(!imm.isActive())
+            {
+                scrollView_edit_Profile.setOnTouchListener( new View.OnTouchListener() {
+
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event)
+                    {
+                        return true;
+                    }
+                });
+            }
+        }
         cancel_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,6 +153,17 @@ public class activity_Edit_Profile extends AppCompatActivity {
                 {
                     Intent send =new Intent(activity_Edit_Profile.this, salesname_main_dashboard.class);
                     startActivity(send);
+                }
+                if(!isprofileDatacomplete)
+                {
+                    auth.getInstance().signOut();
+                    Intent intent=new Intent(activity_Edit_Profile.this, MainActivity.class);
+                    progressBar.setVisibility(View.VISIBLE);
+                    rellay1.setVisibility(View.GONE);
+                    rellay2.setVisibility(View.GONE);
+                    progressBarh.postDelayed(runnable1,500);
+                    startActivity(intent);
+
                 }
 
 
@@ -273,12 +311,27 @@ public class activity_Edit_Profile extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 profileDataList.clear();
                 for(DataSnapshot profile: dataSnapshot.getChildren()) {
-                    //if (isprofileDatacomplete) {
-                        //if (profile.getValue(ProfileData.class).getEmail().equals(salesMenEmail))
+                    if (isprofileDatacomplete) {
+                        if (profile.getValue(ProfileData.class).getEmail().equals(salesMenEmail))
                             profileDataList.add(profile.getValue(ProfileData.class));
-                    //}
+                    }
 
                 }
+
+                if(isprofileDatacomplete)
+                {
+                    name_tf_edit_profile.setText(profileDataList.get(0).getName());
+                    cnic_tf_edit_profile.setText(profileDataList.get(0).getCNIC());
+                    dob_tf_edit_profile.setText(profileDataList.get(0).getDate_of_birth());
+                    contact_number_tf_edit_profile.setText(profileDataList.get(0).getCell_number());
+                    education_tf_edit_profile.setText(profileDataList.get(0).getEducation());
+
+                }
+                if(!isprofileDatacomplete)
+                {
+                    cancel_button.setText("Log Out");
+                }
+
             }
 
             @Override

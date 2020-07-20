@@ -1,6 +1,7 @@
 package com.example.database_project_salesman.ProfileActivities.Activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -58,20 +59,25 @@ public class activity_View_Profile extends AppCompatActivity {
             progressBar.setVisibility(View.GONE);
         }
     };
-    String profileDataIntent="",email;
+
     //profileData
+
+    String salesMenEmail;
+    boolean isprofileDatacomplete;
     //database reference
     private DatabaseReference profileDataReference;
     //array lists for the array adapters
     private List<ProfileData> profileDataList;
-
+    SharedPreferences prefreences ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity__view__profile);
         Intent recIntent=getIntent();
-        email=recIntent.getStringExtra("VIEW_EMAIL");
+        prefreences = getSharedPreferences(getResources().getString(R.string.SharedPreferences_FileName),MODE_PRIVATE);
+        salesMenEmail=prefreences.getString(getResources().getString(R.string.SharedPreferences_SALESMEN),"");
+        isprofileDatacomplete=prefreences.getBoolean(getResources().getString(R.string.SharedPreferences_isProfileDataComplete),false);
 
         name_tf_view_profile=findViewById(R.id.name_tf_view_profile);
         cnic_tf_view_profile=findViewById(R.id.cnic_tf_view_profile);
@@ -123,11 +129,18 @@ public class activity_View_Profile extends AppCompatActivity {
                 profileDataList.clear();
                 for (DataSnapshot profile : snapshot.getChildren())
                 {
-                    if(profile.getValue(ProfileData.class).getEmail().equals(email))
+                    if(profile.getValue(ProfileData.class).getEmail().equals(salesMenEmail))
                     {
                         profileDataList.add(profile.getValue(ProfileData.class));
                     }
                 }
+                  name_tf_view_profile.setText(profileDataList.get(0).getName());
+                    cnic_tf_view_profile.setText(profileDataList.get(0).getCNIC());
+                    dob_tf_view_profile.setText(profileDataList.get(0).getDate_of_birth());
+                    contact_number_tf_view_profile.setText(profileDataList.get(0).getCell_number());
+                    education_tf_view_profile.setText(profileDataList.get(0).getEducation());
+
+
             }
 
             @Override
