@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity
 
         mAuth = FirebaseAuth.getInstance();
 //initializing databasee reference for downloading and uploading the data the data
-        profileDataReference = FirebaseDatabase.getInstance().getReference("ProfileData");
+        profileDataReference = FirebaseDatabase.getInstance().getReference("SalesMenProfileData");
         profileDataReference.keepSynced(true);
         profileDataList=new ArrayList<>();
         /*if(mAuth.currentUser == null){

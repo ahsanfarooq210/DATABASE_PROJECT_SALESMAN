@@ -29,7 +29,7 @@
             android:id="@+id/adding_sku_rellay1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="visible"
+            android:visibility="gone"
             android:layout_below="@id/profile_imgView_logo"
             android:animateLayoutChanges="true">
 

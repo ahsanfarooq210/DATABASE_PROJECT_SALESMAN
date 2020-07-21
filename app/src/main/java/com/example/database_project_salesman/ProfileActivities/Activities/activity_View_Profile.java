@@ -85,9 +85,9 @@ public class activity_View_Profile extends AppCompatActivity {
         dob_tf_view_profile=findViewById(R.id.dob_tf_view_profile);
         contact_number_tf_view_profile=findViewById(R.id.contact_number_tf_view_profile);
         education_tf_view_profile=findViewById(R.id.education_tf_view_profile);
-
+        email_tf_view_profile.setText(salesMenEmail);
         //initializing databasee reference for downloading and uploading the data the data
-        profileDataReference = FirebaseDatabase.getInstance().getReference("ProfileData");
+        profileDataReference = FirebaseDatabase.getInstance().getReference("SalesMenProfileData");
         profileDataReference.keepSynced(true);
         profileDataList=new ArrayList<>();
 

@@ -90,7 +90,7 @@ public class activity_Edit_Profile extends AppCompatActivity {
         user=auth.getCurrentUser();
 
         //initializing databasee reference for downloading and uploading the data the data
-        profileDataReference = FirebaseDatabase.getInstance().getReference("ProfileData");
+        profileDataReference = FirebaseDatabase.getInstance().getReference("SalesMenProfileData");
         profileDataReference.keepSynced(true);
         profileDataList=new ArrayList<>();
         scrollView_edit_Profile=findViewById(R.id.scrollView_edit_Profile);
@@ -157,6 +157,7 @@ public class activity_Edit_Profile extends AppCompatActivity {
                 if(!isprofileDatacomplete)
                 {
                     //rwccf
+
                     progressBar.setVisibility(View.VISIBLE);
                     Handler logoutHandler=new Handler();
                     rellay2.setVisibility(View.VISIBLE);
