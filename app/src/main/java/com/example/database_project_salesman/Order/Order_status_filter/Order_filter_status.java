@@ -1,16 +1,12 @@
 package com.example.database_project_salesman.Order.Order_status_filter;
 
+import android.os.Bundle;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Bundle;
-import android.os.Handler;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.example.database_project_salesman.Order.Orders;
 import com.example.database_project_salesman.Order.show_order_rv_adaprter;
@@ -53,40 +49,40 @@ public class Order_filter_status extends AppCompatActivity
 
         auth=FirebaseAuth.getInstance();
         user=auth.getCurrentUser();
-        Handler handler=new Handler();
-        handler.postDelayed(runnable,0);
+
 
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
 
-    Runnable runnable=new Runnable()
-    {
-        @Override
-        public void run()
+        Query query= FirebaseDatabase.getInstance().getReference("ORDERS").orderByChild("salesman").equalTo(user.getEmail());
+
+        query.addListenerForSingleValueEvent(new ValueEventListener()
         {
 
-            Query  query=FirebaseDatabase.getInstance().getReference("ORDERS").orderByChild("salesman").equalTo(user.getEmail());
-            query.addListenerForSingleValueEvent(new ValueEventListener()
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot)
+                orderList.clear();
+                for(DataSnapshot shop:dataSnapshot.getChildren())
                 {
-                    orderList.clear();
-                    for(DataSnapshot orderSnap:snapshot.getChildren())
-                    {
-                        orderList.add(orderSnap.getValue(Orders.class));
-                    }
-                    show_order_rv_adaprter showOrderRvAdaprter=new show_order_rv_adaprter(orderList,Order_filter_status.this);
-                    recyclerView.setAdapter(showOrderRvAdaprter);
+                    orderList.add(shop.getValue(Orders.class));
                 }
+                show_order_rv_adaprter showOrderRvAdapter=new show_order_rv_adaprter(orderList,Order_filter_status.this);
+                recyclerView.setAdapter(showOrderRvAdapter);
+                showOrderRvAdapter.notifyDataSetChanged();
+            }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error)
-                {
-                    Toast.makeText(Order_filter_status.this, "Error in downloading the data", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-    };
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError)
+            {
+                Toast.makeText(Order_filter_status.this, "Error in downloading the data", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
 }

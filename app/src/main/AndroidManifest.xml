@@ -18,8 +18,11 @@
             android:name=".Order.Order_status_filter.Order_filter_status_form"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Order.Edit.Edit_order_status" />
-        <activity android:name=".Order.Order_status_filter.Order_filter_status" />
+
+        <activity android:name=".Order.Edit.Edit_order_status"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".Order.Order_status_filter.Order_filter_status"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".Target.Activity.show_target_progess_activity"
             android:label=""

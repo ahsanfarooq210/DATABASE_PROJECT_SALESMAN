@@ -11,24 +11,31 @@ public class Target_SalesMen {
     int achieved;
     int previousAchieved;
     String SaleMenEmail;
-    String Order_ID;
     Sku Sku;
     Orders orders;
-
+    String status;
     public Target_SalesMen() {
     }
 
-    public Target_SalesMen(String TARGET_ID, String SKU_ID, int achieved, int previousAchieved,String saleMenEmail, String order_ID, Sku sku, Orders orders) {
+    public Target_SalesMen(String TARGET_ID, String SKU_ID, int achieved, int previousAchieved,String saleMenEmail, Sku sku, Orders orders,String status) {
         this.TARGET_ID = TARGET_ID;
         this.SKU_ID = SKU_ID;
 
         this.achieved = achieved;
         this.previousAchieved=previousAchieved;
         SaleMenEmail = saleMenEmail;
-        Order_ID = order_ID;
+this.status=status;
         Sku = sku;
         this.orders = orders;
 
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getTARGET_ID() {
@@ -71,13 +78,6 @@ public class Target_SalesMen {
         SaleMenEmail = saleMenEmail;
     }
 
-    public String getOrder_ID() {
-        return Order_ID;
-    }
-
-    public void setOrder_ID(String order_ID) {
-        Order_ID = order_ID;
-    }
 
     public com.example.database_project_salesman.SKU.Sku getSku() {
         return Sku;

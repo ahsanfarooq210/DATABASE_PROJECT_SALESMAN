@@ -18,6 +18,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.database_project_salesman.Order.Orders;
 import com.example.database_project_salesman.R;
 import com.example.database_project_salesman.SKU.Sku;
+import com.example.database_project_salesman.Target.Enity.Target_SalesMen;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -51,28 +54,35 @@ public class edit_order_form_activity extends AppCompatActivity
     //array adapters for the dropdown lists
     private ArrayAdapter<Sku> skuArrayAdapter;
 
-    private DatabaseReference skuReference,  orderReference;
+    private DatabaseReference skuReference,  orderReference, targetSaleseMenRefernce;
     //array lists for the array adapters
     private List<Sku> skuList;
 
     private EditText quantity;
-
+    //to get the email id of the salesman
+    private FirebaseAuth auth;
+    private FirebaseUser user;
     private ArrayList<String> orderStatusList;
     //array aadapter for the order status spinner
     private ArrayAdapter<String> orderstatusArrayAdapter;
-
-
+//target salsman
+private  List<Target_SalesMen> target_salesMenList;
 TextView edit_order_form_shop_TV;
+String userEmail;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_order_form_activity);
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+
         ordersList=new ArrayList<>();
         Intent intent=getIntent();
         progressBar=findViewById(R.id.edit_order_my_progress_bar);
         progressBarh.postDelayed(runnable1, 0);
         orderId=intent.getStringExtra("order_id");
+
         edit_order_form_shop_TV=findViewById(R.id.edit_order_form_shop_TV);
         skuSpinner=findViewById(R.id.edit_order_form_sku_spinner);
         saveButton=findViewById(R.id.edit_order_form_save_button);
@@ -80,6 +90,9 @@ TextView edit_order_form_shop_TV;
         skuReference = FirebaseDatabase.getInstance().getReference("SKU");
 
         orderReference = FirebaseDatabase.getInstance().getReference("ORDERS");
+
+
+        targetSaleseMenRefernce=FirebaseDatabase.getInstance().getReference("TargetSalesMan");
 
         //setting the array adapters
         statusSpinner=findViewById(R.id.edit_order_form_status_edit_text);
@@ -95,10 +108,12 @@ TextView edit_order_form_shop_TV;
 
         //initializing lists
         skuList = new ArrayList<>();
+        target_salesMenList =new ArrayList<>();
 
 
         //synchronizing the database for the offline use
         skuReference.keepSynced(true);
+        targetSaleseMenRefernce.keepSynced(true);
 
         orderReference.keepSynced(true);
 
@@ -124,10 +139,71 @@ TextView edit_order_form_shop_TV;
                 String status=statusSpinner.getSelectedItem().toString();
 
 
+
+                String target_SalesManID=null;
+                int previousTargetAchieved=0;
+                int targetAchieved=0;
+                int ts;
+                String orderSkuId="";
+                boolean notFound=true;
+
+                for (int sk=0; sk<skuList.size(); sk++)
+                {
+                    if(skuList.get(sk).getProductName().equals(sku.getProductName()))
+                    {
+                        orderSkuId=skuList.get(sk).getId();
+                        break;
+                    }
+                }
+                for (ts=0; ts<target_salesMenList.size(); ts++)
+                {
+                    if (target_salesMenList.get(ts).getSKU_ID().equals(orderSkuId))
+                    {
+                        target_SalesManID=target_salesMenList.get(ts).getTARGET_ID();
+                        previousTargetAchieved=target_salesMenList.get(ts).getPreviousAchieved();
+                        targetAchieved=target_salesMenList.get(ts).getAchieved();
+                        notFound=false;
+                        break;
+                    }
+                }
+                if(notFound)
+                {
+                    target_SalesManID=targetSaleseMenRefernce.push().getKey();
+                }
+                int neworder=0;
+             if(target_salesMenList.get(ts).getAchieved()==target_salesMenList.get(ts).getPreviousAchieved())
+             {
+                 targetAchieved=quant;
+                 previousTargetAchieved=targetAchieved;
+             }
+             else if(target_salesMenList.get(ts).getAchieved()!=target_salesMenList.get(ts).getPreviousAchieved()) {
+
+                 if (quant < ordersList.get(0).getQuantity()) {
+                     neworder = ordersList.get(0).getQuantity() - quant;
+                     previousTargetAchieved = targetAchieved;
+                     targetAchieved -= neworder;
+                 }
+                 if (quant > ordersList.get(0).getQuantity()) {
+                     neworder = quant - ordersList.get(0).getQuantity();
+                     previousTargetAchieved = targetAchieved;
+                     targetAchieved += neworder;
+                 }
+                 if (quant == ordersList.get(0).getQuantity()) {
+                     previousTargetAchieved = target_salesMenList.get(ts).getPreviousAchieved();
+                     targetAchieved = target_salesMenList.get(ts).getAchieved();
+                 }
+             }
+                assert target_SalesManID != null;
+                targetSaleseMenRefernce.child(target_SalesManID).child("previousAchieved").setValue(previousTargetAchieved);
+                targetSaleseMenRefernce.child(target_SalesManID).child("achieved").setValue(targetAchieved);
+
                 orderReference.child(orderId).child("sku").setValue(sku);
                 orderReference.child(orderId).child("quantity").setValue(quant);
                 orderReference.child(orderId).child("sku_id").setValue(sku.getId());
                 orderReference.child(orderId).child("orderStatus").setValue(status);
+                neworder=0;
+                targetAchieved=0;
+                previousTargetAchieved=0;
                 Toast.makeText(edit_order_form_activity.this,"Data Updated successfully",Toast.LENGTH_LONG).show();
                 progressBarh.postDelayed(runnable1,200);
 
@@ -208,10 +284,10 @@ TextView edit_order_form_shop_TV;
                     }
                else if(ordersList.get(0).getOrderStatus().equals(getResources().getString(R.string.in_progress)))
                 {
-statusSpinner.setSelection(1);
+                        statusSpinner.setSelection(1);
                 }else  if(ordersList.get(0).getOrderStatus().equals(getResources().getString(R.string.cancelled)))
             {
-statusSpinner.setSelection(2);
+                                    statusSpinner.setSelection(2);
 
             }
 
@@ -224,7 +300,23 @@ statusSpinner.setSelection(2);
             }
         });
 
+        targetSaleseMenRefernce.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                target_salesMenList.clear();
+                for (DataSnapshot targetSalesman:snapshot.getChildren()) {
+                    if ((targetSalesman.getValue(Target_SalesMen.class).getSaleMenEmail().equals(user.getEmail() ) )
+                    && (targetSalesman.getValue(Target_SalesMen.class).getStatus().equals("Active") ) ){
+                        target_salesMenList.add(targetSalesman.getValue(Target_SalesMen.class));
+                    }
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
 
 

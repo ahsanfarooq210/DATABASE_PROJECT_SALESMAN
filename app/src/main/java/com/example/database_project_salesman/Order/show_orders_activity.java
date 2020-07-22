@@ -63,7 +63,7 @@ public class show_orders_activity extends AppCompatActivity
                 }
                 show_order_rv_adaprter showOrderRvAdaprter=new show_order_rv_adaprter(orderList,show_orders_activity.this);
                 recyclerView.setAdapter(showOrderRvAdaprter);
-
+                showOrderRvAdaprter.notifyDataSetChanged();
             }
 
             @Override

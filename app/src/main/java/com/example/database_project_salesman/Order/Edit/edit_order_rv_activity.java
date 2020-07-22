@@ -65,7 +65,7 @@ public class edit_order_rv_activity extends AppCompatActivity
                 }
                 EditOrderRvAdapter editOrderRvAdapter=new EditOrderRvAdapter(orderList, edit_order_rv_activity.this);
                 recyclerView.setAdapter(editOrderRvAdapter);
-
+                editOrderRvAdapter.notifyDataSetChanged();
             }
 
             @Override

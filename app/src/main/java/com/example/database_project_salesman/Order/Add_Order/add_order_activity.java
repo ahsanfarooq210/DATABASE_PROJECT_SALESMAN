@@ -147,7 +147,7 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
         shopReference = FirebaseDatabase.getInstance().getReference("SHOP");
         orderReference = FirebaseDatabase.getInstance().getReference("ORDERS");
 
-        targetSaleseMenRefernce=FirebaseDatabase.getInstance().getReference("TargetSaleseMen");
+        targetSaleseMenRefernce=FirebaseDatabase.getInstance().getReference("TargetSalesMan");
         //synchronizing the database for the offline use
         skuReference.keepSynced(true);
         shopReference.keepSynced(true);
@@ -276,7 +276,7 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
                 {
                     previousTargetAchieved=targetAchieved=Integer.parseInt(quantity.getText().toString().trim());
 
-                    Target_SalesMen target_salesMen=new Target_SalesMen(targetSalesmenID,sk.getId(),targetAchieved,previousTargetAchieved,username,order_id,sk,order);
+                    Target_SalesMen target_salesMen=new Target_SalesMen(targetSalesmenID,sk.getId(),targetAchieved,previousTargetAchieved,username,sk,order,"Active");
 
                     if(order_id!=null&&targetSalesmenID!=null)
                     {
@@ -294,7 +294,7 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
                     return;
                 }
                 if(target_salesMenList.size()!=0) {
-                    boolean found=true;
+                    boolean notFound=true;
                     for(int sku=0; sku<target_salesMenList.size(); sku++)
                     {
                         if (sk.getId().equals(target_salesMenList.get(sku).getSKU_ID())) {
@@ -312,17 +312,17 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
                             } else {
                                 Toast.makeText(add_order_activity.this, "Error \n string id=null \n contact developer immediately", Toast.LENGTH_SHORT).show();
                             }
-                           found=false;
+                           notFound=false;
                             break;
                         }
                     }
 
 
-                    if(found)
+                    if(notFound)
                     {
                         previousTargetAchieved=targetAchieved=Integer.parseInt(quantity.getText().toString().trim());
 
-                        Target_SalesMen target_salesMen=new Target_SalesMen(targetSalesmenID,sk.getId(),targetAchieved,previousTargetAchieved,username,order_id,sk,order);
+                        Target_SalesMen target_salesMen=new Target_SalesMen(targetSalesmenID,sk.getId(),targetAchieved,previousTargetAchieved,username,sk,order,"Active");
 
                         if(order_id!=null&&targetSalesmenID!=null)
                         {
@@ -500,7 +500,8 @@ targetSaleseMenRefernce.addValueEventListener(new ValueEventListener() {
     public void onDataChange(@NonNull DataSnapshot snapshot) {
         target_salesMenList.clear();
         for (DataSnapshot targetSalesman:snapshot.getChildren()) {
-            if (targetSalesman.getValue(Target_SalesMen.class).getSaleMenEmail().equals(user.getEmail())) {
+            if ( (targetSalesman.getValue(Target_SalesMen.class).getSaleMenEmail().equals(user.getEmail()))
+            && targetSalesman.getValue(Target_SalesMen.class).getStatus().equals("Active")){
                 target_salesMenList.add(targetSalesman.getValue(Target_SalesMen.class));
             }
         }
