@@ -276,7 +276,7 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
                 {
                     previousTargetAchieved=targetAchieved=Integer.parseInt(quantity.getText().toString().trim());
 
-                    Target_SalesMen target_salesMen=new Target_SalesMen(targetSalesmenID,sk.getId(),targetAchieved,previousTargetAchieved,username,sk,order,"Active");
+                    Target_SalesMen target_salesMen=new Target_SalesMen(targetSalesmenID,sk.getId(),targetAchieved,username,sk,order,"Active");
 
                     if(order_id!=null&&targetSalesmenID!=null)
                     {
@@ -298,8 +298,8 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
                     for(int sku=0; sku<target_salesMenList.size(); sku++)
                     {
                         if (sk.getId().equals(target_salesMenList.get(sku).getSKU_ID())) {
-                            previousTargetAchieved = target_salesMenList.get(sku).getAchieved();
-                            targetAchieved += previousTargetAchieved;
+
+                            targetAchieved   = target_salesMenList.get(sku).getAchieved();
                             targetAchieved += Integer.parseInt(quantity.getText().toString().trim());
 
 
@@ -307,7 +307,6 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
 
                             if (target_salesMenID != null && order_id != null) {
                                 orderReference.child(order_id).setValue(order);
-                                targetSaleseMenRefernce.child(target_salesMenID).child("previousAchieved").setValue(previousTargetAchieved);
                                 targetSaleseMenRefernce.child(target_salesMenID).child("achieved").setValue(targetAchieved);
                             } else {
                                 Toast.makeText(add_order_activity.this, "Error \n string id=null \n contact developer immediately", Toast.LENGTH_SHORT).show();
@@ -320,9 +319,8 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
 
                     if(notFound)
                     {
-                        previousTargetAchieved=targetAchieved=Integer.parseInt(quantity.getText().toString().trim());
 
-                        Target_SalesMen target_salesMen=new Target_SalesMen(targetSalesmenID,sk.getId(),targetAchieved,previousTargetAchieved,username,sk,order,"Active");
+                        Target_SalesMen target_salesMen=new Target_SalesMen(targetSalesmenID,sk.getId(),targetAchieved,username,sk,order,"Active");
 
                         if(order_id!=null&&targetSalesmenID!=null)
                         {

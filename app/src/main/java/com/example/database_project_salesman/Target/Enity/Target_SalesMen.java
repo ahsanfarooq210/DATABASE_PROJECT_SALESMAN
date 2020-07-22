@@ -9,7 +9,7 @@ public class Target_SalesMen {
     String TARGET_ID;
     String SKU_ID;
     int achieved;
-    int previousAchieved;
+
     String SaleMenEmail;
     Sku Sku;
     Orders orders;
@@ -17,12 +17,12 @@ public class Target_SalesMen {
     public Target_SalesMen() {
     }
 
-    public Target_SalesMen(String TARGET_ID, String SKU_ID, int achieved, int previousAchieved,String saleMenEmail, Sku sku, Orders orders,String status) {
+    public Target_SalesMen(String TARGET_ID, String SKU_ID, int achieved,String saleMenEmail, Sku sku, Orders orders,String status) {
         this.TARGET_ID = TARGET_ID;
         this.SKU_ID = SKU_ID;
 
         this.achieved = achieved;
-        this.previousAchieved=previousAchieved;
+
         SaleMenEmail = saleMenEmail;
 this.status=status;
         Sku = sku;
@@ -54,13 +54,7 @@ this.status=status;
         this.SKU_ID = SKU_ID;
     }
 
-    public int getPreviousAchieved() {
-        return previousAchieved;
-    }
 
-    public void setPreviousAchieved(int previousAchieved) {
-        this.previousAchieved = previousAchieved;
-    }
 
     public int getAchieved() {
         return achieved;

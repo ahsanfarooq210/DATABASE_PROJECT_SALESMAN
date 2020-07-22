@@ -54,11 +54,11 @@ public class edit_order_form_activity extends AppCompatActivity
     //array adapters for the dropdown lists
     private ArrayAdapter<Sku> skuArrayAdapter;
 
-    private DatabaseReference skuReference,  orderReference, targetSaleseMenRefernce;
+    private DatabaseReference skuReference,  orderReference, targetSalesMenRefernce;
     //array lists for the array adapters
     private List<Sku> skuList;
 
-    private EditText quantity;
+    private EditText quantity_editText;
     //to get the email id of the salesman
     private FirebaseAuth auth;
     private FirebaseUser user;
@@ -92,7 +92,7 @@ String userEmail;
         orderReference = FirebaseDatabase.getInstance().getReference("ORDERS");
 
 
-        targetSaleseMenRefernce=FirebaseDatabase.getInstance().getReference("TargetSalesMan");
+        targetSalesMenRefernce=FirebaseDatabase.getInstance().getReference("TargetSalesMan");
 
         //setting the array adapters
         statusSpinner=findViewById(R.id.edit_order_form_status_edit_text);
@@ -113,12 +113,12 @@ String userEmail;
 
         //synchronizing the database for the offline use
         skuReference.keepSynced(true);
-        targetSaleseMenRefernce.keepSynced(true);
+        targetSalesMenRefernce.keepSynced(true);
 
         orderReference.keepSynced(true);
 
         //initializing the quantity edit text
-        quantity=findViewById(R.id.edit_order_form_quantity_edit_text);
+        quantity_editText=findViewById(R.id.edit_order_form_quantity_edit_text);
         // quantity.setText();
 
         saveButton.setOnClickListener(new View.OnClickListener()
@@ -127,18 +127,16 @@ String userEmail;
             public void onClick(View v)
             {
                 progressBar.setVisibility(View.VISIBLE);
-                if(quantity.getText().toString().trim().length()==0)
+                if(quantity_editText.getText().toString().trim().length()==0)
                 {
-                    quantity.setError("Please enter the quantity");
+                    quantity_editText.setError("Please enter the quantity");
                     return;
                 }
 
                 Sku sku= (Sku) skuSpinner.getSelectedItem();
 
-                int quant=Integer.parseInt(quantity.getText().toString().trim());
+                int quant=Integer.parseInt(quantity_editText.getText().toString().trim());
                 String status=statusSpinner.getSelectedItem().toString();
-
-
 
                 String target_SalesManID=null;
                 int previousTargetAchieved=0;
@@ -160,7 +158,7 @@ String userEmail;
                     if (target_salesMenList.get(ts).getSKU_ID().equals(orderSkuId))
                     {
                         target_SalesManID=target_salesMenList.get(ts).getTARGET_ID();
-                        previousTargetAchieved=target_salesMenList.get(ts).getPreviousAchieved();
+
                         targetAchieved=target_salesMenList.get(ts).getAchieved();
                         notFound=false;
                         break;
@@ -168,34 +166,27 @@ String userEmail;
                 }
                 if(notFound)
                 {
-                    target_SalesManID=targetSaleseMenRefernce.push().getKey();
+                    target_SalesManID=targetSalesMenRefernce.push().getKey();
                 }
                 int neworder=0;
-             if(target_salesMenList.get(ts).getAchieved()==target_salesMenList.get(ts).getPreviousAchieved())
-             {
-                 targetAchieved=quant;
-                 previousTargetAchieved=targetAchieved;
-             }
-             else if(target_salesMenList.get(ts).getAchieved()!=target_salesMenList.get(ts).getPreviousAchieved()) {
+              {
 
                  if (quant < ordersList.get(0).getQuantity()) {
                      neworder = ordersList.get(0).getQuantity() - quant;
-                     previousTargetAchieved = targetAchieved;
                      targetAchieved -= neworder;
                  }
                  if (quant > ordersList.get(0).getQuantity()) {
                      neworder = quant - ordersList.get(0).getQuantity();
-                     previousTargetAchieved = targetAchieved;
                      targetAchieved += neworder;
                  }
                  if (quant == ordersList.get(0).getQuantity()) {
-                     previousTargetAchieved = target_salesMenList.get(ts).getPreviousAchieved();
+
                      targetAchieved = target_salesMenList.get(ts).getAchieved();
                  }
              }
                 assert target_SalesManID != null;
-                targetSaleseMenRefernce.child(target_SalesManID).child("previousAchieved").setValue(previousTargetAchieved);
-                targetSaleseMenRefernce.child(target_SalesManID).child("achieved").setValue(targetAchieved);
+
+                targetSalesMenRefernce.child(target_SalesManID).child("achieved").setValue(targetAchieved);
 
                 orderReference.child(orderId).child("sku").setValue(sku);
                 orderReference.child(orderId).child("quantity").setValue(quant);
@@ -203,7 +194,7 @@ String userEmail;
                 orderReference.child(orderId).child("orderStatus").setValue(status);
                 neworder=0;
                 targetAchieved=0;
-                previousTargetAchieved=0;
+
                 Toast.makeText(edit_order_form_activity.this,"Data Updated successfully",Toast.LENGTH_LONG).show();
                 progressBarh.postDelayed(runnable1,200);
 
@@ -236,7 +227,7 @@ String userEmail;
                     ordersList.add(shop.getValue(Orders.class));
                 }
 
-            quantity.setText(String.valueOf(ordersList.get(0).getQuantity()));
+            quantity_editText.setText(String.valueOf(ordersList.get(0).getQuantity()));
                 String shopDetails="Shop Name : "+ordersList.get(0).getShopName()+"\n"
                                   +"Owner Name : "+ordersList.get(0).getShop().getOwnerName()+"\n"
                                   +"Owner Number : "+ordersList.get(0).getShop().getOwnerMobile();
@@ -300,7 +291,7 @@ String userEmail;
             }
         });
 
-        targetSaleseMenRefernce.addValueEventListener(new ValueEventListener() {
+        targetSalesMenRefernce.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 target_salesMenList.clear();
