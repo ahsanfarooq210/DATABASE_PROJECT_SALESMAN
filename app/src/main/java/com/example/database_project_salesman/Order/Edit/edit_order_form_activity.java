@@ -105,7 +105,7 @@ public class edit_order_form_activity extends AppCompatActivity
 
         //initializing the quantity edit text
         quantity=findViewById(R.id.edit_order_form_quantity_edit_text);
-       // quantity.setText();
+        // quantity.setText();
 
         saveButton.setOnClickListener(new View.OnClickListener()
         {
@@ -127,19 +127,19 @@ public class edit_order_form_activity extends AppCompatActivity
 
                 //if (!isSkuSame())
                 //{
-                    orderReference.child(orderId).child("sku").setValue(sku);
-                    Toast.makeText(edit_order_form_activity.this, "sku updated", Toast.LENGTH_SHORT).show();
+                orderReference.child(orderId).child("sku").setValue(sku);
+                Toast.makeText(edit_order_form_activity.this, "sku updated", Toast.LENGTH_SHORT).show();
                 //}
                 //if(!isShopSame())
                 //{
-                    orderReference.child(orderId).child("shop").setValue(shopDetails);
-                    Toast.makeText(edit_order_form_activity.this, "shop updated", Toast.LENGTH_SHORT).show();
+                orderReference.child(orderId).child("shop").setValue(shopDetails);
+                Toast.makeText(edit_order_form_activity.this, "shop updated", Toast.LENGTH_SHORT).show();
                 //}
                 //if(!isQuantitySame())
                 //{
-                    orderReference.child(orderId).child("quantity").setValue(quant);
-                    Toast.makeText(edit_order_form_activity.this, "quantity updated", Toast.LENGTH_SHORT).show();
-              //  }
+                orderReference.child(orderId).child("quantity").setValue(quant);
+                Toast.makeText(edit_order_form_activity.this, "quantity updated", Toast.LENGTH_SHORT).show();
+                //  }
 
                 orderReference.child(orderId).child("orderStatus").setValue(status);
 
@@ -174,7 +174,7 @@ public class edit_order_form_activity extends AppCompatActivity
                     ordersList.add(shop.getValue(Orders.class));
                 }
 
-
+            quantity.setText(String.valueOf(ordersList.get(0).getQuantity()));
             }
 
             @Override
@@ -184,7 +184,7 @@ public class edit_order_form_activity extends AppCompatActivity
             }
         });
 
-       // orders=ordersList.get(0);
+        // orders=ordersList.get(0);
 
         ////getting all the sku
         skuReference.addValueEventListener(new ValueEventListener()

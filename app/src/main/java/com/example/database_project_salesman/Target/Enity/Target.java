@@ -3,31 +3,76 @@ package com.example.database_project_salesman.Target.Enity;
 
 import com.example.database_project_salesman.SKU.Sku;
 
-public class Target {
-   String TARGET_ID;
-   Sku SKU;
-   int TARGET;
-   long TARGET_DATE;
-   String SKU_ID;
 
+public class Target {
+    String TARGET_ID;
+    Sku SKU;
+    int TARGET;
+    String salesmenEmail;
+    String startDateString ,endDateString;
+    String skuID;
+    String targetStatus;
     public Target() {
     }
 
-    public Target(String TARGET_ID, Sku SKU,String SKU_ID, int TARGET, long TARGET_DATE) {
+    public Target(String TARGET_ID, Sku SKU,String skuID,String salesmenEmail, int TARGET, String startDateString ,String endDateString ,String targetStatus) {
         this.TARGET_ID = TARGET_ID;
         this.SKU = SKU;
         this.TARGET = TARGET;
-        this.SKU_ID=SKU_ID;
-        this.TARGET_DATE = TARGET_DATE;
+        this.skuID=skuID;
+        this.salesmenEmail=salesmenEmail;
+        this.startDateString = startDateString ;
+        this.endDateString =endDateString;
+        this.targetStatus=targetStatus;
 
     }
 
-    public String getSKU_ID() {
-        return SKU_ID;
+    public String getSkuID() {
+        return skuID;
     }
 
-    public void setSKU_ID(String SKU_ID) {
-        this.SKU_ID = SKU_ID;
+    public void setSkuID(String skuID) {
+        this.skuID = skuID;
+    }
+
+    public String getTargetStatus() {
+        return targetStatus;
+    }
+
+    public void setTargetStatus(String targetStatus) {
+        this.targetStatus = targetStatus;
+    }
+
+    public String getSalesmenEmail() {
+        return salesmenEmail;
+    }
+
+    public void setSalesmenEmail(String salesmenEmail) {
+        this.salesmenEmail = salesmenEmail;
+    }
+
+    public String getStartDateString() {
+        return startDateString;
+    }
+
+    public void setStartDateString(String startDateString) {
+        this.startDateString = startDateString;
+    }
+
+    public String getEndDateString() {
+        return endDateString;
+    }
+
+    public void setEndDateString(String endDateString) {
+        this.endDateString = endDateString;
+    }
+
+    public String getskuID() {
+        return skuID;
+    }
+
+    public void setskuID(String skuID) {
+        this.skuID = skuID;
     }
 
     public String getTARGET_ID() {
@@ -54,11 +99,5 @@ public class Target {
         this.TARGET = TARGET;
     }
 
-    public long getTARGET_DATE() {
-        return TARGET_DATE;
-    }
 
-    public void setTARGET_DATE(long TARGET_DATE) {
-        this.TARGET_DATE = TARGET_DATE;
-    }
 }

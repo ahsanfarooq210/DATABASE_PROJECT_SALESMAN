@@ -37,7 +37,7 @@ import com.example.database_project_salesman.Order.show_order_shop_on_map;
 import com.example.database_project_salesman.R;
 import com.example.database_project_salesman.SHOP.ShopDetails;
 import com.example.database_project_salesman.SKU.Sku;
-import com.example.database_project_salesman.SHOP.show_shop_on_map_activity;
+import com.example.database_project_salesman.Target.Enity.Target_SalesMen;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -61,7 +61,7 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
     private LocationBrodcast locationBrodcast;
 
     //database reference
-    private DatabaseReference skuReference, shopReference, orderReference;
+    private DatabaseReference skuReference, shopReference, orderReference, targetSaleseMenRefernce;
 
     //splash screen relative layout
     private RelativeLayout rellay1, rally3, rellay2;
@@ -107,6 +107,7 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
     //array lists for the array adapters
     private List<Sku> skuList;
     private List<ShopDetails> shopDetailsList;
+    private  List<Target_SalesMen> target_salesMenList;
     //buttons and edit texts
     private Button save, showShop;
     private EditText quantity;
@@ -124,6 +125,7 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
     private ArrayList<String> orderStatusList;
     //array aadapter for the order status spinner
     private ArrayAdapter<String> orderstatusArrayAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -138,16 +140,20 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
         //initializing lists
         skuList = new ArrayList<>();
         shopDetailsList = new ArrayList<>();
+        target_salesMenList =new ArrayList<>();
 
         //initializing databasee reference for downloading and uploading the data the data
         skuReference = FirebaseDatabase.getInstance().getReference("SKU");
         shopReference = FirebaseDatabase.getInstance().getReference("SHOP");
         orderReference = FirebaseDatabase.getInstance().getReference("ORDERS");
+
+        targetSaleseMenRefernce=FirebaseDatabase.getInstance().getReference("TargetSaleseMen");
         //synchronizing the database for the offline use
         skuReference.keepSynced(true);
         shopReference.keepSynced(true);
         orderReference.keepSynced(true);
 
+        targetSaleseMenRefernce.keepSynced(true);
         //initializing the quantity text view
         quantity = findViewById(R.id.add_order_quantity_et);
 
@@ -182,9 +188,9 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
         client = LocationServices.getFusedLocationProviderClient(this);
         //adding strings in the order status list
         orderStatusList=new ArrayList<>();
-        orderStatusList.add(getString(R.string.delivered));
+    //    orderStatusList.add(getString(R.string.delivered));
         orderStatusList.add(getString(R.string.in_progress));
-        orderStatusList.add(getString(R.string.cancelled));
+      //  orderStatusList.add(getString(R.string.cancelled));
         //initializing the orderstatus array adapter
         orderstatusArrayAdapter=new ArrayAdapter(this,R.layout.spinner_text,orderStatusList);
         orderstatusArrayAdapter.setDropDownViewResource(R.layout.spinner_text_dropdown);
@@ -259,18 +265,85 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
                 }
 
                 String OrderStatus=orderStatusSpinner.getSelectedItem().toString();
+                //orders
+                String order_id=orderReference.push().getKey();
+                Orders order =new Orders(order_id,username,shopDetails,sk,Integer.parseInt(quantity.getText().toString().trim()),OrderStatus);
+              //Target_salesMen
+                String targetSalesmenID=targetSaleseMenRefernce.push().getKey();
+                int previousTargetAchieved=0;
+                int targetAchieved=0;
+                if(target_salesMenList.size()==0)
+                {
+                    previousTargetAchieved=targetAchieved=Integer.parseInt(quantity.getText().toString().trim());
 
-                String id=orderReference.push().getKey();
-                Orders order =new Orders(id,username,shopDetails,sk,Integer.parseInt(quantity.getText().toString().trim()),OrderStatus);
-                if(id!=null)
-                {
-                    orderReference.child(id).setValue(order);
+                    Target_SalesMen target_salesMen=new Target_SalesMen(targetSalesmenID,sk.getId(),targetAchieved,previousTargetAchieved,username,order_id,sk,order);
+
+                    if(order_id!=null&&targetSalesmenID!=null)
+                    {
+                        orderReference.child(order_id).setValue(order);
+                        targetSaleseMenRefernce.child(targetSalesmenID).setValue(target_salesMen);
+                    }
+                    else
+                    {
+                        Toast.makeText(add_order_activity.this, "Error \n string id=null \n contact developer immediately", Toast.LENGTH_SHORT).show();
+                    }
+                    quantity.setText("");
+                    skuSpinner.setSelection(0);
+                    shopSpinner.setSelection(0);
+                    progressBarh.postDelayed(runnable1,500);
+                    return;
                 }
-                else
-                {
-                    Toast.makeText(add_order_activity.this, "Error \n string id=null \n contact developer immediately", Toast.LENGTH_SHORT).show();
+                if(target_salesMenList.size()!=0) {
+                    boolean found=true;
+                    for(int sku=0; sku<target_salesMenList.size(); sku++)
+                    {
+                        if (sk.getId().equals(target_salesMenList.get(sku).getSKU_ID())) {
+                            previousTargetAchieved = target_salesMenList.get(sku).getAchieved();
+                            targetAchieved += previousTargetAchieved;
+                            targetAchieved += Integer.parseInt(quantity.getText().toString().trim());
+
+
+                            String target_salesMenID = target_salesMenList.get(sku).getTARGET_ID();
+
+                            if (target_salesMenID != null && order_id != null) {
+                                orderReference.child(order_id).setValue(order);
+                                targetSaleseMenRefernce.child(target_salesMenID).child("previousAchieved").setValue(previousTargetAchieved);
+                                targetSaleseMenRefernce.child(target_salesMenID).child("achieved").setValue(targetAchieved);
+                            } else {
+                                Toast.makeText(add_order_activity.this, "Error \n string id=null \n contact developer immediately", Toast.LENGTH_SHORT).show();
+                            }
+                           found=false;
+                            break;
+                        }
+                    }
+
+
+                    if(found)
+                    {
+                        previousTargetAchieved=targetAchieved=Integer.parseInt(quantity.getText().toString().trim());
+
+                        Target_SalesMen target_salesMen=new Target_SalesMen(targetSalesmenID,sk.getId(),targetAchieved,previousTargetAchieved,username,order_id,sk,order);
+
+                        if(order_id!=null&&targetSalesmenID!=null)
+                        {
+                            orderReference.child(order_id).setValue(order);
+                            targetSaleseMenRefernce.child(targetSalesmenID).setValue(target_salesMen);
+                        }
+                        else
+                        {
+                            Toast.makeText(add_order_activity.this, "Error \n string id=null \n contact developer immediately", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                    quantity.setText("");
+                    skuSpinner.setSelection(0);
+                    shopSpinner.setSelection(0);
+                    progressBarh.postDelayed(runnable1, 500);
+                    return;
                 }
-                progressBarh.postDelayed(runnable1,500);
+
+
+
             }
         });
 
@@ -422,8 +495,22 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
             }
 
         });
+targetSaleseMenRefernce.addValueEventListener(new ValueEventListener() {
+    @Override
+    public void onDataChange(@NonNull DataSnapshot snapshot) {
+        target_salesMenList.clear();
+        for (DataSnapshot targetSalesman:snapshot.getChildren()) {
+            if (targetSalesman.getValue(Target_SalesMen.class).getSaleMenEmail().equals(user.getEmail())) {
+                target_salesMenList.add(targetSalesman.getValue(Target_SalesMen.class));
+            }
+        }
+    }
 
+    @Override
+    public void onCancelled(@NonNull DatabaseError error) {
 
+    }
+});
     }
 
     @Override
