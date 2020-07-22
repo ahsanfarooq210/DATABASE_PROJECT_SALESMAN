@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,7 +17,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.database_project_salesman.Order.Orders;
 import com.example.database_project_salesman.R;
-import com.example.database_project_salesman.SHOP.ShopDetails;
 import com.example.database_project_salesman.SKU.Sku;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,7 +32,7 @@ public class edit_order_form_activity extends AppCompatActivity
 {
     private String orderId;
     private List<Orders> ordersList;
-    private Orders orders;
+
     //handler for the progress bar
     private ProgressBar progressBar;
     private Handler progressBarh = new Handler();
@@ -47,15 +47,14 @@ public class edit_order_form_activity extends AppCompatActivity
     };
 
     private Button saveButton;
-    private Spinner shopSpinner,skuSpinner,statusSpinner;
+    private Spinner skuSpinner,statusSpinner;
     //array adapters for the dropdown lists
     private ArrayAdapter<Sku> skuArrayAdapter;
-    private ArrayAdapter<ShopDetails> shopDetailsArrayAdapter;
-    //database reference
-    private DatabaseReference skuReference, shopReference, orderReference;
+
+    private DatabaseReference skuReference,  orderReference;
     //array lists for the array adapters
     private List<Sku> skuList;
-    private List<ShopDetails> shopDetailsList;
+
     private EditText quantity;
 
     private ArrayList<String> orderStatusList;
@@ -63,7 +62,7 @@ public class edit_order_form_activity extends AppCompatActivity
     private ArrayAdapter<String> orderstatusArrayAdapter;
 
 
-
+TextView edit_order_form_shop_TV;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -74,12 +73,12 @@ public class edit_order_form_activity extends AppCompatActivity
         progressBar=findViewById(R.id.edit_order_my_progress_bar);
         progressBarh.postDelayed(runnable1, 0);
         orderId=intent.getStringExtra("order_id");
-        shopSpinner=findViewById(R.id.edit_order_form_shop_spiner);
+        edit_order_form_shop_TV=findViewById(R.id.edit_order_form_shop_TV);
         skuSpinner=findViewById(R.id.edit_order_form_sku_spinner);
         saveButton=findViewById(R.id.edit_order_form_save_button);
         //initializing databasee reference for downloading and uploading the data the data
         skuReference = FirebaseDatabase.getInstance().getReference("SKU");
-        shopReference = FirebaseDatabase.getInstance().getReference("SHOP");
+
         orderReference = FirebaseDatabase.getInstance().getReference("ORDERS");
 
         //setting the array adapters
@@ -96,11 +95,11 @@ public class edit_order_form_activity extends AppCompatActivity
 
         //initializing lists
         skuList = new ArrayList<>();
-        shopDetailsList = new ArrayList<>();
+
 
         //synchronizing the database for the offline use
         skuReference.keepSynced(true);
-        shopReference.keepSynced(true);
+
         orderReference.keepSynced(true);
 
         //initializing the quantity edit text
@@ -120,30 +119,17 @@ public class edit_order_form_activity extends AppCompatActivity
                 }
 
                 Sku sku= (Sku) skuSpinner.getSelectedItem();
-                ShopDetails shopDetails= (ShopDetails) shopSpinner.getSelectedItem();
+
                 int quant=Integer.parseInt(quantity.getText().toString().trim());
                 String status=statusSpinner.getSelectedItem().toString();
 
 
-                //if (!isSkuSame())
-                //{
                 orderReference.child(orderId).child("sku").setValue(sku);
-                Toast.makeText(edit_order_form_activity.this, "sku updated", Toast.LENGTH_SHORT).show();
-                //}
-                //if(!isShopSame())
-                //{
-                orderReference.child(orderId).child("shop").setValue(shopDetails);
-                Toast.makeText(edit_order_form_activity.this, "shop updated", Toast.LENGTH_SHORT).show();
-                //}
-                //if(!isQuantitySame())
-                //{
                 orderReference.child(orderId).child("quantity").setValue(quant);
-                Toast.makeText(edit_order_form_activity.this, "quantity updated", Toast.LENGTH_SHORT).show();
-                //  }
-
+                orderReference.child(orderId).child("sku_id").setValue(sku.getId());
                 orderReference.child(orderId).child("orderStatus").setValue(status);
-
-                progressBarh.postDelayed(runnable1,100);
+                Toast.makeText(edit_order_form_activity.this,"Data Updated successfully",Toast.LENGTH_LONG).show();
+                progressBarh.postDelayed(runnable1,200);
 
 
             }
@@ -175,6 +161,10 @@ public class edit_order_form_activity extends AppCompatActivity
                 }
 
             quantity.setText(String.valueOf(ordersList.get(0).getQuantity()));
+                String shopDetails="Shop Name : "+ordersList.get(0).getShopName()+"\n"
+                                  +"Owner Name : "+ordersList.get(0).getShop().getOwnerName()+"\n"
+                                  +"Owner Number : "+ordersList.get(0).getShop().getOwnerMobile();
+                edit_order_form_shop_TV.setText(shopDetails);
             }
 
             @Override
@@ -201,6 +191,30 @@ public class edit_order_form_activity extends AppCompatActivity
                 skuArrayAdapter = new ArrayAdapter(edit_order_form_activity.this, R.layout.spinner_text, skuList);
                 skuArrayAdapter.setDropDownViewResource(R.layout.spinner_text_dropdown);
                 skuSpinner.setAdapter(skuArrayAdapter);
+                int sku;
+                for ( sku=0; sku<skuList.size();sku++)
+                {
+                    if(skuList.get(sku).getId().equals(ordersList.get(0).getSku_id()))
+                    {
+                        break;
+                    }
+                }
+                skuSpinner.setSelection(sku);
+
+
+                    if(ordersList.get(0).getOrderStatus().equals(getResources().getString(R.string.delivered)))
+                    {
+                        statusSpinner.setSelection(0);
+                    }
+               else if(ordersList.get(0).getOrderStatus().equals(getResources().getString(R.string.in_progress)))
+                {
+statusSpinner.setSelection(1);
+                }else  if(ordersList.get(0).getOrderStatus().equals(getResources().getString(R.string.cancelled)))
+            {
+statusSpinner.setSelection(2);
+
+            }
+
             }
 
             @Override
@@ -210,30 +224,7 @@ public class edit_order_form_activity extends AppCompatActivity
             }
         });
 
-        //getting all the shops
-        shopReference.addValueEventListener(new ValueEventListener()
-        {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
-            {
-                shopDetailsList.clear();
 
-                for(DataSnapshot shop:dataSnapshot.getChildren())
-                {
-                    shopDetailsList.add(shop.getValue(ShopDetails.class));
-                }
-                shopDetailsArrayAdapter = new ArrayAdapter(edit_order_form_activity.this, R.layout.spinner_text, shopDetailsList);
-                shopDetailsArrayAdapter.setDropDownViewResource(R.layout.spinner_text_dropdown);
-                shopSpinner.setAdapter(shopDetailsArrayAdapter);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError)
-            {
-                Toast.makeText(edit_order_form_activity.this,"Error in downloading the data",Toast.LENGTH_SHORT).show();
-            }
-
-        });
 
 
 
@@ -241,17 +232,4 @@ public class edit_order_form_activity extends AppCompatActivity
 
     }
 
-
-    private boolean isSkuSame()
-    {
-        return (Sku) skuSpinner.getSelectedItem() == ordersList.get(0).getSku();
-    }
-    private boolean isShopSame()
-    {
-        return (ShopDetails) shopSpinner.getSelectedItem() == ordersList.get(0).getShop();
-    }
-    private boolean isQuantitySame()
-    {
-        return Integer.parseInt(quantity.getText().toString().trim()) == ordersList.get(0).getQuantity();
-    }
 }

@@ -63,10 +63,10 @@
                         android:textColor="@android:color/black"
                         android:textSize="15sp" />
 
-                    <Spinner
-                        android:id="@+id/edit_order_form_shop_spiner"
+                    <TextView
+                        android:id="@+id/edit_order_form_shop_TV"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
 
                         android:autofillHints="company"
