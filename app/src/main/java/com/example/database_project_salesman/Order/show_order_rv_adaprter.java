@@ -14,13 +14,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.database_project_salesman.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class show_order_rv_adaprter extends RecyclerView.Adapter<show_order_rv_adaprter.viewHolder>
 {
-    private ArrayList<Orders> shop;
+    private List<Orders> shop;
     private Activity context;
 
-    public show_order_rv_adaprter(ArrayList<Orders> shop, Activity context)
+    public show_order_rv_adaprter(List<Orders> shop, Activity context)
     {
         this.shop = shop;
         this.context = context;
@@ -65,7 +66,48 @@ public class show_order_rv_adaprter extends RecyclerView.Adapter<show_order_rv_a
     {
         return shop.size();
     }
+    public void updateList(String search, List<Orders> orders ) {
+        if(search.equals(""))
+        {
+            if(!(shop.size()==orders.size()))
+            {
+                this.shop.clear();
+                List<Orders> empty = new ArrayList<>();
+                for (int i=0; i< orders.size(); i++) {
+                    empty.add(orders.get(i));
+                }
+                this.shop=empty;
+                notifyDataSetChanged();
+            }
 
+        }
+        if(!search.equals(""))
+        {
+
+            List<Orders>  temps = new ArrayList<>();
+            for (int i=0; i< orders.size(); i++) {
+                if (orders.get(i).getQuantity()==(Integer.parseInt(search.toLowerCase()))) {
+                    temps.add(orders.get(i));
+                }
+                if (orders.get(i).getOrderStatus().toLowerCase().contains(search.toLowerCase())) {
+                    temps.add(orders.get(i));
+                }
+                if (orders.get(i).getShopName().toLowerCase().contains(search.toLowerCase()))
+                {
+                    temps.add(orders.get(i));
+                }
+                if (orders.get(i).getSku().getProductName().toLowerCase().contains(search.toLowerCase()))
+                {
+                    temps.add(orders.get(i));
+                }
+
+            }
+            //
+            this.shop = temps;
+            notifyDataSetChanged();
+        }
+
+    }
     public class viewHolder extends RecyclerView.ViewHolder
     {
         TextView shopName,skuName,quantity,status;

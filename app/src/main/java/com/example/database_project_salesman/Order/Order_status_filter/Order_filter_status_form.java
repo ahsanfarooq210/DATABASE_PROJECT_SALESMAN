@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.database_project_salesman.Order.Orders;
 import com.example.database_project_salesman.R;
 import com.example.database_project_salesman.Target.Enity.Target_SalesMen;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,6 +35,7 @@ public class Order_filter_status_form extends AppCompatActivity
     private ArrayAdapter<String> orderstatusArrayAdapter;
     //order id
     private String order_id;
+    private  List<Orders> ordersList;
     //database reference
     private DatabaseReference reference, targetSalesMenReference;
     //handler for the progress bar
@@ -53,8 +55,6 @@ public class Order_filter_status_form extends AppCompatActivity
     //to get the email id of the salesman
     private FirebaseAuth auth;
     private FirebaseUser user;
-
-
 
 
 
@@ -88,9 +88,50 @@ public class Order_filter_status_form extends AppCompatActivity
     {
         progressBar.setVisibility(View.VISIBLE);
         String status=spinner.getSelectedItem().toString();
-        reference.child(order_id).child("orderStatus").setValue(status);
-        progressBarh.postDelayed(runnable1,200);
-        Toast.makeText(this, "Status changed successfully", Toast.LENGTH_SHORT).show();
+
+
+        if(status.equals(ordersList.get(0).getOrderStatus()))
+        {
+            Toast.makeText(Order_filter_status_form.this,"Nothing is changed ",Toast.LENGTH_LONG).show();
+            progressBarh.postDelayed(runnable1,200);
+            return;
+        }
+        if(!(status.equals(ordersList.get(0).getOrderStatus())) )
+        {
+            String target_SalesManID=null;
+            int previousTargetAchieved=0;
+            int targetAchieved=0;
+            int ts;
+            String orderSkuId="";
+
+            orderSkuId=ordersList.get(0).getSku_id();
+
+            for (ts = 0; ts < target_salesMenList.size(); ts++) {
+                if (target_salesMenList.get(ts).getSKU_ID().equals(orderSkuId)) {
+                    target_SalesManID = target_salesMenList.get(ts).getTARGET_ID();
+                    targetAchieved = target_salesMenList.get(ts).getAchieved();
+                    break;
+                }
+            }
+
+            if(status.equals(getString(R.string.cancelled)))
+            {
+                targetAchieved-=ordersList.get(0).getQuantity();
+
+            }
+
+            if ( (status.equals(getString(R.string.delivered))) ||  (status.equals(getString(R.string.in_progress))) )
+            {
+                targetAchieved+=ordersList.get(0).getQuantity();
+            }
+
+           targetSalesMenReference.child(target_SalesManID).child("achieved").setValue(targetAchieved);
+            reference.child(order_id).child("orderStatus").setValue(status);
+            progressBarh.postDelayed(runnable1,200);
+            Toast.makeText(this, "Status changed successfully", Toast.LENGTH_SHORT).show();
+
+        }
+
     }
 
     @Override
@@ -105,6 +146,35 @@ public class Order_filter_status_form extends AppCompatActivity
                             && (targetSalesman.getValue(Target_SalesMen.class).getStatus().equals("Active") ) ){
                         target_salesMenList.add(targetSalesman.getValue(Target_SalesMen.class));
                     }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ordersList.clear();
+                for (DataSnapshot orderStatus : snapshot.getChildren()) {
+                    if (orderStatus.getValue(Orders.class).getId().equals(order_id)) {
+                        ordersList.add(orderStatus.getValue(Orders.class));
+                    }
+                }
+                if(ordersList.get(0).getOrderStatus().equals(getString(R.string.delivered)))
+                {
+                    spinner.setSelection(0);
+                }
+                if(ordersList.get(0).getOrderStatus().equals(getString(R.string.in_progress)))
+                {
+                    spinner.setSelection(1);
+                }
+                if(ordersList.get(0).getOrderStatus().equals(getString(R.string.cancelled)))
+                {
+                    spinner.setSelection(2);
                 }
             }
 

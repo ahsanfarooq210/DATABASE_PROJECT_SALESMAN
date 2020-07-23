@@ -69,6 +69,12 @@ public class edit_order_form_activity extends AppCompatActivity
 private  List<Target_SalesMen> target_salesMenList;
 TextView edit_order_form_shop_TV;
 String userEmail;
+    String target_SalesManID=null;
+    int previousTargetAchieved=0;
+    int targetAchieved=0;
+    int ts;
+    String orderSkuId="";
+    boolean notFound=true;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -138,12 +144,6 @@ String userEmail;
                 int quant=Integer.parseInt(quantity_editText.getText().toString().trim());
                 String status=statusSpinner.getSelectedItem().toString();
 
-                String target_SalesManID=null;
-                int previousTargetAchieved=0;
-                int targetAchieved=0;
-                int ts;
-                String orderSkuId="";
-                boolean notFound=true;
 
                 for (int sk=0; sk<skuList.size(); sk++)
                 {
@@ -153,56 +153,182 @@ String userEmail;
                         break;
                     }
                 }
-                for (ts=0; ts<target_salesMenList.size(); ts++)
-                {
-                    if (target_salesMenList.get(ts).getSKU_ID().equals(orderSkuId))
-                    {
-                        target_SalesManID=target_salesMenList.get(ts).getTARGET_ID();
+                for (ts = 0; ts < target_salesMenList.size(); ts++) {
+                    if (target_salesMenList.get(ts).getSKU_ID().equals(orderSkuId)) {
+                        target_SalesManID = target_salesMenList.get(ts).getTARGET_ID();
 
-                        targetAchieved=target_salesMenList.get(ts).getAchieved();
-                        notFound=false;
+                        targetAchieved = target_salesMenList.get(ts).getAchieved();
+                        notFound = false;
                         break;
                     }
                 }
-                if(notFound)
-                {
-                    target_SalesManID=targetSalesMenRefernce.push().getKey();
+
+                if (notFound) {
+                    target_SalesManID = targetSalesMenRefernce.push().getKey();
                 }
-                int neworder=0;
-              {
+                if(status.equals(ordersList.get(0).getOrderStatus()))
+                {
+                    if(quant==ordersList.get(0).getQuantity())
+                    {
+                      if(orderSkuId.equals(ordersList.get(0).getSku_id()))
+                      {
+                          Toast.makeText(edit_order_form_activity.this,"Nothing is changed",Toast.LENGTH_LONG).show();
+                          return;
+                      }
+                    }
+                    if(quant!=ordersList.get(0).getQuantity())
+                    {
+                        if(orderSkuId.equals(ordersList.get(0).getSku_id()))
+                        {
+                            int neworder = 0;
+                            {
 
-                 if (quant < ordersList.get(0).getQuantity()) {
-                     neworder = ordersList.get(0).getQuantity() - quant;
-                     targetAchieved -= neworder;
-                 }
-                 if (quant > ordersList.get(0).getQuantity()) {
-                     neworder = quant - ordersList.get(0).getQuantity();
-                     targetAchieved += neworder;
-                 }
-                 if (quant == ordersList.get(0).getQuantity()) {
+                                if (quant < ordersList.get(0).getQuantity()) {
+                                    neworder = ordersList.get(0).getQuantity() - quant;
+                                    targetAchieved -= neworder;
+                                }
+                                if (quant > ordersList.get(0).getQuantity()) {
+                                    neworder = quant - ordersList.get(0).getQuantity();
+                                    targetAchieved += neworder;
+                                }
+                                if (quant == ordersList.get(0).getQuantity()) {
 
-                     targetAchieved = target_salesMenList.get(ts).getAchieved();
-                 }
-             }
-                assert target_SalesManID != null;
+                                    targetAchieved = target_salesMenList.get(ts).getAchieved();
+                                }
+                            }
+                            assert target_SalesManID != null;
 
-                targetSalesMenRefernce.child(target_SalesManID).child("achieved").setValue(targetAchieved);
+                            targetSalesMenRefernce.child(target_SalesManID).child("achieved").setValue(targetAchieved);
 
-                orderReference.child(orderId).child("sku").setValue(sku);
-                orderReference.child(orderId).child("quantity").setValue(quant);
-                orderReference.child(orderId).child("sku_id").setValue(sku.getId());
-                orderReference.child(orderId).child("orderStatus").setValue(status);
-                neworder=0;
-                targetAchieved=0;
+                            orderReference.child(orderId).child("quantity").setValue(quant);
 
-                Toast.makeText(edit_order_form_activity.this,"Data Updated successfully",Toast.LENGTH_LONG).show();
-                progressBarh.postDelayed(runnable1,200);
+                            targetAchieved = 0;
 
+                            Toast.makeText(edit_order_form_activity.this, "Data Updated successfully", Toast.LENGTH_LONG).show();
+                            progressBarh.postDelayed(runnable1, 200);
+                            return;
+                        }
+                        if(!orderSkuId.equals(ordersList.get(0).getSku_id()))
+                        {
+                            int neworder = 0;
+                            {
+
+                                if (quant < ordersList.get(0).getQuantity()) {
+                                    neworder = ordersList.get(0).getQuantity() - quant;
+                                    targetAchieved -= neworder;
+                                }
+                                if (quant > ordersList.get(0).getQuantity()) {
+                                    neworder = quant - ordersList.get(0).getQuantity();
+                                    targetAchieved += neworder;
+                                }
+                                if (quant == ordersList.get(0).getQuantity()) {
+
+                                    targetAchieved = target_salesMenList.get(ts).getAchieved();
+                                }
+                            }
+                            assert target_SalesManID != null;
+                            targetSalesMenRefernce.child(target_SalesManID).child("achieved").setValue(targetAchieved);
+                            orderReference.child(orderId).child("sku").setValue(sku);
+                            orderReference.child(orderId).child("quantity").setValue(quant);
+                            orderReference.child(orderId).child("sku_id").setValue(sku.getId());
+                            neworder = 0;
+                            targetAchieved = 0;
+
+                            Toast.makeText(edit_order_form_activity.this, "Data Updated successfully", Toast.LENGTH_LONG).show();
+                            progressBarh.postDelayed(runnable1, 200);
+                        }
+                    }
+                }
+                else if(!status.equals(ordersList.get(0).getOrderStatus()))
+                {
+                    if (status.equals(getResources().getString(R.string.delivered))||status.equals(getResources().getString(R.string.in_progress)))
+                        {
+                     if(quant==ordersList.get(0).getQuantity())
+                     {
+                         orderReference.child(orderId).child("sku").setValue(sku);
+                         orderReference.child(orderId).child("quantity").setValue(quant);
+                         orderReference.child(orderId).child("sku_id").setValue(sku.getId());
+                         orderReference.child(orderId).child("orderStatus").setValue(status);
+
+
+                         Toast.makeText(edit_order_form_activity.this, "Data Updated successfully", Toast.LENGTH_LONG).show();
+                         progressBarh.postDelayed(runnable1, 200);
+                         return;
+                     }
+                     if(quant!=ordersList.get(0).getQuantity())
+                     {
+                         int neworder = 0;
+                         {
+
+                             if (quant < ordersList.get(0).getQuantity()) {
+                                 neworder = ordersList.get(0).getQuantity() - quant;
+                                 targetAchieved -= neworder;
+                             }
+                             if (quant > ordersList.get(0).getQuantity()) {
+                                 neworder = quant - ordersList.get(0).getQuantity();
+                                 targetAchieved += neworder;
+                             }
+                             if (quant == ordersList.get(0).getQuantity()) {
+
+                                 targetAchieved = target_salesMenList.get(ts).getAchieved();
+                             }
+                         }
+                         assert target_SalesManID != null;
+
+                         targetSalesMenRefernce.child(target_SalesManID).child("achieved").setValue(targetAchieved);
+
+                         orderReference.child(orderId).child("sku").setValue(sku);
+                         orderReference.child(orderId).child("quantity").setValue(quant);
+                         orderReference.child(orderId).child("sku_id").setValue(sku.getId());
+                         orderReference.child(orderId).child("orderStatus").setValue(status);
+                         neworder = 0;
+                         targetAchieved = 0;
+
+                         Toast.makeText(edit_order_form_activity.this, "Data Updated successfully", Toast.LENGTH_LONG).show();
+                         progressBarh.postDelayed(runnable1, 200);
+                   return;
+                     }
+
+
+                }
+                    if(status.equals(getString(R.string.cancelled)))
+                    {
+
+                        int neworder = 0;
+                        {
+
+                            if (quant < ordersList.get(0).getQuantity()) {
+                                neworder = ordersList.get(0).getQuantity() - quant;
+                                targetAchieved -= neworder;
+                            }
+                            if (quant > ordersList.get(0).getQuantity()) {
+                                neworder = quant - ordersList.get(0).getQuantity();
+                                targetAchieved += neworder;
+                            }
+                            if (quant == ordersList.get(0).getQuantity()) {
+
+                                targetAchieved = target_salesMenList.get(ts).getAchieved();
+                            }
+                        }
+                        assert target_SalesManID != null;
+
+                        targetSalesMenRefernce.child(target_SalesManID).child("achieved").setValue(targetAchieved);
+
+                        orderReference.child(orderId).child("sku").setValue(sku);
+                        orderReference.child(orderId).child("quantity").setValue(quant);
+                        orderReference.child(orderId).child("sku_id").setValue(sku.getId());
+                        orderReference.child(orderId).child("orderStatus").setValue(status);
+                        neworder = 0;
+                        targetAchieved = 0;
+
+                        Toast.makeText(edit_order_form_activity.this, "Data Updated successfully", Toast.LENGTH_LONG).show();
+                        progressBarh.postDelayed(runnable1, 200);
+                    }
+}
 
             }
         });
     }
-
 
 
 

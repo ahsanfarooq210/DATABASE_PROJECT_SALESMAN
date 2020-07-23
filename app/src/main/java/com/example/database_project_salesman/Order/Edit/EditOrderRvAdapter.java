@@ -16,10 +16,11 @@ import com.example.database_project_salesman.Order.Orders;
 import com.example.database_project_salesman.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class EditOrderRvAdapter extends RecyclerView.Adapter<EditOrderRvAdapter.viewHolder>
 {
-    private ArrayList<Orders> shop;
+    private List<Orders> shop;
     private Activity context;
 //    private EditOrderInterface editOrderInterface;
 //
@@ -28,7 +29,7 @@ public class EditOrderRvAdapter extends RecyclerView.Adapter<EditOrderRvAdapter.
 //        public void onItemClick(int position);
 //    }
 
-    public EditOrderRvAdapter(ArrayList<Orders> shop, Activity context)
+    public EditOrderRvAdapter(List<Orders> shop, Activity context)
     {
         this.shop = shop;
         this.context = context;
@@ -78,7 +79,48 @@ public class EditOrderRvAdapter extends RecyclerView.Adapter<EditOrderRvAdapter.
     {
         return shop.size();
     }
+    public void updateList(String search, List<Orders> orders ) {
+        if(search.equals(""))
+        {
+            if(!(shop.size()==orders.size()))
+            {
+                this.shop.clear();
+                List<Orders> empty = new ArrayList<>();
+                for (int i=0; i< orders.size(); i++) {
+                    empty.add(orders.get(i));
+                }
+                this.shop=empty;
+                notifyDataSetChanged();
+            }
 
+        }
+        if(!search.equals(""))
+        {
+
+            List<Orders>  temps = new ArrayList<>();
+            for (int i=0; i< orders.size(); i++) {
+                if (orders.get(i).getQuantity()==(Integer.parseInt(search.toLowerCase()))) {
+                    temps.add(orders.get(i));
+                }
+                if (orders.get(i).getOrderStatus().toLowerCase().contains(search.toLowerCase())) {
+                    temps.add(orders.get(i));
+                }
+                if (orders.get(i).getShopName().toLowerCase().contains(search.toLowerCase()))
+                {
+                    temps.add(orders.get(i));
+                }
+                if (orders.get(i).getSku().getProductName().toLowerCase().contains(search.toLowerCase()))
+                {
+                    temps.add(orders.get(i));
+                }
+
+            }
+            //
+            this.shop = temps;
+            notifyDataSetChanged();
+        }
+
+    }
     public class viewHolder extends RecyclerView.ViewHolder
     {
 

@@ -30,8 +30,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.database_project_salesman.Order.Add_Order.add_order_activity;
-import com.example.database_project_salesman.Order.Edit.Edit_order_status;
 import com.example.database_project_salesman.Order.Edit.edit_order_rv_activity;
+import com.example.database_project_salesman.Order.Order_status_filter.Order_filter_status;
 import com.example.database_project_salesman.Order.show_orders_activity;
 import com.example.database_project_salesman.ProfileActivities.Activities.activity_Edit_Profile;
 import com.example.database_project_salesman.ProfileActivities.Activities.activity_View_Profile;
@@ -448,7 +448,7 @@ public  void targetDetails(View view)
 
     public void changeStatus(View view)
     {
-        startActivity(new Intent(salesname_main_dashboard.this, Edit_order_status.class));
+        startActivity(new Intent(salesname_main_dashboard.this, Order_filter_status.class));
     }
 
     @Override

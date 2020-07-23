@@ -19,10 +19,9 @@
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity android:name=".Order.Edit.Edit_order_status"
-            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".Order.Order_status_filter.Order_filter_status"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:label=""
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".Target.Activity.show_target_progess_activity"
             android:label=""
@@ -60,7 +59,7 @@
         <activity
             android:name=".Order.Edit.edit_order_rv_activity"
             android:label=""
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -81,11 +80,11 @@
         <activity
             android:name=".SHOP.show_shop_activity"
             android:label=""
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".Order.show_orders_activity"
             android:label=""
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".Order.Add_Order.add_order_activity"
             android:label=""
