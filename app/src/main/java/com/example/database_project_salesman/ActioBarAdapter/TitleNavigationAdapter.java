@@ -10,8 +10,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.database_project_salesman.ActioBarAdapter.model.SpinnerNavItem;
 import  com.example.database_project_salesman.R;
-import  com.example.database_project_salesman.ActioBarAdapter.model.SpinnerNavItem;
 
 import java.util.ArrayList;
 

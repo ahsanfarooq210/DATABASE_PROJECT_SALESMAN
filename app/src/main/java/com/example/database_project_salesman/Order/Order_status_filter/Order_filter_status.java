@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.database_project_salesman.Order.Entity.Orders;
-import com.example.database_project_salesman.Order.Show_Order.show_order_rv_adaprter;
 import com.example.database_project_salesman.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

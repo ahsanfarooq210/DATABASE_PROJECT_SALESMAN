@@ -1,4 +1,4 @@
-package com.example.database_project_salesman.SHOP;
+package com.example.database_project_salesman.SHOP.Activities;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.database_project_salesman.R;
+import com.example.database_project_salesman.SHOP.Entity.ShopDetails;
 
 import java.util.ArrayList;
 import java.util.List;

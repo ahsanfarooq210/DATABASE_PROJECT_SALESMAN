@@ -1,4 +1,4 @@
-package com.example.database_project_salesman.SHOP;
+package com.example.database_project_salesman.SHOP.Entity;
 
 public class ShopDetails
 {

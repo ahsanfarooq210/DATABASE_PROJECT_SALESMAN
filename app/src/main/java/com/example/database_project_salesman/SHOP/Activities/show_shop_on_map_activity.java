@@ -1,4 +1,4 @@
-package com.example.database_project_salesman.SHOP;
+package com.example.database_project_salesman.SHOP.Activities;
 
 
 import android.Manifest;
@@ -32,6 +32,7 @@ import androidx.core.content.ContextCompat;
 
 import com.example.database_project_salesman.ActioBarAdapter.TitleNavigationAdapter;
 import com.example.database_project_salesman.R;
+import com.example.database_project_salesman.SHOP.Entity.ShopDetails;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;

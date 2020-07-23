@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.database_project_salesman.Order.Entity.Orders;
 import com.example.database_project_salesman.R;
+
 import com.example.database_project_salesman.Target.Enity.Target_SalesMen;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -80,6 +81,7 @@ public class Order_filter_status_form extends AppCompatActivity
         Intent intent=getIntent();
         order_id=intent.getStringExtra("order_id");
         target_salesMenList=new ArrayList<>();
+        ordersList=new ArrayList<>();
         reference= FirebaseDatabase.getInstance().getReference().child("ORDERS");
         targetSalesMenReference=FirebaseDatabase.getInstance().getReference().child("TargetSalesMan");
 

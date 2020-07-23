@@ -29,17 +29,19 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
 import com.example.database_project_salesman.Order.Add_Order.add_order_activity;
 import com.example.database_project_salesman.Order.Edit.edit_order_rv_activity;
 import com.example.database_project_salesman.Order.Order_status_filter.Order_filter_status;
 import com.example.database_project_salesman.Order.Show_Order.show_orders_activity;
 import com.example.database_project_salesman.ProfileActivities.Activities.activity_Edit_Profile;
-import com.example.database_project_salesman.ProfileActivities.Activities.activity_View_Profile;
 import com.example.database_project_salesman.ProfileActivities.Activities.setting_activity;
 import com.example.database_project_salesman.R;
-import com.example.database_project_salesman.SHOP.show_shop_activity;
-import com.example.database_project_salesman.SHOP.show_shop_on_map_activity;
+import com.example.database_project_salesman.SHOP.Activities.show_shop_activity;
+import com.example.database_project_salesman.SHOP.Activities.show_shop_on_map_activity;
 import com.example.database_project_salesman.Target.Activity.show_target_progess_activity;
+import com.example.database_project_salesman.ProfileActivities.Activities.activity_View_Profile;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;

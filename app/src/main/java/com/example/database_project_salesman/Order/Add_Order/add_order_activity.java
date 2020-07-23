@@ -31,12 +31,14 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.location.LocationManagerCompat;
 
+
 import com.example.database_project_salesman.BrodcastReceivers.LocationBrodcast;
 import com.example.database_project_salesman.Order.Entity.Orders;
 import com.example.database_project_salesman.Order.Show_Order.show_order_shop_on_map;
 import com.example.database_project_salesman.R;
-import com.example.database_project_salesman.SHOP.ShopDetails;
+import com.example.database_project_salesman.SHOP.Entity.ShopDetails;
 import com.example.database_project_salesman.SKU.Sku;
+
 import com.example.database_project_salesman.Target.Enity.Target_SalesMen;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -276,11 +278,11 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
                 {
                     previousTargetAchieved=targetAchieved=Integer.parseInt(quantity.getText().toString().trim());
 
-                    Target_SalesMen target_salesMen=new Target_SalesMen(targetSalesmenID,sk.getId(),targetAchieved,username,sk,order,"Active");
+                    Target_SalesMen target_salesMen=new Target_SalesMen(targetSalesmenID,sk.getId(),targetAchieved,username,sk,"Active");
 
-                    if(order_id!=null&&targetSalesmenID!=null)
+                    if(targetSalesmenID!=null)
                     {
-                        orderReference.child(order_id).setValue(order);
+
                         targetSaleseMenRefernce.child(targetSalesmenID).setValue(target_salesMen);
                     }
                     else
@@ -320,7 +322,7 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
                     if(notFound)
                     {
 
-                        Target_SalesMen target_salesMen=new Target_SalesMen(targetSalesmenID,sk.getId(),targetAchieved,username,sk,order,"Active");
+                        Target_SalesMen target_salesMen=new Target_SalesMen(targetSalesmenID,sk.getId(),targetAchieved,username,sk,"Active");
 
                         if(order_id!=null&&targetSalesmenID!=null)
                         {

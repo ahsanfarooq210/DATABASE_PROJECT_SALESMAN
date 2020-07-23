@@ -1,4 +1,4 @@
-package com.example.database_project_salesman.SHOP;
+package com.example.database_project_salesman.SHOP.Activities;
 
 import android.app.ActionBar;
 import android.app.SearchManager;
@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.database_project_salesman.R;
+import com.example.database_project_salesman.SHOP.Entity.ShopDetails;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

@@ -1,9 +1,8 @@
 package com.example.database_project_salesman.Target.Enity;
 
 
-import com.example.database_project_salesman.Order.Entity.Orders;
-import com.example.database_project_salesman.SKU.Sku;
 
+import  com.example.database_project_salesman.SKU.Sku;
 
 public class Target_SalesMen
 {
@@ -13,7 +12,7 @@ public class Target_SalesMen
 
     String SaleMenEmail;
     Sku Sku;
-    Orders orders;
+
     String status;
     String status_skuId;
 
@@ -21,7 +20,7 @@ public class Target_SalesMen
     {
     }
 
-    public Target_SalesMen(String TARGET_ID, String SKU_ID, int achieved, String saleMenEmail, Sku sku, Orders orders, String status)
+    public Target_SalesMen(String TARGET_ID, String SKU_ID, int achieved, String saleMenEmail, Sku sku, String status)
     {
         this.TARGET_ID = TARGET_ID;
         this.SKU_ID = SKU_ID;
@@ -31,7 +30,6 @@ public class Target_SalesMen
         SaleMenEmail = saleMenEmail;
         this.status = status;
         Sku = sku;
-        this.orders = orders;
 
         status_skuId=status+SKU_ID;
 
@@ -99,25 +97,17 @@ public class Target_SalesMen
     }
 
 
-    public com.example.database_project_salesman.SKU.Sku getSku()
+    public Sku getSku()
     {
         return Sku;
     }
 
-    public void setSku(com.example.database_project_salesman.SKU.Sku sku)
+    public void setSku(Sku sku)
     {
         Sku = sku;
     }
 
-    public Orders getOrders()
-    {
-        return orders;
-    }
 
-    public void setOrders(Orders orders)
-    {
-        this.orders = orders;
-    }
     //hashtag
 
 }
