@@ -12,7 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.database_project_salesman.Order.Orders;
+import com.example.database_project_salesman.Order.Entity.Orders;
 import com.example.database_project_salesman.R;
 import com.example.database_project_salesman.Target.Enity.Target_SalesMen;
 import com.google.firebase.auth.FirebaseAuth;
@@ -79,9 +79,10 @@ public class Order_filter_status_form extends AppCompatActivity
         spinner.setAdapter(orderstatusArrayAdapter);
         Intent intent=getIntent();
         order_id=intent.getStringExtra("order_id");
-
+        target_salesMenList=new ArrayList<>();
         reference= FirebaseDatabase.getInstance().getReference().child("ORDERS");
-        targetSalesMenReference=FirebaseDatabase.getInstance().getReference("TargetSalesMan");
+        targetSalesMenReference=FirebaseDatabase.getInstance().getReference().child("TargetSalesMan");
+
     }
 
     public void save(View view)

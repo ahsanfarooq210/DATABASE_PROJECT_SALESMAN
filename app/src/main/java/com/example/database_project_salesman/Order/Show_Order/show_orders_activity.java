@@ -1,4 +1,4 @@
-package com.example.database_project_salesman.Order;
+package com.example.database_project_salesman.Order.Show_Order;
 
 import android.app.ActionBar;
 import android.app.SearchManager;
@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.database_project_salesman.Order.Entity.Orders;
 import com.example.database_project_salesman.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

@@ -16,8 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.database_project_salesman.Order.Orders;
-import com.example.database_project_salesman.Order.show_order_rv_adaprter;
+import com.example.database_project_salesman.Order.Entity.Orders;
+import com.example.database_project_salesman.Order.Show_Order.show_order_rv_adaprter;
 import com.example.database_project_salesman.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -161,7 +161,7 @@ public class Order_filter_status extends AppCompatActivity
 
         try{
             //Toast.makeText(delete_shop.this.toString(),Toast.LENGTH_LONG).show();
-            ((show_order_rv_adaprter)recyclerView.getAdapter()).updateList(search,orderList);
+            ((OrderStatusRvAdapter)recyclerView.getAdapter()).updateList(search,orderList);
         }
         catch (Exception e){}
     }
@@ -183,8 +183,8 @@ public class Order_filter_status extends AppCompatActivity
                 {
                     orderList.add(shop.getValue(Orders.class));
                 }
-                show_order_rv_adaprter showOrderRvAdapter=new show_order_rv_adaprter(orderList,Order_filter_status.this);
-                recyclerView.setAdapter(showOrderRvAdapter);
+                OrderStatusRvAdapter OrderRvAdapter=new OrderStatusRvAdapter(orderList,Order_filter_status.this);
+                recyclerView.setAdapter( OrderRvAdapter);
             }
 
             @Override

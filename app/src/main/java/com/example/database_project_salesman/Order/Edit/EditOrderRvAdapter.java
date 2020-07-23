@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.database_project_salesman.Order.Orders;
+import com.example.database_project_salesman.Order.Entity.Orders;
 import com.example.database_project_salesman.R;
 
 import java.util.ArrayList;

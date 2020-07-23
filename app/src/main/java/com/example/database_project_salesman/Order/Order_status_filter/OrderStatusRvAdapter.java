@@ -12,16 +12,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.database_project_salesman.Order.Order_status_filter.OrderStatusRvAdapter;
-import com.example.database_project_salesman.Order.Edit.edit_order_form_activity;
-import com.example.database_project_salesman.Order.Orders;
+import com.example.database_project_salesman.Order.Entity.Orders;
 import com.example.database_project_salesman.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class OrderStatusRvAdapter extends RecyclerView.Adapter<OrderStatusRvAdapter.viewHolder>
 {
-    private ArrayList<Orders> orderList;
+    private List<Orders> orderList;
     private Activity context;
 //    private EditOrderInterface editOrderInterface;
 //
@@ -30,7 +29,7 @@ public class OrderStatusRvAdapter extends RecyclerView.Adapter<OrderStatusRvAdap
 //        public void onItemClick(int position);
 //    }
 
-    public OrderStatusRvAdapter(ArrayList<Orders> orderList, Activity context)
+    public OrderStatusRvAdapter(List<Orders> orderList, Activity context)
     {
         this.orderList = orderList;
         this.context = context;
@@ -79,6 +78,47 @@ public class OrderStatusRvAdapter extends RecyclerView.Adapter<OrderStatusRvAdap
     public int getItemCount()
     {
         return orderList.size();
+    }
+
+    public void updateList(String search, List<Orders> searchList ) {
+        if(search.equals(""))
+        {
+            if(!(orderList.size()==searchList.size()))
+            {
+                this.orderList.clear();
+                List<Orders> empty = new ArrayList<>();
+                for (int i=0; i< searchList.size(); i++) {
+                    empty.add(searchList.get(i));
+                }
+                this.orderList=empty;
+                notifyDataSetChanged();
+            }
+
+        }
+        if(!search.equals(""))
+        {
+
+            List<Orders>  temps = new ArrayList<>();
+            for (int i=0; i< searchList.size(); i++) {
+
+                if (searchList.get(i).getShopName().toLowerCase().contains(search.toLowerCase())) {
+                    temps.add(searchList.get(i));
+                }
+                if (searchList.get(i).getSku().getProductName().toLowerCase().contains(search.toLowerCase()))
+                {
+                    temps.add(searchList.get(i));
+                }
+                if (searchList.get(i).getQuantity()==Integer.parseInt(search))
+                {
+                    temps.add(searchList.get(i));
+                }
+
+            }
+            //
+            this.orderList = temps;
+            notifyDataSetChanged();
+        }
+
     }
 
     public class viewHolder extends RecyclerView.ViewHolder

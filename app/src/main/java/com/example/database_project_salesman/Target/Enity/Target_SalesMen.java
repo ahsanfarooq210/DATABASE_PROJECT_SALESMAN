@@ -1,7 +1,7 @@
 package com.example.database_project_salesman.Target.Enity;
 
 
-import com.example.database_project_salesman.Order.Orders;
+import com.example.database_project_salesman.Order.Entity.Orders;
 import  com.example.database_project_salesman.SKU.Sku;
 
 

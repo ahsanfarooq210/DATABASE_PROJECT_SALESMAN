@@ -1,4 +1,4 @@
-package com.example.database_project_salesman.Order;
+package com.example.database_project_salesman.Order.Show_Order;
 
 import android.app.Activity;
 import android.os.Build;
@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.database_project_salesman.Order.Entity.Orders;
 import com.example.database_project_salesman.R;
 
 import java.util.ArrayList;

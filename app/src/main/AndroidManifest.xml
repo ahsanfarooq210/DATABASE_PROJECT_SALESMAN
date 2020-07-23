@@ -74,7 +74,7 @@
             android:label=""
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Order.show_order_shop_on_map"
+            android:name=".Order.Show_Order.show_order_shop_on_map"
             android:label=""
             android:theme="@style/AppTheme" />
         <activity
@@ -82,7 +82,7 @@
             android:label=""
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Order.show_orders_activity"
+            android:name=".Order.Show_Order.show_orders_activity"
             android:label=""
             android:theme="@style/AppTheme" />
         <activity

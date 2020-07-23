@@ -32,8 +32,8 @@ import androidx.core.content.ContextCompat;
 import androidx.core.location.LocationManagerCompat;
 
 import com.example.database_project_salesman.BrodcastReceivers.LocationBrodcast;
-import com.example.database_project_salesman.Order.Orders;
-import com.example.database_project_salesman.Order.show_order_shop_on_map;
+import com.example.database_project_salesman.Order.Entity.Orders;
+import com.example.database_project_salesman.Order.Show_Order.show_order_shop_on_map;
 import com.example.database_project_salesman.R;
 import com.example.database_project_salesman.SHOP.ShopDetails;
 import com.example.database_project_salesman.SKU.Sku;

@@ -1,4 +1,4 @@
-package com.example.database_project_salesman.Order;
+package com.example.database_project_salesman.Order.Entity;
 
 import com.example.database_project_salesman.SHOP.ShopDetails;
 import com.example.database_project_salesman.SKU.Sku;
