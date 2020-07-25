@@ -99,17 +99,9 @@ public class EditOrderRvAdapter extends RecyclerView.Adapter<EditOrderRvAdapter.
 
             List<Orders>  temps = new ArrayList<>();
             for (int i=0; i< orders.size(); i++) {
-                if (orders.get(i).getQuantity()==(Integer.parseInt(search.toLowerCase()))) {
-                    temps.add(orders.get(i));
-                }
-                if (orders.get(i).getOrderStatus().toLowerCase().contains(search.toLowerCase())) {
-                    temps.add(orders.get(i));
-                }
-                if (orders.get(i).getShopName().toLowerCase().contains(search.toLowerCase()))
-                {
-                    temps.add(orders.get(i));
-                }
-                if (orders.get(i).getSku().getProductName().toLowerCase().contains(search.toLowerCase()))
+                int qunatity=orders.get(i).getQuantity();
+
+                 if (orders.get(i).getSku().getProductName().compareToIgnoreCase(search)==0)
                 {
                     temps.add(orders.get(i));
                 }

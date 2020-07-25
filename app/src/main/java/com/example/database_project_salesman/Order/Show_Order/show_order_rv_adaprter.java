@@ -87,16 +87,7 @@ public class show_order_rv_adaprter extends RecyclerView.Adapter<show_order_rv_a
 
             List<Orders>  temps = new ArrayList<>();
             for (int i=0; i< orders.size(); i++) {
-                if (orders.get(i).getQuantity()==(Integer.parseInt(search.toLowerCase()))) {
-                    temps.add(orders.get(i));
-                }
-                if (orders.get(i).getOrderStatus().toLowerCase().contains(search.toLowerCase())) {
-                    temps.add(orders.get(i));
-                }
-                if (orders.get(i).getShopName().toLowerCase().contains(search.toLowerCase()))
-                {
-                    temps.add(orders.get(i));
-                }
+
                 if (orders.get(i).getSku().getProductName().toLowerCase().contains(search.toLowerCase()))
                 {
                     temps.add(orders.get(i));

@@ -69,19 +69,14 @@ public class show_shops_rv_adapter extends RecyclerView.Adapter<show_shops_rv_ad
 
             List<ShopDetails>  temps = new ArrayList<>();
             for (int i=0; i< searchList.size(); i++) {
-
-                if (searchList.get(i).getOwnerMobile().contains(search)) {
+                String shop=searchList.get(i).getShopName().toLowerCase();
+                if (shop.compareToIgnoreCase(search)==0 ) {
                     temps.add(searchList.get(i));
                 }
-                if (searchList.get(i).getOwnerName().toLowerCase().contains(search.toLowerCase()))
+                if(searchList.get(i).getOwnerName().toLowerCase().contains(search.toLowerCase()))
                 {
                     temps.add(searchList.get(i));
                 }
-                if (searchList.get(i).getShopName().toLowerCase().contains(search.toLowerCase()))
-                {
-                    temps.add(searchList.get(i));
-                }
-
             }
             //
             this.list = temps;

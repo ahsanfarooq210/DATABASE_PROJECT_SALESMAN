@@ -65,12 +65,9 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/map_key" />
 
+
         <activity
-            android:name=".Order.Edit.edit_order_rv_list"
-            android:label=""
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".SHOP.show_shop_on_map_activity"
+            android:name=".SHOP.Activities.show_shop_activity"
             android:label=""
             android:theme="@style/AppTheme" />
         <activity
@@ -78,7 +75,7 @@
             android:label=""
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".SHOP.show_shop_activity"
+            android:name=".SHOP.Activities.show_shop_on_map_activity"
             android:label=""
             android:theme="@style/AppTheme" />
         <activity

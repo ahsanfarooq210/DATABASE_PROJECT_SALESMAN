@@ -272,17 +272,15 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
                 Orders order =new Orders(order_id,username,shopDetails,sk,Integer.parseInt(quantity.getText().toString().trim()),OrderStatus);
               //Target_salesMen
                 String targetSalesmenID=targetSaleseMenRefernce.push().getKey();
-                int previousTargetAchieved=0;
+
                 int targetAchieved=0;
                 if(target_salesMenList.size()==0)
                 {
-                    previousTargetAchieved=targetAchieved=Integer.parseInt(quantity.getText().toString().trim());
-
+                    targetAchieved=Integer.parseInt(quantity.getText().toString().trim());
                     Target_SalesMen target_salesMen=new Target_SalesMen(targetSalesmenID,sk.getId(),targetAchieved,username,sk,"Active");
 
-                    if(targetSalesmenID!=null)
-                    {
-
+                    if(targetSalesmenID!=null&&order_id!=null)
+                    { orderReference.child(order_id).setValue(order);
                         targetSaleseMenRefernce.child(targetSalesmenID).setValue(target_salesMen);
                     }
                     else
@@ -321,7 +319,7 @@ public class add_order_activity extends AppCompatActivity implements LocationLis
 
                     if(notFound)
                     {
-
+                        targetAchieved=Integer.parseInt(quantity.getText().toString().trim());
                         Target_SalesMen target_salesMen=new Target_SalesMen(targetSalesmenID,sk.getId(),targetAchieved,username,sk,"Active");
 
                         if(order_id!=null&&targetSalesmenID!=null)

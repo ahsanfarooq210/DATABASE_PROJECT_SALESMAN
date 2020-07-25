@@ -65,16 +65,18 @@ public class MainActivity extends AppCompatActivity
             progressBar.setVisibility(View.GONE);
         }
     };
+    boolean check;
     private EditText usernameTf,passeordTf;
     SharedPreferences prefreences ;
     String username,passsword;
+    boolean found=false;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         prefreences = getSharedPreferences(getResources().getString(R.string.SharedPreferences_FileName),MODE_PRIVATE);
-
+        found=prefreences.getBoolean(getResources().getString(R.string.SharedPreferences_isProfileDataComplete),false);
         rellay1 = findViewById(R.id.rellay1);
         rally2=findViewById(R.id.bottom_rally2);
         rellay2=findViewById(R.id.rellay2);
@@ -94,6 +96,7 @@ public class MainActivity extends AppCompatActivity
         profileDataReference = FirebaseDatabase.getInstance().getReference("SalesMenProfileData");
         profileDataReference.keepSynced(true);
         profileDataList=new ArrayList<>();
+
         /*if(mAuth.currentUser == null){
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
@@ -101,6 +104,7 @@ public class MainActivity extends AppCompatActivity
         }else{
             Toast.makeText(this, "Already logged in", Toast.LENGTH_LONG).show()
         }*/
+
     }
 
     public void loginButton(View v)
@@ -127,6 +131,10 @@ public class MainActivity extends AppCompatActivity
         username=usernameTf.getText().toString().trim();
         passsword=passeordTf.getText().toString().trim();
         signIn(username,passsword);
+        if (mAuth.getCurrentUser()!=null)
+        {
+            username=prefreences.getString(getString(R.string.SharedPreferences_SALESMEN),"");
+        }
     }
 
     public void signIn(String email,String password)
@@ -154,17 +162,16 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void whereTo() {
-
-boolean found=false;
-for (int i=0; i<profileDataList.size();i++)
+for(int p=0;  p<profileDataList.size();p++)
 {
-    if(profileDataList.get(i).getEmail().equals(username))
+    if(profileDataList.get(p).getEmail().equals(username))
     {
         found=true;
-                break;
+        break;
     }
 }
-        if (!found) {
+
+      if (!found) {
             // activity_Edit_Profile
             SharedPreferences.Editor editor = getSharedPreferences(getResources().getString(R.string.SharedPreferences_FileName),MODE_PRIVATE).edit();
             editor.putString(getResources().getString(R.string.SharedPreferences_SALESMEN),username);
@@ -173,7 +180,8 @@ for (int i=0; i<profileDataList.size();i++)
             Intent edit_profile=new Intent(MainActivity.this, activity_Edit_Profile.class);
             progressBarh.postDelayed(runnable1, 100);
             startActivity(edit_profile);
-        } else {
+        }
+      if(found){
             Intent intent = new Intent(MainActivity.this, salesname_main_dashboard.class);
             // activity_Edit_Profile
             SharedPreferences.Editor editor = getSharedPreferences(getResources().getString(R.string.SharedPreferences_FileName),MODE_PRIVATE).edit();
@@ -191,9 +199,14 @@ for (int i=0; i<profileDataList.size();i++)
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 profileDataList.clear();
-                for(DataSnapshot profile: dataSnapshot.getChildren())
+
+                for(DataSnapshot profile: dataSnapshot.getChildren()) {
+
+                        profileDataList.add(profile.getValue(ProfileData.class));
+                }
+                if(mAuth.getCurrentUser()!=null)
                 {
-                    profileDataList.add(profile.getValue(ProfileData.class));
+                    whereTo();
                 }
             }
 
@@ -206,6 +219,6 @@ for (int i=0; i<profileDataList.size();i++)
 
     @Override
     public void onBackPressed() {
-super.onBackPressed();
+
     }
 }
