@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Build;
@@ -314,6 +315,13 @@ public void onBackPressed() {
         if (id == R.id.action_logout) {
             //Toast.makeText(getApplicationContext(), "Logout user!", Toast.LENGTH_LONG).show();
             auth.getInstance().signOut();
+            // activity_Edit_Profile
+            SharedPreferences.Editor editor = getSharedPreferences(getResources().getString(R.string.SharedPreferences_FileName),MODE_PRIVATE).edit();
+            editor.putString(getResources().getString(R.string.SharedPreferences_SalesManEmail),"");
+            editor.putString(getString(R.string.SharedPreferences_SalesManPassWord),"");
+            editor.putBoolean(getResources().getString(R.string.SharedPreferences_isProfileDataComplete),false);
+            editor.apply();
+            editor.commit();
            Intent intent=new Intent(salesname_main_dashboard.this, MainActivity.class);
             startActivity(intent);
             return true;

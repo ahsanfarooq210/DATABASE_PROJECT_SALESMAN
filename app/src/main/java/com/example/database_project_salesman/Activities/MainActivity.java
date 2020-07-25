@@ -97,13 +97,10 @@ public class MainActivity extends AppCompatActivity
         profileDataReference.keepSynced(true);
         profileDataList=new ArrayList<>();
 
-        /*if(mAuth.currentUser == null){
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-            finish()
-        }else{
-            Toast.makeText(this, "Already logged in", Toast.LENGTH_LONG).show()
-        }*/
+        if(mAuth.getCurrentUser() != null){
+          username=prefreences.getString(getString(R.string.SharedPreferences_SalesManEmail),"");
+          passsword=prefreences.getString(getString(R.string.SharedPreferences_SalesManPassWord),"");
+        }
 
     }
 
@@ -133,7 +130,7 @@ public class MainActivity extends AppCompatActivity
         signIn(username,passsword);
         if (mAuth.getCurrentUser()!=null)
         {
-            username=prefreences.getString(getString(R.string.SharedPreferences_SALESMEN),"");
+            username=prefreences.getString(getString(R.string.SharedPreferences_SalesManEmail),"");
         }
     }
 
@@ -174,7 +171,8 @@ for(int p=0;  p<profileDataList.size();p++)
       if (!found) {
             // activity_Edit_Profile
             SharedPreferences.Editor editor = getSharedPreferences(getResources().getString(R.string.SharedPreferences_FileName),MODE_PRIVATE).edit();
-            editor.putString(getResources().getString(R.string.SharedPreferences_SALESMEN),username);
+            editor.putString(getResources().getString(R.string.SharedPreferences_SalesManEmail),username);
+            editor.putString(getResources().getString(R.string.SharedPreferences_SalesManPassWord),passsword);
             editor.putBoolean(getResources().getString(R.string.SharedPreferences_isProfileDataComplete),false);
             editor.commit();
             Intent edit_profile=new Intent(MainActivity.this, activity_Edit_Profile.class);
@@ -185,7 +183,8 @@ for(int p=0;  p<profileDataList.size();p++)
             Intent intent = new Intent(MainActivity.this, salesname_main_dashboard.class);
             // activity_Edit_Profile
             SharedPreferences.Editor editor = getSharedPreferences(getResources().getString(R.string.SharedPreferences_FileName),MODE_PRIVATE).edit();
-            editor.putString(getResources().getString(R.string.SharedPreferences_SALESMEN),username);
+            editor.putString(getResources().getString(R.string.SharedPreferences_SalesManEmail),username);
+            editor.putString(getResources().getString(R.string.SharedPreferences_SalesManPassWord),passsword);
             editor.putBoolean(getResources().getString(R.string.SharedPreferences_isProfileDataComplete),true);
             editor.commit();
             progressBarh.postDelayed(runnable1, 100);

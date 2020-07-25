@@ -77,7 +77,7 @@ public class activity_View_Profile extends AppCompatActivity {
         setContentView(R.layout.activity__view__profile);
         Intent recIntent=getIntent();
         prefreences = getSharedPreferences(getResources().getString(R.string.SharedPreferences_FileName),MODE_PRIVATE);
-        salesMenEmail=prefreences.getString(getResources().getString(R.string.SharedPreferences_SALESMEN),"");
+        salesMenEmail=prefreences.getString(getResources().getString(R.string.SharedPreferences_SalesManEmail),"");
         isprofileDatacomplete=prefreences.getBoolean(getResources().getString(R.string.SharedPreferences_isProfileDataComplete),false);
 
         name_tf_view_profile=findViewById(R.id.name_tf_view_profile);

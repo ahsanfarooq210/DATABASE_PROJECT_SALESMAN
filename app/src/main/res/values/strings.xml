@@ -92,6 +92,7 @@
     <string name="enter_quantity">Enter quantity</string>
     <!--SharedPreferences.-->
     <string name="SharedPreferences_FileName">com.example.salesman.profileData</string>
-    <string name="SharedPreferences_SALESMEN">SALESMEN</string>
+    <string name="SharedPreferences_SalesManEmail">SalesManEmail</string>
+    <string name="SharedPreferences_SalesManPassWord">SalesManPassWord</string>
     <string name="SharedPreferences_isProfileDataComplete">isProfileDataComplete</string>
 </resources>

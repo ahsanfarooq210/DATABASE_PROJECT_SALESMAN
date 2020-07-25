@@ -84,7 +84,7 @@ public class activity_Edit_Profile extends AppCompatActivity {
         setContentView(R.layout.activity__edit__profile);
         Intent recIntent=getIntent();
         prefreences = getSharedPreferences(getResources().getString(R.string.SharedPreferences_FileName),MODE_PRIVATE);
-        salesMenEmail=prefreences.getString(getResources().getString(R.string.SharedPreferences_SALESMEN),"");
+        salesMenEmail=prefreences.getString(getResources().getString(R.string.SharedPreferences_SalesManEmail),"");
         isprofileDatacomplete=prefreences.getBoolean(getResources().getString(R.string.SharedPreferences_isProfileDataComplete),false);
 
         auth=FirebaseAuth.getInstance();
@@ -205,8 +205,8 @@ public class activity_Edit_Profile extends AppCompatActivity {
                     }
 
                     String id = profileDataReference.push().getKey();
-
-                    ProfileData profileData = new ProfileData(id, name, CNIC, salesMenEmail, Date_of_birth, cell_number, Education);
+String password =prefreences.getString(getString(R.string.SharedPreferences_SalesManPassWord),"");
+                    ProfileData profileData = new ProfileData(id, name, CNIC, salesMenEmail, Date_of_birth, cell_number, Education,password);
 
                     if (id != null) {
                         profileDataReference.child(id).setValue(profileData);
@@ -255,9 +255,6 @@ public class activity_Edit_Profile extends AppCompatActivity {
                     }
 
                     String id = profileDataList.get(0).getProfileDataID();
-
-                    ProfileData profileData = new ProfileData(id, name, CNIC, salesMenEmail, Date_of_birth, cell_number, Education);
-
                     if (id != null) {
                         profileDataReference.child(id).child("name").setValue(name);
                         profileDataReference.child(id).child("cnic").setValue(CNIC);

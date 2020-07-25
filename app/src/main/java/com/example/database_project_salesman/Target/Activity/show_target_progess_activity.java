@@ -102,7 +102,7 @@ public class show_target_progess_activity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
         prefreences= getSharedPreferences(getResources().getString(R.string.SharedPreferences_FileName),MODE_PRIVATE);
-        salesmanEmail=prefreences.getString(getString(R.string.SharedPreferences_SALESMEN),"");
+        salesmanEmail=prefreences.getString(getString(R.string.SharedPreferences_SalesManEmail),"");
         //initializing lists
         skuList = new ArrayList<>();
         target_list_from_dataBase=new ArrayList<>();
